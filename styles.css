@@ -11,6 +11,13 @@ body {
     overflow-x: hidden; /* Prevent horizontal scrollbar */
     background-color: #121212; /* Dark background color */
     color: #fff; /* Text color */
+    
+    /* Fonts */
+    font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+
     /* Overrides. */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
