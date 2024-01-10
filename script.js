@@ -28,6 +28,24 @@
 //49276D0D0A2F2F20676F696E6720746F
 //2074727920616E6420676F20646F2069
 //7420616E797761792E
+
+function collapseElementOnLoad() {
+  try {
+    const targetElement = document.querySelector(".iRVltc.VisitorCounter__VisitorCounterComponent-sc-quvvmc-0 > [href]");
+
+    if (targetElement) {
+      targetElement.style.display = "none"; // Hide the element
+      console.log("Target element successfully collapsed.");
+    } else {
+      console.warn("Target element not found.");
+    }
+  } catch (error) {
+    console.error("Error occurred:", error);
+  }
+}
+
+// window.addEventListener("load", collapseElementOnLoad);
+
 /////////////////////////////////////////////////////////////////////////
 // Mantra
 /*
@@ -123,6 +141,11 @@ function rotateText(event) {
     ctx.fillText(titleText, 0, 0);
     ctx.restore();
 }
+
+// Event Listener trigger
+window.addEventListener("load", collapseElementOnLoad);
+// Trigger.
+
 /* Rainbow Text Generator */
 /*
 $('.text').html(function(i, html) {
