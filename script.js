@@ -1,7 +1,7 @@
 /* (C) 2023/2024 Cydonis Heavy Industries (C.H.I), Ltd. */
 /* "Tackling life's toughest problems; with science!" */
 // CHI Website Core Codebase v0.02a.
-// Copyright (GPLv3) (Amanda Hariette Scott, ~40+ years old, December Onwards -->, 2023/204.
+// Copyright (GPLv3) (Amanda Hariette Scott, ~40+ years old, December Onwards -->, 2023/2024.
 // ------------------------------------------------------------------------------------------
 /* Ozymandias... */
 //2F2F20466F7220416C6963652E20466F
@@ -28,6 +28,38 @@
 //49276D0D0A2F2F20676F696E6720746F
 //2074727920616E6420676F20646F2069
 //7420616E797761792E
+
+// Custom Layered Menu |=| Menu Initaliser(s) Start.
+// [Must Load First to avoid annoying Chrome/Webkit load ordering race condition bug(s)! Eff you Google for this!]. :-P ^_^v
+
+const menu = document.querySelector(".menu");
+const menuItems = document.querySelectorAll(".menuItem");
+const hamburger= document.querySelector(".hamburger");
+const closeIcon= document.querySelector(".closeIcon");
+const menuIcon = document.querySelector(".menuIcon");
+
+function toggleMenu() {
+  if (menu.classList.contains("showMenu")) {
+    menu.classList.remove("showMenu");
+    closeIcon.style.display = "none";
+    menuIcon.style.display = "block";
+  } else {
+    menu.classList.add("showMenu");
+    closeIcon.style.display = "block";
+    menuIcon.style.display = "none";
+  }
+}
+
+hamburger.addEventListener("click", toggleMenu);
+const menuItems = document.querySelectorAll(".menuItem");
+
+menuItems.forEach( 
+  function(menuItem) { 
+    menuItem.addEventListener("click", toggleMenu);
+  }
+)
+
+// End Menu Code block.
 
 function collapseElementOnLoad() {
   try {
