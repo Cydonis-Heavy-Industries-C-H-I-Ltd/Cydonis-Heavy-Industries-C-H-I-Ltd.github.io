@@ -61,6 +61,34 @@ menuItems.forEach(
 
 // End Menu Code block #1.
 
+// Video Loading Randomiser
+function cycleBackgroundVideo() {
+  // Array of video file paths (replace with your actual paths):
+  const videoPaths = [
+    "./sim-demo-4k-improved-scalar_model.mp4",
+    "./Time%20Vortex%20Experiment_1080p.mp4",
+    "./sim-demo-4k-improved-scalar_model.mp4"
+  ];
+
+  // Get a random video path:
+  const randomIndex = Math.floor(Math.random() * videoPaths.length);
+  const randomVideoPath = videoPaths[randomIndex];
+
+  // Get the video element:
+  const videoElement = document.getElementById("background-video");
+
+  // Set the new source, load, and play the video:
+  videoElement.src = randomVideoPath;
+  videoElement.load();
+  videoElement.play();
+}
+
+// Call the function initially to start the cycling:
+cycleBackgroundVideo();
+
+// Optional: Set an interval to cycle the videos automatically every 30 seconds:
+// setInterval(cycleBackgroundVideo, 60000);
+
 // Menu Code block #2.
 const sideNav = document.querySelector(".sideNav")
 const overlay = document.querySelector(".overlay")
