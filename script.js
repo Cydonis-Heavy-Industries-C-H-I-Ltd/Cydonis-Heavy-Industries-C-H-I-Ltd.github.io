@@ -59,8 +59,29 @@ menuItems.forEach(
   }
 )
 
-// End Menu Code block.
+// End Menu Code block #1.
 
+// Menu Code block #2.
+const sideNav = document.querySelector(".sideNav")
+const overlay = document.querySelector(".overlay")
+const ham = document.querySelector(".ham")
+const menuX = document.querySelector(".menuX")
+const menuItems = document.querySelectorAll(".menuLink")
+
+menuItems.forEach(menuItem => {
+  menuItem.addEventListener("click", toggleHamburger)
+})
+
+ham.addEventListener("click", toggleHamburger)
+menuX.addEventListener("click", toggleHamburger)
+overlay.addEventListener("click", toggleHamburger)
+
+function toggleHamburger() {
+  overlay.classList.toggle("showOverlay")
+  sideNav.classList.toggle("showNav")
+}
+
+// End Menu Code Block #2.
 function collapseElementOnLoad() {
   try {
     const targetElement = document.querySelector(".iRVltc.VisitorCounter__VisitorCounterComponent-sc-quvvmc-0 > [href]");
