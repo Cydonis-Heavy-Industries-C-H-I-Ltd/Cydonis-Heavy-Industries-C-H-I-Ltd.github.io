@@ -4,6 +4,19 @@
 // Copyright (GPLv3) (Amanda Hariette Scott, ~40+ years old, December Onwards -->, 2023/2024.
 // ------------------------------------------------------------------------------------------
 /* Ozymandias... */
+// ------------------------------------------------------------------------------------------
+WebFontConfig = {
+  google: {
+    families: ['Roboto:300,400,500']
+  }
+};
+
+(function(d) {
+  var wf = d.createElement('script'), s = d.scripts[0];
+  wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js';
+  s.parentNode.insertBefore(wf, s);
+})(document);
+// ------------------------------------------------------------------------------------------
 //2F2F20466F7220416C6963652E20466F
 //722053617368612E20466F7220616C6C
 //2074686F73652077686F206861766520
