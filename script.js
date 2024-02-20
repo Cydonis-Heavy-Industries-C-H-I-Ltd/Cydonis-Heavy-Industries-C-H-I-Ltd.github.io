@@ -17,6 +17,8 @@ WebFontConfig = {
   s.parentNode.insertBefore(wf, s);
 })(document);
 // ------------------------------------------------------------------------------------------
+
+// Shhhhhhhhh! ;-P ^_^v
 //2F2F20466F7220416C6963652E20466F
 //722053617368612E20466F7220616C6C
 //2074686F73652077686F206861766520
@@ -80,7 +82,8 @@ function cycleBackgroundVideo() {
   const videoPaths = [
     "./sim-demo-4k-improved-scalar_model.mp4",
     "./Time%20Vortex%20Experiment_1080p.mp4",
-    "./sim-demo-4k-improved-scalar_model.mp4"
+    "./sim-demo-4k-improved-scalar_model.mp4",
+	"./red/1k_core_system.mp4",
   ];
 
   // Get a random video path:
@@ -178,6 +181,7 @@ Oh it's a rush
 Oh it's a rush...
 */
 // End Mantra...
+
 // JavaScript for the animated canvas.
 
 const canvas = document.getElementById('titleCanvas');
@@ -280,5 +284,142 @@ function browserResize() {
       
 }
 var fileID = "";
+
+// Dungeon Generator... ^_^v
+const HEIGHT = 40;
+const WIDTH  = 80;
+const map = [];
+
+const PLAYER = '@';
+const TREASURE = '$';
+const ROCK = ' ';
+const CORNER = '!';
+const WALL = '#';
+const FLOOR = '.';
+const DOOR1 = '+';
+const DOOR2 = '\'';
+
+function rand (val) {
+  return Math.floor(Math.random() * val);
+}
+
+function cave (start) {
+  const width = rand(10) + 5;
+  const height = rand(6) + 3;
+  const left = rand(WIDTH - width - 2) + 1;
+  const top = rand(HEIGHT - height - 2) + 1;
+
+  for (let y = top - 1; y < top + height + 2; y++) {
+    for (let x = left - 1; x < left + width + 2; x++) {
+      if (map[y][x] === FLOOR)
+        return;
+    }
+  }
+
+  let doors = 0;
+  let door_x;
+  let door_y;
+
+  if (!start) {
+    for (let y = top - 1; y < top + height + 2; y++) {
+      for (let x = left - 1; x < left + width + 2; x++) {
+        let s = x < left || x > left + width;
+        let t = y < top || y > top + height;
+        if (s ^ t && map[y][x] === WALL) {
+          doors++;
+          if (rand(doors) === 0) {
+            door_x = x;
+            door_y = y;
+          }
+        }
+      }
+    }
+
+    if (doors === 0) {
+      return;
+    }
+  }
+
+  for (let y = top - 1; y < top + height + 2; y++) {
+    for (let x = left - 1; x < left + width + 2; x++) {
+      let s = x < left || x > left + width;
+      let t = y < top || y > top + height;
+      map[y][x] = s && t ? CORNER : (s ^ t ? WALL : FLOOR);
+    }
+  }
+
+  if (doors > 0) {
+    map[door_y][door_x] = rand(2) ? DOOR2 : DOOR1;
+  }
+
+  for (let j = 0; j < (start ? 1 : rand(6) + 1); j++) {
+    map[rand(height) + top][rand(width) + left] =
+      start ? PLAYER :
+      (rand(4) === 0 ? TREASURE : String.fromCharCode(rand(62) + 65));
+  }
+}
+
+function generate () {
+  for (let y = 0; y < HEIGHT; y++) {
+    map[y] = [];
+    for (let x = 0; x < WIDTH; x++) {
+      map[y][x] = ROCK;
+    }
+  }
+
+  for (let j = 0; j < 1000; j++) {
+    cave(j === 0);
+  }
+}
+
+generate();
+console.log(map.map(r => r.map(c => c === CORNER ? WALL : c).join('')).join('\n'));
+// End Dungeon Generator.
+
+// Protocol M22. Reserved for future use.
+/* onclick=(e,p)=>{c.style="position:fixed;width:100%;height:100%;background:#000";g=[];
+w=Math.PI;s=Math.sin;A=new AudioContext;a=A.createScriptProcessor(2048,c.style.top=c.style.left=t=M=l= 0,1);a.connect(A.destination);a.onaudioprocess=(e,p)=>{c.width=1024;c.height=576;j=t>>5;m=s(Math.min(1,t/160)*w)**.5;d=e.outputBuffer.getChannelData(e=t/32%1);o=["","M22\nP01 + 4MAT BACK TOGETHER","","M22\nP01 + 4MAT ROCKING THE 1K AGAIN","","1K COMPETITION OVER"];
+if(j>M)a=new SpeechSynthesisUtterance(o[j]),a.lang="en",speechSynthesis.speak(a),M+=1;
+f=1-e
+h=e**16/16+f**64
+l+=[e/8,1,h-.5,1,h-.5,1][j]/64
+for(a=0;a<2048;a++){p=g[a]||a
+u=3+((p.a/4+4*l)&7)
+z=p.z*8;
+b=c.getContext("2d");
+b.beginPath();
+b.fillStyle=p.f;
+for(i=0;i<u;i++){
+v=i/u*w*2-4*l-p.x/2048;
+b.lineTo(p.x+z*s(v),p.y+z*s(v+11));
+}
+if(2<z)b.fill();
+d[a]=m*(s(Math.tan(t*l))/64+Math.random()*h+"80411"[j]*(":IW7%,A".charCodeAt(a%7)*t%.1)/8+"13107103135701314204"[(t/4&4)+(t*8&15)]*64*t%1*[e**16/16,.5,h/2,.5,f**16/2,t-=.5][j]+"13107103135701314204"[(t/4&4)+(t*8&15)]*32*t%1*[e**16/16,.5,h/2,.5,f**16/2,t+=.5][j]/2+"12020"[j]*(t*8&7^5?0:Math.random()/8))
+x=s(a**2)*256;
+y=s(a**3)*128+s(x+l)*8;
+r=s(x)*256;
+y/=m;
+u=(a+x%1)/22%1;
+v=(a+y%1)/968;
+if(v<1){
+y=256;i=32+s(u*w*2*2-4*l)*s(v*w*2*3+l)*16;r=i*s(v*w*2+11);
+if(j>0)y=128-u*256,x=i*s(v*w*2)+y*s(l+11)/2
+if(j>2)x=i*s(u*w+11),y=i*s(v*w*2)*s(u*w),r*=s(u*w)
+if(j%2<1)x/=f**16,y/=f**16,r/=f**16
+}z=1024/(256-r*s(l+11)+x*s(l));t+=1/A.sampleRate
+g[a]=a?{z,a,x:512+z*(x*s(l+11)+r*s(l)),y:288+z*(y+s(l*8)*16),f:"hsl("+[y/2+32*t,[0,64,0,64,64,64][j]+"%",(j%2*32*m+32*s(u*w*2*2-4*l)*s(v*w*2*3+l+11)+((a%27^a/27-l)%15||64))+"%"]}:{f:"#000",x:512,y:288,z:t*2-256}}
+g.sort((e,p)=>e.z-p.z)
+b.fillStyle="#fff"
+b.font="900 14px monospace";
+b.fillText(o[j].slice(0,s(e*w)*78),512+e*64,256)
+b.globalCompositeOperation="lighten"
+if(j>0)b.drawImage(c,0,0,1024*128,576)
+b.filter="blur(1em"
+b.drawImage(c,0,0)
+b.filter="blur(7em"
+b.drawImage(c,0,0)
+}
+} */
+// End Protocol M22.
 // -------------------------------------------------------------------------
-/* EOF. EOL. MCP CORE PROTOCOLS CEASED. TRON WINS. 101010101010111111. */
+/* EOF. EOL. MCP CORE PROTOCOLS CEASED. TRON WINS..? DUN DAH DUN!! 101010101010111111. */
