@@ -290,8 +290,8 @@ const HEIGHT = 40;
 const WIDTH  = 80;
 const map = [];
 
-const PLAYER = '@';
-const TREASURE = '$';
+const PLAYER = '^_^v';
+const TREASURE = 'C-H-I';
 const ROCK = ' ';
 const CORNER = '!';
 const WALL = '#';
@@ -376,7 +376,8 @@ generate();
 console.log(map.map(r => r.map(c => c === CORNER ? WALL : c).join('')).join('\n'));
 // End Dungeon Generator.
 
-// Protocol M22. Reserved for future use.
+// Protocol M22. (Party Mode...) Reserved for future use. ^_^v
+// #-------------------------------------------------------------#
 /* onclick=(e,p)=>{c.style="position:fixed;width:100%;height:100%;background:#000";g=[];
 w=Math.PI;s=Math.sin;A=new AudioContext;a=A.createScriptProcessor(2048,c.style.top=c.style.left=t=M=l= 0,1);a.connect(A.destination);a.onaudioprocess=(e,p)=>{c.width=1024;c.height=576;j=t>>5;m=s(Math.min(1,t/160)*w)**.5;d=e.outputBuffer.getChannelData(e=t/32%1);o=["","M22\nP01 + 4MAT BACK TOGETHER","","M22\nP01 + 4MAT ROCKING THE 1K AGAIN","","1K COMPETITION OVER"];
 if(j>M)a=new SpeechSynthesisUtterance(o[j]),a.lang="en",speechSynthesis.speak(a),M+=1;
