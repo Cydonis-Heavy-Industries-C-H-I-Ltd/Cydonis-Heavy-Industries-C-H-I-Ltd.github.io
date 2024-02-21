@@ -2,7 +2,23 @@
 /* (C) 2023/2024 Cydonis Heavy Industries (C.H.I), Ltd. */
 /* "Tackling life's toughest problems; with science!" */
 /* Ozymandias... */
+/*
+**Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.**
 
+Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.
+
+*Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.*
+
+Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.
+
+*Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.*
+
+Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.
+
+*Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.*
+
+And so the forest began to sing. And the song's name was Cydonis Heavy Industries. And lo, the song was good.
+*/
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -11,7 +27,7 @@ body {
     overflow-x: hidden; /* Prevent horizontal scrollbar */
     background-color: #121212; /* Dark background color */
     color: #fff; /* Text color */
-    
+    overflow: hidden; /* Hide scrollbars */
     /* Fonts */
     font-family: -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Roboto", "Oxygen",
