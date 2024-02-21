@@ -188,7 +188,24 @@ function toggleHamburger() {
   overlay.classList.toggle("showOverlay")
   sideNav.classList.toggle("showNav")
 }
+function render() {
+      // There are 2 main types of menus:
+      //  (1) direct descendant of a menubar
+      //  (2) all other menus
+      // There is also an "iconic" variation of (1) and (2) based on the class.
+      // To make this as simple as possible, we don't support menus being changed from one
+      // of these types to another after the initial DOM connection. It'd be possible to make
+      // this work by keeping track of the markup we prepend and then removing / re-prepending
+      // during a change, but it's not a feature we use anywhere currently.
+      if (this.renderedOnce) {
+        return;
+      }
+      this.renderedOnce = true;
 
+      // There will be a <menupopup /> already. Don't clear it out, just put our markup before it.
+      this.prepend(this.fragment);
+      this.initializeAttributeInheritance();
+    }
 // End Menu Code Block #2.
 function collapseElementOnLoad() {
   try {
