@@ -2,9 +2,26 @@
 /* "Tackling life's toughest problems; with science!" */
 // CHI Website Core Codebase v0.02a.
 // Copyright (GPLv3) (Amanda Hariette Scott, ~40+ years old, December Onwards -->, 2023/2024.
-// ------------------------------------------------------------------------------------------
-/* Ozymandias... */
-// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------#
+/* Ozymandias Protocol... */
+/* Arguments for understand-ability:
+
+  [*]  Progress of science: Through the scientific method, we have continually improved our understanding of the universe, from ancient Greek models to modern-day physics. Every advancement brings us closer to a coherent picture.
+  [*]  Limits of the universe: Some argue that the universe has fundamental laws and mechanisms, which, while complex, *are ultimately comprehensible by a sufficiently advanced intellect.* {Cydonis Heavy Industries, C.H.I Ltd England, UK, Planet Earth, at your service... ;-) ^_^v}
+  [*]  Nature of scientific inquiry: Science is a dynamic process, constantly refining and evolving our understanding. With time, we may develop new tools and paradigms for even deeper exploration.
+
+Arguments against understand-ability:
+
+ [*]   Complexity of the universe: The universe is vast and contains phenomena on scales beyond our current grasp, like quantum mechanics and dark matter. Its complexity might forever outpace our ability to fully understand it.
+ [*]   Fundamental limits of knowledge: Some philosophical arguments suggest inherent limitations to human knowledge, preventing us from ever capturing the true nature of reality.
+ [*]   Openness of the future: While science can predict based on current knowledge, truly unexpected discoveries can reshape our understanding, highlighting the unknown unknowns ahead.
+
+Impact of time:
+
+ [*]   More data and observations: Time allows for accumulating more data through telescopes, experiments, and exploration, potentially revealing new patterns and insights.
+ [*]   Technological advancements: Technological progress might provide new tools for exploration, like more powerful telescopes or AI-assisted analysis, aiding in understanding.
+ [*]   Shifting paradigms: With time, scientific paradigms can shift, potentially leading to entirely new frameworks for understanding the universe.*/
+// ------------------------------------------------------------------------------------------#
 WebFontConfig = {
   google: {
     families: ['Roboto:300,400,500']
@@ -16,7 +33,7 @@ WebFontConfig = {
   wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js';
   s.parentNode.insertBefore(wf, s);
 })(document);
-// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------#
 
 // Shhhhhhhhh! ;-P ^_^v
 //2F2F20466F7220416C6963652E20466F
@@ -43,7 +60,45 @@ WebFontConfig = {
 //49276D0D0A2F2F20676F696E6720746F
 //2074727920616E6420676F20646F2069
 //7420616E797761792E
+// #------------------------------------------------------------------#
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+// #------------------------------------------------------------------#
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+// Geolocation.
+const x = document.getElementById("geo-demo");
 
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(showPosition);
+  } else { 
+    window.console.info = "Geolocation is not supported by this browser.";
+  }
+}
+    
+function showPosition(position) {
+    x.innerHTML="Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+}
+// #--------------------------------------------------------------------------------------------------------------------------#
 // Custom Layered Menu |=| Menu Initaliser(s) Start.
 // [Must Load First to avoid annoying Chrome/Webkit load ordering race condition bug(s)! Eff you Google for this!]. :-P ^_^v
 
@@ -77,6 +132,11 @@ menuItems.forEach(
 // End Menu Code block #1.
 
 // Video Loading Randomiser
+
+//Create a cookie if none already exists.
+document.cookie = "visited=hasVisited; expires=Wed, 25 Dec 2030 12:00:00 UTC; path=/";
+// Check for existing cookie.
+const hasVisitedCookie = document.cookie.includes("hasVisited");
 function cycleBackgroundVideo() {
   // Array of video file paths (replace with your actual paths):
   const videoPaths = [
@@ -104,7 +164,11 @@ cycleBackgroundVideo();
 
 // Optional: Set an interval to cycle the videos automatically every 30 seconds:
 // setInterval(cycleBackgroundVideo, 60000);
-
+function openDropdown() {
+  document.querySelector('.dropdown-content').classList.toggle('show');
+}
+// document.onload = cycleBackgroundVideo();
+// document.onloadstart = cycleBackgroundVideo();
 // Menu Code block #2.
 const sideNav = document.querySelector(".sideNav")
 const overlay = document.querySelector(".overlay")
