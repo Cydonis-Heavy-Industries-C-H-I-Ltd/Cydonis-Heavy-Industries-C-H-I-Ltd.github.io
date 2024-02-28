@@ -503,7 +503,17 @@ b.drawImage(c,0,0)
 }
 } */
 // End Protocol M22.
+/*
+Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul;
+whenever I find myself involuntarily pausing before coffin warehouses,
+...and bringing up the rear of every funeral I meet;
+...and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street,
+...and methodically knocking people's hats off--then,
+I account it high time to get to sea as soon as I can.
+This is my substitute for pistol and ball. With a philosophical flourish Cato throws himself upon his sword; I quietly take to the ship.
 
+- Herman Melville, Moby-Dick; or, The Whale (1851)
+*/
 /*
 // Test to see if the browser supports the HTML template element by checking
 // for the presence of the template element's content attribute.
