@@ -35,6 +35,27 @@ WebFontConfig = {
 })(document);
 // ------------------------------------------------------------------------------------------#
 
+// Title Scroller.
+var msg  = document.title;
+      var speed = 150;
+      var endChar = "... ";
+      var pos = 0;
+      
+      function moveTitle()
+      {
+       	var ml = msg.length;
+      		
+      	title = msg.substr(pos,ml) + endChar + msg.substr(0,pos);
+    	document.title = title;
+      	
+        pos++;
+    	if (pos > ml) pos=0;
+        window.setTimeout("moveTitle()",speed);
+      }
+  
+      moveTitle();
+// End Title Scroller.
+
 // Shhhhhhhhh! ;-P ^_^v
 //2F2F20466F7220416C6963652E20466F
 //722053617368612E20466F7220616C6C
