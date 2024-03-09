@@ -53,6 +53,39 @@ div.sticky {
   border: 1px solid #000000;
 }
 
+/* Responsive styles for screens with a width between 769px and 1024px (common for tablets) */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    body {
+        font-size: 18px;
+    }
+
+    /* Additional styles for medium-sized screens go here: */
+}
+
+/* Responsive styles for screens with a width of 768 pixels or less (common for mobile devices) */
+@media only screen and (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    /* Additional styles for smaller screens go here: */
+
+    /* Target Android devices */
+    @media only screen and (max-width: 768px) and (min-aspect-ratio: 13/9) {
+        body {
+            background-color: #121212;; /* Change background color for Android users? TODO? */
+        }
+    }
+
+    /* Target iPhone devices */
+    @media only screen and (max-width: 768px) and (min-aspect-ratio: 40/71) {
+        body {
+            background-color: #121212;; /* Change background color for iPhone users? TODO? */
+        }
+    }
+}
+/* End Rseponsive Styles */
+
 /* Dropdown Menu Code */
 nav ul {
   list-style: none;
