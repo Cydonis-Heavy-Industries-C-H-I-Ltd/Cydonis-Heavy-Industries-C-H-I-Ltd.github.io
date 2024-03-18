@@ -48,11 +48,11 @@ body {
     "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
 div {
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 img {
-  opacity: 0.5;
+  opacity: 0.9;
 }
 
 img:hover {
