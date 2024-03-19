@@ -67,6 +67,11 @@ img:hover {
     user-select: none;
     /* End Overrides. */
 }
+
+.glowing-logo-image {
+  box-shadow: 0 0 15px rgba(255, 240, 200, 0.8); /* Light yellow glow */
+}
+
 /* Sticky dividers. */
 div.sticky {
   position: -webkit-sticky;
