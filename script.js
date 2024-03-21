@@ -769,5 +769,168 @@ if ("content" in document.createElement("template")) {
   // the HTML template element is not supported.
 }
 */
+
+// Screensaver Easter Egg! (TODO.)
+// #-----------------------------------------------------------#
+/*
+window.onload = function(){
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	 
+	//Let's make the canvas occupy the full page...
+	var W = window.innerWidth, H = window.innerHeight;
+	canvas.width = W;
+	canvas.height = H;
+	
+	//Let's make some particles...
+	var particles = [];
+	for(var i = 0; i < 25; i++)
+	{
+		particles.push(new particle());
+	}
+	
+	function particle()
+	{
+		//location on the canvas
+		this.location = {x: Math.random()*W, y: Math.random()*H};
+		//radius - lets make this 0
+		this.radius = 0;
+		//speed
+		this.speed = 3;
+		//steering angle in degrees range = 0 to 360
+		this.angle = Math.random()*360;
+		//colors
+		var r = Math.round(Math.random()*255);
+		var g = Math.round(Math.random()*255);
+		var b = Math.round(Math.random()*255);
+		var a = Math.random();
+		this.rgba = "rgba("+r+", "+g+", "+b+", "+a+")";
+	}
+	
+	//Let's draw the particles!
+	function draw()
+	{
+		//Re-paint the BG
+		//Let's fill the canvas black
+		//reduce opacity of the bg fill.
+		//blending time
+		ctx.globalCompositeOperation = "source-over";
+		ctx.fillStyle = "rgba(0, 0, 0, 0.02)";
+		ctx.fillRect(0, 0, W, H);
+		ctx.globalCompositeOperation = "lighter";
+		
+		for(var i = 0; i < particles.length; i++)
+		{
+			var p = particles[i];
+			ctx.fillStyle = "white";
+			ctx.fillRect(p.location.x, p.location.y, p.radius, p.radius);
+			
+			//Let's move the particles...
+			//So we basically created a set of particles moving in random direction
+			//at the same speed
+			//Time to add the ribbon effect!
+			for(var n = 0; n < particles.length; n++)
+			{
+				var p2 = particles[n];
+				//calculating distance of particle with all other particles
+				var yd = p2.location.y - p.location.y;
+				var xd = p2.location.x - p.location.x;
+				var distance = Math.sqrt(xd*xd + yd*yd);
+				//draw a line between both particles if they are in 200px range
+				if(distance < 200)
+				{
+					ctx.beginPath();
+					ctx.lineWidth = 1;
+					ctx.moveTo(p.location.x, p.location.y);
+					ctx.lineTo(p2.location.x, p2.location.y);
+					ctx.strokeStyle = p.rgba;
+					ctx.stroke();
+					//The ribbons appear now.
+				}
+			}
+			// Let x = x. Big Science!
+			//We are using simple vectors here
+			//New x = old x + speed * cos(angle)
+			p.location.x = p.location.x + p.speed*Math.cos(p.angle*Math.PI/180);
+			//New y = old y + speed * sin(angle)
+			p.location.y = p.location.y + p.speed*Math.sin(p.angle*Math.PI/180);
+						
+			if(p.location.x < 0) p.location.x = W;
+			if(p.location.x > W) p.location.x = 0;
+			if(p.location.y < 0) p.location.y = H;
+			if(p.location.y > H) p.location.y = 0;
+		}
+	}
+	
+	setInterval(draw, 30);
+}
+// #------------------------------------------------------------------------------------------#
+*/
+
+/*
+[code]
+#------------------------------------------------------------------------------------------------------------------------------#
+          _       _        _          _                  _                _                    _             _        
+        /\ \     /\ \     /\_\       /\ \               /\ \             /\ \     _           /\ \          / /\      
+       /  \ \    \ \ \   / / /      /  \ \____         /  \ \           /  \ \   /\_\         \ \ \        / /  \     
+      / /\ \ \    \ \ \_/ / /      / /\ \_____\       / /\ \ \         / /\ \ \_/ / /         /\ \_\      / / /\ \__  
+     / / /\ \ \    \ \___/ /      / / /\/___  /      / / /\ \ \       / / /\ \___/ /         / /\/_/     / / /\ \___\ 
+    / / /  \ \_\    \ \ \_/      / / /   / / /      / / /  \ \_\     / / /  \/____/         / / /        \ \ \ \/___/ 
+   / / /    \/_/     \ \ \      / / /   / / /      / / /   / / /    / / /    / / /         / / /          \ \ \       
+  / / /               \ \ \    / / /   / / /      / / /   / / /    / / /    / / /         / / /       _    \ \ \      
+ / / /________         \ \ \   \ \ \__/ / /      / / /___/ / /    / / /    / / /      ___/ / /__     /_/\__/ / /      
+/ / /_________\         \ \_\   \ \___\/ /      / / /____\/ /    / / /    / / /      /\__\/_/___\    \ \/___/ /       
+\/____________/          \/_/    \/_____/       \/_________/     \/_/     \/_/       \/_________/     \_____\/        
+
+#----------------------------------------------------------------------------------------------------------------------------#
+[/code]
+[quote]Arguments for understand-ability:
+
+  [*]  Progress of science: Through the scientific method, we have continually improved our understanding of the universe, from ancient Greek models to modern-day physics. Every advancement brings us closer to a coherent picture.
+  [*]  Limits of the universe: Some argue that the universe has fundamental laws and mechanisms, which, while complex, are ultimately comprehensible by a sufficiently advanced intellect.
+  [*]  Nature of scientific inquiry: Science is a dynamic process, constantly refining and evolving our understanding. With time, we may develop new tools and paradigms for even deeper exploration.
+
+Arguments against understand-ability:
+
+ [*]   Complexity of the universe: The universe is vast and contains phenomena on scales beyond our current grasp, like quantum mechanics and dark matter. Its complexity might forever outpace our ability to fully understand it.
+ [*]   Fundamental limits of knowledge: Some philosophical arguments suggest inherent limitations to human knowledge, preventing us from ever capturing the true nature of reality.
+ [*]   Openness of the future: While science can predict based on current knowledge, truly unexpected discoveries can reshape our understanding, highlighting the unknown unknowns ahead.
+
+Impact of time:
+
+ [*]   More data and observations: Time allows for accumulating more data through telescopes, experiments, and exploration, potentially revealing new patterns and insights.
+ [*]   Technological advancements: Technological progress might provide new tools for exploration, like more powerful telescopes or AI-assisted analysis, aiding in understanding.
+ [*]   Shifting paradigms: With time, scientific paradigms can shift, potentially leading to entirely new frameworks for understanding the universe.[/quote]
+ 
+ Aaron Bushnell's horrific death is tragically one more in an inexcusably large pile of horrific deaths which are to my mind ultimately
+laid at the feet of a few powerful men who lack the simple courage to treat their fellow humans with empathy, and kindness, and respect.
+													And they are all heartbreaking.
+													
+Ontological and tautological constructs be wild like that, at the confluence of LQGP, chirality,
+and the often total illogical outcomes of the continuous integration of gestalt human behaviour(s).
+
+And somewhere inbetween, meta-determinatistic h.i.p/h.u.p outcomes (aka 'fate') occur.
+ 
+**Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.**
+
+Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.
+
+*Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.*
+
+Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.
+
+*Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.*
+
+Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.
+
+*Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.*
+
+And so the forest began to sing. And the song's name was Cydonis Heavy Industries. And lo, the song was good.
+
+Cydonis Roars! Beware I bite, as I run up and down the great world tree Yggdrasil!
+Harken to the words I speak; with a tounge as sharp as a whip! Thou art a puny and petty god!
+
+And I fucking challenge thee!
+*/
 // -------------------------------------------------------------------------
 /* EOF. EOL. MCP CORE PROTOCOLS CEASED. TRON WINS..? DUN DAH DUN!! 101010101010111111. */
