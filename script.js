@@ -683,6 +683,14 @@ generate();
 console.log(map.map(r => r.map(c => c === CORNER ? WALL : c).join('')).join('\n'));
 // End Dungeon Generator.
 
+/*
+失敗は成功のもと
+
+Shigoto no ato ni,
+Me ga sameru,
+Nani ka shinakucha,
+Shigoto no ato ni... */
+
 // Protocol M22. (Party Mode...) Reserved for future use. ^_^v
 // #-------------------------------------------------------------#
 /* onclick=(e,p)=>{c.style="position:fixed;width:100%;height:100%;background:#000";g=[];
