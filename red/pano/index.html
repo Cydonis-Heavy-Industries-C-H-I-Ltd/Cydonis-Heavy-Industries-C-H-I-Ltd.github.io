@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cydonis Heavy Industries Ltd. Image Recognition App (v0.1a)</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@latest/dist/mobilenet.min.js"></script>
+    <meta name="description" content="('Tackling life's toughest problems; with science!')" />
+<script>
+/*
+          _       _        _          _                  _                _                    _             _        
+        /\ \     /\ \     /\_\       /\ \               /\ \             /\ \     _           /\ \          / /\      
+       /  \ \    \ \ \   / / /      /  \ \____         /  \ \           /  \ \   /\_\         \ \ \        / /  \     
+      / /\ \ \    \ \ \_/ / /      / /\ \_____\       / /\ \ \         / /\ \ \_/ / /         /\ \_\      / / /\ \__  
+     / / /\ \ \    \ \___/ /      / / /\/___  /      / / /\ \ \       / / /\ \___/ /         / /\/_/     / / /\ \___\ 
+    / / /  \ \_\    \ \ \_/      / / /   / / /      / / /  \ \_\     / / /  \/____/         / / /        \ \ \ \/___/ 
+   / / /    \/_/     \ \ \      / / /   / / /      / / /   / / /    / / /    / / /         / / /          \ \ \       
+  / / /               \ \ \    / / /   / / /      / / /   / / /    / / /    / / /         / / /       _    \ \ \      
+ / / /________         \ \ \   \ \ \__/ / /      / / /___/ / /    / / /    / / /      ___/ / /__     /_/\__/ / /      
+/ / /_________\         \ \_\   \ \___\/ /      / / /____\/ /    / / /    / / /      /\__\/_/___\    \ \/___/ /       
+\/____________/          \/_/    \/_____/       \/_________/     \/_/     \/_/       \/_________/     \_____\/        
+                                                                                                                      
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@BBB@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    @@@@@BBBBB@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,.  _@@@@@           "=@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                "+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    '4@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@B@@@@@@@@@@@@@@@@@@@@@@@@                       "B@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@"      9@@@@@@@@B.     'B@@@@@@@ga____.               %@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         9@@@@@@@.       .@@@@@@@@@@@@@@g__              %@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         @@@@@@@@.       .@@@@@@@@@@@@@@@@@@@_,            0@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@_    . j@@@@@@@@g_.    _@@@@@@@@@@@@@@@@@@@@@@g_.          '@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@_           @@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@           @@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@a          @@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'  _.   %@@@@@@@@@@@@@P'""""`@@@@@@@@g.        .@@@@@@@@@@@
+[@@@@@@@@@@@@@F      B@@@@@@F .+@@@@_.  B@@@@@@@@@@@|      @@@@@@@@@A.         @@@@@@@@@@
+[@@"   \@@@@@         @@@@@@  !@@@@@@;  .@@@T.---- Vg_.   j@'----..B@j         [@@@@@@@@@
+[@@.   ,@@@@@         &@@@@B   B@@@@P   .@@@||      @@|   @@|     [|@@,         @@@@@@@@@
+[@@@@@@@@@@@@@,      j@@@@@@,          .J@@@||      @@|   @@|     [|@@]         @@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@g_       _@@@@@||      --    --      [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ggggg@@@@@@@||     ___'   ___     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||      --.   --,     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P"     "%@@@@@||      @@|   @@|     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@N     "@@@@@@@F   ...    '@@@@||      @@|   @@|     [|@@@         @@@@@@@@@
+[@@"   \@@@@@"        @@@@@@  .g@@@@_.  .@@@1.===== P.    "@L.====='@@)         @@@@@@@@@
+[@@.    @@@@@         [@@@@B  !@@@@@@!  '@@@@@@@@@@@|      @@@@@@@@@@P         ,@@@@@@@@@
+[@@@ggg@@@@@@B       _@@@@@@   0@@@@f   !@@@@@@@@@@@ggggggg@@@@@@@@@@          @@@@@@@@@@
+[@@@@@@@@@@@@@@@~~~J@@@@@@@@@_         A@@@@@@@@@@@@@@@@@@@@@@@@@@@@"         j@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@g~~~~~@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@          _@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@N          _@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@W"         .+@@@@@@@@@@@@@
+[@@@@@@@@@@@@@W"'  "4@@@@@@@@@@P"   "4@@@@@@@@@@@@@@@@@@@@@@@P"          .g@@@@@@@@@@@@@@
+[@@@@@@@@@@@@?        @@@@@@@@'       '@@@@@@@@@@@@@@@@@@@@"            ,@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         [@@@@@@B.       .@@@@@@@@@@@@@@@@P"            ..g@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@B        @@@@@@@@_       J@@@@@@@@@@@=>'               ,g@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@~___~g@@@@@@@@@@g~___~@@@@@                        _@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    ._/@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                 __g@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P"""9@@@@@           ..__@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    @@@@@l__-___gg@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@g___g@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+*/
+</script>
+<!--
+#
+DARPA operates on the principle that generating big rewards requires taking big risks. But how does the Agency determine what risks are worth taking?
+
+George H. Heilmeier, a former DARPA director (1975-1977), crafted a set of questions known as the "Heilmeier Catechism" to help Agency officials think through,
+and evaluate proposed research programs:
+
+    What are you trying to do? Articulate your objectives using absolutely no jargon.
+    How is it done today, and what are the limits of current practice? [*]
+    What is new in your approach and why do you think it will be successful? [*]
+    Who cares? If you are successful, what difference will it make? [The continued existence of the human race 'homo-sapiens'...]
+    What are the risks? [High!]
+    How much will it cost? [Everything.]
+    How long will it take? [Unknowable?]
+    What are the mid-term and final “exams” to check for success? [Survival versus extinction for ~*8+ billion people...]
+#
+-->
+	
+<!-- #high-energy #matter #physics #quantum-mechanics #space-time #research-development #industrial #science #mathematics #philosophy #meta-ethics #environment #humanitarianism #climate-crisis #activism #humankind #human-kind-ness" /> -->
+
+<!-- Open Graph / Facebook
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://cydonis-heavy-industries-c-h-i-ltd.github.io/" />
+<meta property="og:title" content="Cydonis Heavy Industries (C.H.I) Ltd"
+<meta property="og:description" content=""Tackling life's toughest problems; with science!"
+
+<!-- #high-energy #matter #physics #quantum-mechanics #space-time #research-development #industrial #science #mathematics #philosophy #meta-ethics #environment #humanitarianism #climate-crisis #activism #humankind #human-kind-ness" /> -->
+<meta property="og:image" content="./chi-logo-only_transparent.png"/>
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="cydonis.co.uk/panopticon/" />
+<meta property="twitter:title" content="Cydonis Heavy Industries (C.H.I) Ltd" />
+<meta property="twitter:description" content=""Tackling life's toughest problems; with science!"
+
+#high-energy #matter #physics #quantum-mechanics #space-time #research-development #industrial #science #mathematics #philosophy #meta-ethics #environment #humanitarianism #climate-crisis #activism #humankind #human-kind-ness" />
+<meta property="twitter:image" content="./chi-logo-only_transparent.png" />
+
+<!-- Meta Tags End -->
+    <link rel="shortcut icon" href="./chi-logo-only_transparent.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="./chi-logo-only_transparent.png" type="image/png" />
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+      .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #5a5a5a;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        #imageUpload {
+            display: block;
+            margin: 0 auto 15px auto; /* Reduced bottom margin */
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #imageUpload:disabled {
+            cursor: not-allowed;
+            background-color: #eee;
+        }
+        #clearButton {
+            padding: 10px 15px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        #clearButton:hover {
+            background-color: #d32f2f;
+        }
+        #clearButton:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        #imageDisplayContainer {
+            min-height: 200px; /* Minimum height for placeholder */
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            background-color: #eee; /* Placeholder background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #imageDisplay {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 4px; /* Keep consistent with container */
+            display: block; /* Ensures it takes up its own line */
+        }
+        #predictions {
+            margin-top: 20px;
+            font-size: 1.1em;
+            text-align: left;
+        }
+      .prediction-item {
+            background-color: #e9e9f3;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+      .prediction-item strong {
+            color: #333;
+        }
+        #loader {
+            margin-top: 15px;
+            font-style: italic;
+            color: #777;
+        }
+      .error-message {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Client-Side Image Recognition</h1>
+        <p>Upload an image to classify it using the MobileNet model directly in your browser with TensorFlow.js.</p>
+
+        <input type="file" id="imageUpload" accept="image/*" disabled>
+        <button id="clearButton" disabled>Clear Image & Predictions</button>
+
+        <div id="imageDisplayContainer">
+            <img id="imageDisplay" src="#" alt="Uploaded Image" style="display:none;">
+        </div>
+        
+        <div id="loader" aria-live="polite">Initializing... Please wait.</div>
+        <div id="predictions" aria-live="polite"></div>
+    </div>
+
+    <script>
+        const imageUpload = document.getElementById('imageUpload');
+        const imageDisplay = document.getElementById('imageDisplay');
+        const imageDisplayContainer = document.getElementById('imageDisplayContainer');
+        const predictionsDiv = document.getElementById('predictions');
+        const loaderDiv = document.getElementById('loader');
+        const clearButton = document.getElementById('clearButton');
+
+        let model;
+
+        // --- Model and Application Lifecycle Functions ---
+
+        // 1. Load the MobileNet model
+        async function loadMobileNetModel() {
+            setLoadingState(true, 'Loading MobileNet model...');
+            try {
+                console.log("Attempting to load MobileNet model...");
+                model = await mobilenet.load(); // mobilenet is globally available from the CDN script
+                console.log("MobileNet model loaded successfully.");
+                setLoadingState(false, 'Model loaded. Please upload an image to classify.');
+                imageUpload.disabled = false; // Enable upload once model is loaded
+            } catch (error) {
+                console.error("Error loading model:", error);
+                predictionsDiv.innerHTML = "<p class='error-message'>Error loading the model. Please check the console and ensure you are connected to the internet.</p>";
+                setLoadingState(false, 'Failed to load model.');
+            }
+        }
+
+        // 2. Handle image selection and initiate classification
+        async function handleImageUpload(event) {
+            const file = event.target.files; // Get the first file
+            if (file) {
+                setLoadingState(true, 'Reading image...');
+                imageUpload.disabled = true; // Disable upload during processing
+                clearButton.disabled = true;
+
+                const reader = new FileReader();
+                reader.onload = async (e) => {
+                    try {
+                        imageDisplay.src = e.target.result;
+                        imageDisplay.style.display = 'block';
+                        imageDisplayContainer.style.backgroundColor = '#fff'; // Remove placeholder bg
+                        predictionsDiv.innerHTML = ''; // Clear previous predictions
+                        
+                        if (!model) {
+                            console.warn('Model not loaded when image selected. Attempting to load now.');
+                            await loadMobileNetModel();
+                            if (!model) {
+                                predictionsDiv.innerHTML = "<p class='error-message'>Model could not be loaded. Cannot predict.</p>";
+                                setLoadingState(false, 'Model not available.');
+                                imageUpload.disabled = false; // Re-enable if model load failed
+                                return;
+                            }
+                        }
+                        
+                        setLoadingState(true, 'Classifying image...');
+                        console.log("Classifying image...");
+                        // Perform inference using the loaded model and the displayed image
+                        const predictions = await model.classify(imageDisplay);
+                        console.log("Predictions:", predictions);
+
+                        // Display results
+                        displayPredictions(predictions);
+                        setLoadingState(false, 'Classification complete. Upload another image or clear.');
+                    } catch (classificationError) {
+                        console.error("Error during classification:", classificationError);
+                        predictionsDiv.innerHTML = "<p class='error-message'>Error during prediction. Please check the console.</p>";
+                        setLoadingState(false, 'Classification failed.');
+                    } finally {
+                        imageUpload.disabled = false; // Re-enable upload
+                        clearButton.disabled = false; // Enable clear button
+                    }
+                };
+                reader.onerror = (e) => {
+                    console.error("FileReader error:", e);
+                    predictionsDiv.innerHTML = "<p class='error-message'>Error reading the selected file.</p>";
+                    setLoadingState(false, 'File reading error.');
+                    imageUpload.disabled = false;
+                    clearButton.disabled = true; // Keep clear disabled if no image loaded
+                };
+                reader.readAsDataURL(file);
+            } else {
+                // This case should ideally not be hit if a file was selected,
+                // but good for robustness.
+                clearImageAndPredictions(); // Reset if no file is actually processed
+            }
+        }
+
+        // 3. Display predictions in the UI
+        function displayPredictions(predictions) {
+            if (predictions && predictions.length > 0) {
+                const header = document.createElement('h3');
+                header.innerText = 'Top Predictions:';
+                predictionsDiv.appendChild(header);
+
+                const list = document.createElement('ul');
+                list.style.listStyleType = 'none';
+                list.style.paddingLeft = '0';
+
+                predictions.forEach(prediction => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'prediction-item';
+                    listItem.innerHTML = `<strong>${prediction.className}</strong>: ${Math.round(prediction.probability * 100)}% confidence`;
+                    list.appendChild(listItem);
+                });
+                predictionsDiv.appendChild(list);
+            } else {
+                predictionsDiv.innerHTML = '<p>No predictions could be made for this image, or the model did not identify any known objects.</p>';
+            }
+        }
+
+        // 4. Clear image and predictions
+        function clearImageAndPredictions() {
+            imageDisplay.src = '#';
+            imageDisplay.style.display = 'none';
+            imageDisplayContainer.style.backgroundColor = '#eee'; // Restore placeholder bg
+            predictionsDiv.innerHTML = '';
+            imageUpload.value = null; // Reset file input to allow re-selection of the same file
+            if (model) { // Only show this message if the model is actually loaded
+                 setLoadingState(false, 'Image cleared. Please upload a new image.');
+            } else {
+                 setLoadingState(false, 'Model not yet loaded.');
+            }
+            clearButton.disabled = true; // Disable clear button after clearing
+            imageUpload.disabled =!model; // Disable if model isn't loaded
+        }
+
+        // --- Utility Functions ---
+        function setLoadingState(isLoading, message) {
+            if (isLoading) {
+                loaderDiv.innerText = message;
+                loaderDiv.style.display = 'block';
+            } else {
+                loaderDiv.innerText = message;
+                // Keep the message visible for a short period or until next action
+                // For simplicity, we'll just update the text.
+                // If no message, hide it:
+                // if (!message) loaderDiv.style.display = 'none';
+            }
+        }
+
+        // --- Event Listeners ---
+        imageUpload.addEventListener('change', handleImageUpload);
+        clearButton.addEventListener('click', clearImageAndPredictions);
+
+        // --- Initial Load ---
+        // Call loadMobileNetModel when the script loads
+        loadMobileNetModel();
+
+        /*
+        --- Developer Notes & Considerations ---
+
+        Model Optimization: [1, 2, 3]
+        For production applications with stricter performance needs or for deployment on
+        resource-constrained devices, consider model optimization techniques:
+        - Quantization: Reduces model size and can speed up inference on compatible hardware,
+          though it may slightly affect accuracy. TensorFlow.js supports loading
+          quantized models.
+        - Pruning: Removes less important parts of the model to reduce size.
+        - Graph Optimization: Tools can optimize the model graph for inference.
+        Always benchmark to ensure optimizations meet performance and accuracy targets.
+
+        Web Workers for Complex Tasks: [4, 5]
+        If using more complex models or performing real-time video processing,
+        TensorFlow.js (and other ML libraries) can be run inside a Web Worker.
+        This offloads heavy computation from the main browser thread, preventing the UI
+        from freezing and maintaining responsiveness.
+
+        Security Considerations: [6, 7, 8, 9]
+        - Model Exposure: Deploying models client-side means the model files (architecture
+          and weights) are downloaded by the browser and are thus accessible. This is a
+          key consideration for proprietary models where intellectual property theft is a concern.
+          Techniques like obfuscation can make reverse-engineering harder but not impossible.
+        - Input Sanitization: While this app processes image files (which TensorFlow.js handles),
+          general web applications should always sanitize all user inputs rigorously to prevent
+          common web vulnerabilities like Cross-Site Scripting (XSS), especially if user-provided
+          text is displayed or used in queries.
+        - Adversarial Attacks: Client-side models can be probed by attackers to understand
+          their vulnerabilities and craft adversarial inputs to cause misclassifications.
+          Defenses are an active area of research.
+
+        Error Handling:
+        The current error handling provides basic user feedback and console logs.
+        For a production app, more sophisticated error logging (e.g., to a remote service)
+        and more granular user-facing messages might be beneficial.
+
+        Accessibility (ARIA):
+        `aria-live="polite"` has been added to loader and prediction divs so screen readers
+        announce changes. Further accessibility improvements could include focus management
+        when new content appears.
+        */
+    </script>
+</body>
+</html>
