@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cydonis Heavy Industries: Aerial Rendezvous Simulation. (v0.1a)</title>
+    <meta name="description" content=""Tackling life's toughest problems; with science!" />
+<script src="https://kit.fontawesome.com/624f95c733.js" crossorigin="anonymous"></script>
+<script>
+/*
+          _       _        _          _                  _                _                    _             _        
+        /\ \     /\ \     /\_\       /\ \               /\ \             /\ \     _           /\ \          / /\      
+       /  \ \    \ \ \   / / /      /  \ \____         /  \ \           /  \ \   /\_\         \ \ \        / /  \     
+      / /\ \ \    \ \ \_/ / /      / /\ \_____\       / /\ \ \         / /\ \ \_/ / /         /\ \_\      / / /\ \__  
+     / / /\ \ \    \ \___/ /      / / /\/___  /      / / /\ \ \       / / /\ \___/ /         / /\/_/     / / /\ \___\ 
+    / / /  \ \_\    \ \ \_/      / / /   / / /      / / /  \ \_\     / / /  \/____/         / / /        \ \ \ \/___/ 
+   / / /    \/_/     \ \ \      / / /   / / /      / / /   / / /    / / /    / / /         / / /          \ \ \       
+  / / /               \ \ \    / / /   / / /      / / /   / / /    / / /    / / /         / / /       _    \ \ \      
+ / / /________         \ \ \   \ \ \__/ / /      / / /___/ / /    / / /    / / /      ___/ / /__     /_/\__/ / /      
+/ / /_________\         \ \_\   \ \___\/ /      / / /____\/ /    / / /    / / /      /\__\/_/___\    \ \/___/ /       
+\/____________/          \/_/    \/_____/       \/_________/     \/_/     \/_/       \/_________/     \_____\/        
+                                                                                                                      
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@BBB@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    @@@@@BBBBB@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,.  _@@@@@           "=@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                "+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    '4@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@B@@@@@@@@@@@@@@@@@@@@@@@@                       "B@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@"      9@@@@@@@@B.     'B@@@@@@@ga____.               %@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         9@@@@@@@.       .@@@@@@@@@@@@@@g__              %@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         @@@@@@@@.       .@@@@@@@@@@@@@@@@@@@_,            0@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@_    . j@@@@@@@@g_.    _@@@@@@@@@@@@@@@@@@@@@@g_.          '@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@_           @@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@           @@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@a          @@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'  _.   %@@@@@@@@@@@@@P'""""`@@@@@@@@g.        .@@@@@@@@@@@
+[@@@@@@@@@@@@@F      B@@@@@@F .+@@@@_.  B@@@@@@@@@@@|      @@@@@@@@@A.         @@@@@@@@@@
+[@@"   \@@@@@         @@@@@@  !@@@@@@;  .@@@T.---- Vg_.   j@'----..B@j         [@@@@@@@@@
+[@@.   ,@@@@@         &@@@@B   B@@@@P   .@@@||      @@|   @@|     [|@@,         @@@@@@@@@
+[@@@@@@@@@@@@@,      j@@@@@@,          .J@@@||      @@|   @@|     [|@@]         @@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@g_       _@@@@@||      --    --      [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ggggg@@@@@@@||     ___'   ___     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||      --.   --,     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P"     "%@@@@@||      @@|   @@|     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@N     "@@@@@@@F   ...    '@@@@||      @@|   @@|     [|@@@         @@@@@@@@@
+[@@"   \@@@@@"        @@@@@@  .g@@@@_.  .@@@1.===== P.    "@L.====='@@)         @@@@@@@@@
+[@@.    @@@@@         [@@@@B  !@@@@@@!  '@@@@@@@@@@@|      @@@@@@@@@@P         ,@@@@@@@@@
+[@@@ggg@@@@@@B       _@@@@@@   0@@@@f   !@@@@@@@@@@@ggggggg@@@@@@@@@@          @@@@@@@@@@
+[@@@@@@@@@@@@@@@~~~J@@@@@@@@@_         A@@@@@@@@@@@@@@@@@@@@@@@@@@@@"         j@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@g~~~~~@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@          _@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@N          _@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@W"         .+@@@@@@@@@@@@@
+[@@@@@@@@@@@@@W"'  "4@@@@@@@@@@P"   "4@@@@@@@@@@@@@@@@@@@@@@@P"          .g@@@@@@@@@@@@@@
+[@@@@@@@@@@@@?        @@@@@@@@'       '@@@@@@@@@@@@@@@@@@@@"            ,@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         [@@@@@@B.       .@@@@@@@@@@@@@@@@P"            ..g@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@B        @@@@@@@@_       J@@@@@@@@@@@=>'               ,g@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@~___~g@@@@@@@@@@g~___~@@@@@                        _@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    ._/@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                 __g@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P"""9@@@@@           ..__@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    @@@@@l__-___gg@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@g___g@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+*/
+</script>
+<!--
+#
+DARPA operates on the principle that generating big rewards requires taking big risks. But how does the Agency determine what risks are worth taking?
+
+George H. Heilmeier, a former DARPA director (1975-1977), crafted a set of questions known as the "Heilmeier Catechism" to help Agency officials think through,
+and evaluate proposed research programs:
+
+    What are you trying to do? Articulate your objectives using absolutely no jargon.
+    How is it done today, and what are the limits of current practice? [*]
+    What is new in your approach and why do you think it will be successful? [*]
+    Who cares? If you are successful, what difference will it make? [The continued existence of the human race 'homo-sapiens'...]
+    What are the risks? [High!]
+    How much will it cost? [Everything.]
+    How long will it take? [Unknowable?]
+    What are the mid-term and final “exams” to check for success? [Survival versus extinction for ~*8+ billion people...]
+#
+-->
+<!-- #high-energy #matter #physics #quantum-mechanics #space-time #research-development #industrial #science #mathematics #philosophy #meta-ethics #environment #humanitarianism #climate-crisis #activism #humankind #human-kind-ness" /> -->
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #87CEEB, #E0F6FF);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        #container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 100;
+            max-width: 300px;
+        }
+        
+        #info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 100;
+            max-width: 250px;
+            font-size: 14px;
+        }
+        
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        button:hover {
+            background: #45a049;
+        }
+        
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+        
+        .status {
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .status.approaching { background: #FFA500; }
+        .status.docking { background: #FFD700; }
+        .status.docked { background: #32CD32; }
+        .status.separated { background: #FF6347; }
+        
+        .slider-container {
+            margin: 10px 0;
+        }
+        
+        .slider-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="controls">
+<div id="logo"><img src="chi-logo-only.png" alt="Cydonis Heavy Industries, (C.H.I), Ltd." width="100" height="100" style="opacity: 0.6;"></div><br><br>
+            <i class="fa-solid fa-plane"></i><h3>Flight Control(s).</h3>
+            <button id="startRendezvous">Start Rendezvous!</button>
+            <button id="emergencySeparate" disabled>Emergency Separate!</button>
+            <button id="reset">Reset Simulation.</button>
+            
+            <div class="slider-container">
+                <label>Wind Speed: <span id="windValue">5</span> m/s</label>
+                <input type="range" id="windSlider" min="0" max="20" value="5">
+            </div>
+            
+            <div class="slider-container">
+                <label>Airframe Speed: <span id="speedValue">150</span> m/s</label>
+                <input type="range" id="speedSlider" min="100" max="300" value="150">
+            </div>
+            
+            <div id="status" class="status separated">Status: Separated</div>
+        </div>
+        
+        <div id="info">
+            <i class="fa-solid fa-tachograph-digital"></i><h3>Simulation Data:</h3>
+            <div>Distance: <span id="distance">--</span>m</div>
+            <div>Relative Speed: <span id="relativeSpeed">--</span>m/s</div>
+            <div>Jetpack Fuel: <span id="jetpackFuel">100</span>%</div>
+            <div>Approach Angle: <span id="approachAngle">--</span>°</div>
+            <div>Time to Intercept: <span id="timeToIntercept">--</span>s</div>
+            
+            <h4 style="margin-top: 20px;">Instructions</h4>
+            <p style="font-size: 12px; line-height: 1.4;">
+                • Blue aircraft = Airframe with onboard fusion reactor, cloud harvesting intakes, and plasma propulsion.<br>
+                • Red aircraft = Human Jetpack pilot (Scramjet Engines).<br>
+                • Green trail = Planned intercept course.<br>
+                • <strong>Mouse Controls:</strong><br>
+                &nbsp;&nbsp;- Click and drag to rotate camera.<br>
+                &nbsp;&nbsp;- Mouse wheel to zoom in/out.<br>
+                &nbsp;&nbsp;- Camera follows airframe automatically<br>
+                • Adjust wind and speed to see how it can affect rendezvous.
+            </p>
+<iframe width="200" height="150" src="https://www.youtube.com/embed/F0Bw78Bwo9k" frameborder="0" allowfullscreen></iframe>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Scene setup - creating our 3D world where the rendezvous will take place.
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x87CEEB, 0.3); // Sky blue background
+        document.getElementById('container').appendChild(renderer.domElement);
+        
+        // Lighting setup - making sure we can see our aircraft clearly. ^_^v
+        const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(100, 100, 50);
+        scene.add(directionalLight);
+        
+        // Create aircraft models - simple but recognizable shapes/3D primitives.
+        function createAirframe() {
+            const group = new THREE.Group();
+            
+            // Main fuselage - represents the fusion reactor housing.
+            const fuselageGeometry = new THREE.CylinderGeometry(2, 3, 20, 8);
+            const fuselageMaterial = new THREE.MeshLambertMaterial({ color: 0x0066cc });
+            const fuselage = new THREE.Mesh(fuselageGeometry, fuselageMaterial);
+            fuselage.rotation.z = Math.PI / 2; // Orient horizontally
+            group.add(fuselage);
+            
+            // Wings - providing lift and stability.
+            const wingGeometry = new THREE.BoxGeometry(25, 1, 8);
+            const wingMaterial = new THREE.MeshLambertMaterial({ color: 0x004499 });
+            const wings = new THREE.Mesh(wingGeometry, wingMaterial);
+            group.add(wings);
+            
+            // Tail - for control surfaces.
+            const tailGeometry = new THREE.BoxGeometry(1, 8, 6);
+            const tail = new THREE.Mesh(tailGeometry, wingMaterial);
+            tail.position.set(-8, 0, 0);
+            group.add(tail);
+            
+            return group;
+        }
+        
+        function createJetpack() {
+            const group = new THREE.Group();
+            
+            // Main body - compact jetpack design.
+            const bodyGeometry = new THREE.BoxGeometry(3, 6, 2);
+            const bodyMaterial = new THREE.MeshLambertMaterial({ color: 0xcc3333 });
+            const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+            group.add(body);
+            
+            // Wings - small control surfaces
+            const wingGeometry = new THREE.BoxGeometry(8, 1, 3);
+            const wingMaterial = new THREE.MeshLambertMaterial({ color: 0x994444 });
+            const wings = new THREE.Mesh(wingGeometry, wingMaterial);
+            group.add(wings);
+            
+            // Thrusters - showing propulsion system
+            const thrusterGeometry = new THREE.CylinderGeometry(0.5, 0.8, 2, 6);
+            const thrusterMaterial = new THREE.MeshLambertMaterial({ color: 0x666666 });
+            
+            const leftThruster = new THREE.Mesh(thrusterGeometry, thrusterMaterial);
+            leftThruster.position.set(-1.5, -3, 0);
+            leftThruster.rotation.x = Math.PI / 2;
+            group.add(leftThruster);
+            
+            const rightThruster = new THREE.Mesh(thrusterGeometry, thrusterMaterial);
+            rightThruster.position.set(1.5, -3, 0);
+            rightThruster.rotation.x = Math.PI / 2;
+            group.add(rightThruster);
+            
+            return group;
+        }
+        
+        // Create our aircraft instances
+        const airframe = createAirframe();
+        const jetpack = createJetpack();
+        scene.add(airframe);
+        scene.add(jetpack);
+        
+        // Create ground reference - helps with spatial orientation
+        const groundGeometry = new THREE.PlaneGeometry(20000, 20000);
+        const groundMaterial = new THREE.MeshLambertMaterial({ 
+            color: 0x228B22, 
+            transparent: true, 
+            opacity: 0.3 
+        });
+        const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+        ground.rotation.x = -Math.PI / 2;
+        ground.position.y = -200;
+        scene.add(ground);
+        
+        // Create clouds for atmospheric reference.
+        function createCloud(x, y, z) {
+            const cloud = new THREE.Group();
+            for (let i = 0; i < 6; i++) {
+                const sphereGeometry = new THREE.SphereGeometry(Math.random() * 15 + 10, 8, 6);
+                const sphereMaterial = new THREE.MeshLambertMaterial({ 
+                    color: 0xffffff, 
+                    transparent: true, 
+                    opacity: 0.5 
+                });
+                const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+                sphere.position.set(
+                    (Math.random() - 0.5) * 30,
+                    (Math.random() - 0.5) * 10,
+                    (Math.random() - 0.5) * 30
+                );
+                cloud.add(sphere);
+            }
+            cloud.position.set(x, y, z);
+            return cloud;
+        }
+        
+        // Add some clouds to the scene.
+        for (let i = 0; i < 8; i++) {
+            const cloud = createCloud(
+                (Math.random() - 0.5) * 1000,
+                Math.random() * 100 + 50,
+                (Math.random() - 0.5) * 1000
+            );
+            scene.add(cloud);
+        }
+        
+        // Flight state variables - tracking the rendezvous process.
+        let rendezvousActive = false;
+        let isDocked = false;
+        let jetpackFuel = 1000000;
+        let windSpeed = 5;
+        let airframeSpeed = 150;
+        
+        // Initial positions - starting the aircraft far apart.
+        airframe.position.set(-200, 100, 0);
+        jetpack.position.set(200, 80, 50);
+        
+        // Trajectory planning - this is where the real rendezvous math happens.
+        const trajectoryPoints = [];
+        const trajectoryGeometry = new THREE.BufferGeometry();
+        const trajectoryMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00, linewidth: 2 });
+        const trajectoryLine = new THREE.Line(trajectoryGeometry, trajectoryMaterial);
+        scene.add(trajectoryLine);
+        
+        // Camera positioning - giving us a good view of the action.
+        camera.position.set(0, 150, 300);
+        camera.lookAt(0, 100, 0);
+        
+        // Camera control variables for interactive viewing.
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        let cameraDistance = 300;
+        let cameraAngleX = 0;
+        let cameraAngleY = 0;
+        const cameraTarget = new THREE.Vector3();
+        
+        // Rendezvous algorithm - the core logic for bringing aircraft together.
+        function calculateRendezvousTrajectory() {
+            const airframePos = airframe.position.clone();
+            const jetpackPos = jetpack.position.clone();
+            
+            // Calculate relative positions and velocities.
+            const relativePos = new THREE.Vector3().subVectors(airframePos, jetpackPos);
+            const distance = relativePos.length();
+            
+            // Predict where the airframe will be when jetpack reaches it.
+            const timeToIntercept = distance / (airframeSpeed + 100); // Jetpack approach speed.
+            const interceptPoint = airframePos.clone();
+            interceptPoint.x += airframeSpeed * timeToIntercept * 0.1; // Airframe continues forward.
+            
+            // Add wind effect - this is critical for real-world rendezvous.
+            const windEffect = new THREE.Vector3(windSpeed * 0.5, 0, windSpeed * 0.2);
+            interceptPoint.add(windEffect.multiplyScalar(timeToIntercept));
+            
+            // Generate trajectory curve - not a straight line due to aerodynamics.
+            trajectoryPoints.length = 0;
+            for (let i = 0; i <= 20; i++) {
+                const t = i / 20;
+                const point = new THREE.Vector3().lerpVectors(jetpackPos, interceptPoint, t);
+                
+                // Add realistic flight path curvature
+                point.y += Math.sin(t * Math.PI) * 10;
+                trajectoryPoints.push(point.x, point.y, point.z);
+            }
+            
+            trajectoryGeometry.setAttribute('position', new THREE.Float32BufferAttribute(trajectoryPoints, 3));
+            
+            return { interceptPoint, distance, timeToIntercept };
+        }
+        
+        // Control system simulation - how the aircraft actually move.
+        function updateRendezvous() {
+            if (!rendezvousActive || isDocked) return;
+            
+            const { interceptPoint, distance, timeToIntercept } = calculateRendezvousTrajectory();
+            
+            // Airframe flight - steady forward motion with minor adjustments.
+            airframe.position.x += airframeSpeed * 0.01;
+            airframe.position.y += Math.sin(Date.now() * 0.001) * 0.2; // Slight altitude variation
+            
+            // Jetpack approach - more complex maneuvering required.
+            const jetpackPos = jetpack.position.clone();
+            const direction = new THREE.Vector3().subVectors(interceptPoint, jetpackPos).normalize();
+            
+            // PID controller simulation - this is how real autopilots work.
+            const approachSpeed = Math.min(120, distance * 0.5); // Slow down as we get closer
+            jetpack.position.add(direction.multiplyScalar(approachSpeed * 0.01));
+            
+            // Fuel consumption - jetpack has limited endurance.
+            jetpackFuel -= 0.1;
+            
+            // Orientation control - aircraft must point in direction of travel.
+            jetpack.lookAt(interceptPoint);
+            airframe.rotation.y = Math.sin(Date.now() * 0.001) * 0.1; // Minor course corrections
+            
+            // Docking detection - when aircraft are close enough.
+            if (distance < 15 && !isDocked) {
+                isDocked = true;
+                rendezvousActive = false;
+                updateStatus('docked', 'Status: Successfully Docked!');
+                document.getElementById('emergencySeparate').disabled = false;
+            }
+            
+            // Update UI with current flight data
+            updateUI(distance, Math.abs(approachSpeed), timeToIntercept);
+        }
+        
+        // User interface updates - showing pilot what's happening.
+        function updateUI(distance, relativeSpeed, timeToIntercept) {
+            document.getElementById('distance').textContent = Math.round(distance);
+            document.getElementById('relativeSpeed').textContent = Math.round(relativeSpeed);
+            document.getElementById('jetpackFuel').textContent = Math.round(jetpackFuel);
+            document.getElementById('timeToIntercept').textContent = Math.round(timeToIntercept);
+            
+            // Calculate approach angle - important for safe docking.
+            const jetpackPos = jetpack.position.clone();
+            const airframePos = airframe.position.clone();
+            const relativeVector = new THREE.Vector3().subVectors(airframePos, jetpackPos);
+            const angle = Math.atan2(relativeVector.y, relativeVector.x) * 180 / Math.PI;
+            document.getElementById('approachAngle').textContent = Math.round(angle);
+        }
+        
+        function updateStatus(statusClass, statusText) {
+            const statusElement = document.getElementById('status');
+            statusElement.className = `status ${statusClass}`;
+            statusElement.textContent = statusText;
+        }
+        
+        // Control event handlers - user interaction.
+        document.getElementById('startRendezvous').addEventListener('click', () => {
+            rendezvousActive = true;
+            isDocked = false;
+            updateStatus('approaching', 'Status: Approaching for Rendezvous');
+            document.getElementById('startRendezvous').disabled = true;
+        });
+        
+        document.getElementById('emergencySeparate').addEventListener('click', () => {
+            isDocked = false;
+            rendezvousActive = false;
+            // Separation maneuver - jetpack moves away rapidly
+            jetpack.position.add(new THREE.Vector3(0, -20, 30));
+            updateStatus('separated', 'Status: Emergency Separation Complete');
+            document.getElementById('emergencySeparate').disabled = true;
+            document.getElementById('startRendezvous').disabled = false;
+        });
+        
+        document.getElementById('reset').addEventListener('click', () => {
+            // Reset to initial conditions.
+            rendezvousActive = false;
+            isDocked = false;
+            jetpackFuel = 100000;
+            airframe.position.set(-200, 100, 0);
+            jetpack.position.set(200, 80, 50);
+            airframe.rotation.set(0, 0, 0);
+            jetpack.rotation.set(0, 0, 0);
+            trajectoryPoints.length = 0;
+            trajectoryGeometry.setAttribute('position', new THREE.Float32BufferAttribute(trajectoryPoints, 3));
+            updateStatus('separated', 'Status: Separated');
+            document.getElementById('startRendezvous').disabled = false;
+            document.getElementById('emergencySeparate').disabled = true;
+        });
+        
+        // Environmental controls - testing different conditions.
+        document.getElementById('windSlider').addEventListener('input', (e) => {
+            windSpeed = parseFloat(e.target.value);
+            document.getElementById('windValue').textContent = windSpeed;
+        });
+        
+        document.getElementById('speedSlider').addEventListener('input', (e) => {
+            airframeSpeed = parseFloat(e.target.value);
+            document.getElementById('speedValue').textContent = airframeSpeed;
+        });
+        
+        // Mouse control system for camera - allows user to orbit around the airframe.
+        function addMouseControls() {
+            // Mouse down - start tracking mouse movement for camera control.
+            renderer.domElement.addEventListener('mousedown', (event) => {
+                isDragging = true;
+                previousMousePosition.x = event.clientX;
+                previousMousePosition.y = event.clientY;
+            });
+            
+            // Mouse move - rotate camera around the target when dragging.
+            renderer.domElement.addEventListener('mousemove', (event) => {
+                if (!isDragging) return;
+                
+                // Calculate how much the mouse moved since last frame.
+                const deltaX = event.clientX - previousMousePosition.x;
+                const deltaY = event.clientY - previousMousePosition.y;
+                
+                // Convert mouse movement to rotation angles.
+                // Horizontal mouse movement rotates around Y axis (left/right)
+                cameraAngleY += deltaX * 0.01;
+                // Vertical mouse movement rotates around X axis (up/down)
+                cameraAngleX -= deltaY * 0.01;
+                
+                // Limit vertical rotation to prevent camera flipping upside down.
+                cameraAngleX = Math.max(-Math.PI/2 + 0.1, Math.min(Math.PI/2 - 0.1, cameraAngleX));
+                
+                // Update mouse position for next movement calculation.
+                previousMousePosition.x = event.clientX;
+                previousMousePosition.y = event.clientY;
+            });
+            
+            // Mouse up - stop tracking movement.
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+            
+            // Mouse wheel controls - zoom in and out by changing camera distance.
+            renderer.domElement.addEventListener('wheel', (event) => {
+                event.preventDefault();
+                
+                // Zoom factor - how much to change distance per wheel tick.
+                const zoomSpeed = 20;
+                
+                // Wheel up zooms in (decrease distance), wheel down zooms out.
+                if (event.deltaY > 0) {
+                    cameraDistance = Math.min(1000, cameraDistance + zoomSpeed);
+                } else {
+                    cameraDistance = Math.max(50, cameraDistance - zoomSpeed);
+                }
+            });
+        }
+        
+        // Update camera position based on user controls - called every frame.
+        function updateCameraPosition() {
+            // Set the camera target to follow the airframe position
+            cameraTarget.copy(airframe.position);
+            
+            // Calculate camera position using spherical coordinates
+            // This creates an orbit camera that always looks at the airframe
+            const x = cameraTarget.x + cameraDistance * Math.cos(cameraAngleX) * Math.cos(cameraAngleY);
+            const y = cameraTarget.y + cameraDistance * Math.sin(cameraAngleX);
+            const z = cameraTarget.z + cameraDistance * Math.cos(cameraAngleX) * Math.sin(cameraAngleY);
+            
+            camera.position.set(x, y, z);
+            camera.lookAt(cameraTarget);
+        }
+        
+        // Initialize mouse controls.
+        addMouseControls();
+        
+        // Animation loop - keeping everything moving smoothly.
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            updateRendezvous();
+            
+            // Update camera position based on user mouse controls.
+            // This replaces the automatic camera following during rendezvous.
+            updateCameraPosition();
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Handle window resize - maintaining proper aspect ratio
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Start the simulation.
+        animate();
+    </script>
+</body>
+</html>

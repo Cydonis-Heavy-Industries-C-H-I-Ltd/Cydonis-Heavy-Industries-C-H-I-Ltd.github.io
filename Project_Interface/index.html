@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C.H.I: Cydonis Terminal Interface Alpha. (v0.2a)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <!-- Primary Meta Tags -->
+	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Cydonis" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="title" content="Cydonis Heavy Industries (C.H.I) Ltd." />
+<meta name="description" content=""Tackling life's toughest problems; with the power^2 of science!" />
+<script>
+/*
+          _       _        _          _                  _                _                    _             _        
+        /\ \     /\ \     /\_\       /\ \               /\ \             /\ \     _           /\ \          / /\      
+       /  \ \    \ \ \   / / /      /  \ \____         /  \ \           /  \ \   /\_\         \ \ \        / /  \     
+      / /\ \ \    \ \ \_/ / /      / /\ \_____\       / /\ \ \         / /\ \ \_/ / /         /\ \_\      / / /\ \__  
+     / / /\ \ \    \ \___/ /      / / /\/___  /      / / /\ \ \       / / /\ \___/ /         / /\/_/     / / /\ \___\ 
+    / / /  \ \_\    \ \ \_/      / / /   / / /      / / /  \ \_\     / / /  \/____/         / / /        \ \ \ \/___/ 
+   / / /    \/_/     \ \ \      / / /   / / /      / / /   / / /    / / /    / / /         / / /          \ \ \       
+  / / /               \ \ \    / / /   / / /      / / /   / / /    / / /    / / /         / / /       _    \ \ \      
+ / / /________         \ \ \   \ \ \__/ / /      / / /___/ / /    / / /    / / /      ___/ / /__     /_/\__/ / /      
+/ / /_________\         \ \_\   \ \___\/ /      / / /____\/ /    / / /    / / /      /\__\/_/___\    \ \/___/ /       
+\/____________/          \/_/    \/_____/       \/_________/     \/_/     \/_/       \/_________/     \_____\/        
+                                                                                                                      
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@BBB@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    @@@@@BBBBB@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,.  _@@@@@           "=@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                "+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    '4@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@B@@@@@@@@@@@@@@@@@@@@@@@@                       "B@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@"      9@@@@@@@@B.     'B@@@@@@@ga____.               %@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         9@@@@@@@.       .@@@@@@@@@@@@@@g__              %@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         @@@@@@@@.       .@@@@@@@@@@@@@@@@@@@_,            0@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@_    . j@@@@@@@@g_.    _@@@@@@@@@@@@@@@@@@@@@@g_.          '@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@_           @@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@           @@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@a          @@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'  _.   %@@@@@@@@@@@@@P'""""`@@@@@@@@g.        .@@@@@@@@@@@
+[@@@@@@@@@@@@@F      B@@@@@@F .+@@@@_.  B@@@@@@@@@@@|      @@@@@@@@@A.         @@@@@@@@@@
+[@@"   \@@@@@         @@@@@@  !@@@@@@;  .@@@T.---- Vg_.   j@'----..B@j         [@@@@@@@@@
+[@@.   ,@@@@@         &@@@@B   B@@@@P   .@@@||      @@|   @@|     [|@@,         @@@@@@@@@
+[@@@@@@@@@@@@@,      j@@@@@@,          .J@@@||      @@|   @@|     [|@@]         @@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@g_       _@@@@@||      --    --      [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ggggg@@@@@@@||     ___'   ___     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||      --.   --,     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P"     "%@@@@@||      @@|   @@|     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@N     "@@@@@@@F   ...    '@@@@||      @@|   @@|     [|@@@         @@@@@@@@@
+[@@"   \@@@@@"        @@@@@@  .g@@@@_.  .@@@1.===== P.    "@L.====='@@)         @@@@@@@@@
+[@@.    @@@@@         [@@@@B  !@@@@@@!  '@@@@@@@@@@@|      @@@@@@@@@@P         ,@@@@@@@@@
+[@@@ggg@@@@@@B       _@@@@@@   0@@@@f   !@@@@@@@@@@@ggggggg@@@@@@@@@@          @@@@@@@@@@
+[@@@@@@@@@@@@@@@~~~J@@@@@@@@@_         A@@@@@@@@@@@@@@@@@@@@@@@@@@@@"         j@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@g~~~~~@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@          _@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@N          _@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@W"         .+@@@@@@@@@@@@@
+[@@@@@@@@@@@@@W"'  "4@@@@@@@@@@P"   "4@@@@@@@@@@@@@@@@@@@@@@@P"          .g@@@@@@@@@@@@@@
+[@@@@@@@@@@@@?        @@@@@@@@'       '@@@@@@@@@@@@@@@@@@@@"            ,@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         [@@@@@@B.       .@@@@@@@@@@@@@@@@P"            ..g@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@B        @@@@@@@@_       J@@@@@@@@@@@=>'               ,g@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@~___~g@@@@@@@@@@g~___~@@@@@                        _@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    ._/@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                 __g@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P"""9@@@@@           ..__@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    @@@@@l__-___gg@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@g___g@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+*/
+</script>
+
+<!--
+#
+DARPA operates on the principle that generating big rewards requires taking big risks. But how does the Agency determine what risks are worth taking?
+
+George H. Heilmeier, a former DARPA director (1975-1977), crafted a set of questions known as the "Heilmeier Catechism" to help Agency officials think through,
+and evaluate proposed research programs:
+
+    What are you trying to do? Articulate your objectives using absolutely no jargon.
+    How is it done today, and what are the limits of current practice? [*]
+    What is new in your approach and why do you think it will be successful? [*]
+    Who cares? If you are successful, what difference will it make? [The continued existence of the human race 'homo-sapiens'...]
+    What are the risks? [High!]
+    How much will it cost? [Everything.]
+    How long will it take? [Unknowable?]
+    What are the mid-term and final “exams” to check for success? [Survival versus extinction for ~*8+ billion people...]
+#
+-->
+
+<!-- Fontawesome. -->
+<script src="https://kit.fontawesome.com/624f95c733.js" crossorigin="anonymous"></script>
+	<!-- Include Tone.js for audio synthesis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+    <style>
+        body {
+            font-family: 'VT323', monospace;
+            background-color: #020a02;
+            color: #00ff41;
+        }
+        canvas {
+            background-color: #081408;
+            cursor: crosshair;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border-radius: 0.5rem;
+            border: 2px solid #004d00;
+        }
+        .crt-glow {
+             box-shadow: 0 0 15px 5px rgba(0, 255, 65, 0.2);
+        }
+        textarea, button {
+            font-family: 'VT323', monospace;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-4xl mx-auto"><center><div class="logo-only"><img src="chi-logo-only.png" height="50" width"50" alt="Cydonis Heavy Industries, (C.H.I), Ltd."></div></center><br>
+        <h1 class="text-4xl md:text-5xl text-center mb-2 text-green-400 tracking-widest">CYDONIS TERMINAL A.L.P.H.A.</h1>
+        <p class="text-center text-green-500 mb-6">Cydonis Corporation // Tackling life's toughest problems; <a href="https://cydonis.co.uk/blog/blog-index">with the power^2 of science!</a></p>
+ <center><audio controls autoplay muted loop>
+  <source src="Oingo_Boingo_Weird Science.mp3" type="audio/mpeg">
+<p class="text-center text-green-500 mb-6">Your browser does not support the audio element.</p>
+</audio></center><br>
+        <div class="mb-4 bg-black bg-opacity-30 p-4 rounded-lg border border-green-800">
+             <canvas id="terminalCanvas" class="crt-glow"></canvas>
+        </div>
+
+        <div class="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="md:col-span-2">
+                <label for="textInput" class="block mb-2 text-lg text-green-300">// INPUT BUFFER_</label>
+                <textarea id="textInput" class="w-full h-24 p-3 bg-gray-800 border-2 border-green-700 rounded-md text-green-300 text-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none" placeholder="Enter text to animate..."></textarea>
+            </div>
+            <div class="flex items-end">
+                <button id="renderButton" class="w-full h-12 bg-green-600 text-black text-2xl font-bold rounded-md hover:bg-green-500 active:bg-green-700 transition-all duration-150 ease-in-out border-b-4 border-green-800 hover:border-green-600">
+                    &gt; INPUT.
+                </button>
+            </div>
+        </div>
+         <p id="systemStatus" class="text-center text-xs text-green-700 mt-6">System Online | Status: NOMINAL. | User: Guest | Audio: STANDBY.</p><p class="text-center text-xs text-green-700 mt-6"> | <a href="https://github.com/Cydonis-Heavy-Industries-C-H-I-Ltd"><i class="fa-brands fa-github"></i> |</a> <i class="fa-brands fa-bluesky"></i><a href="https://bsky.app/profile/cydonis.co.uk"> Bluesky.</a> | </p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('terminalCanvas');
+        const ctx = canvas.getContext('2d');
+        const textInput = document.getElementById('textInput');
+        const renderButton = document.getElementById('renderButton');
+        const statusText = document.getElementById('systemStatus');
+
+        let animationFrameId;
+        let letters = [];
+        let sourceText = '#//:> WELCOME TO THE CYDONIS HEAVY INDUSTRIES PRIMARY TERMINAL. *Everything, everywhere, every when, every how, every why, every person who has ever been born, every person who has ever died, all at once.* ALL SYSTEMS FUNCTIONAL. MAXIMUM POWER. AWAITING YOUR INPUT. WHAT IS YOUR COMMAND...?';
+        let textIndex = 0;
+        let lastTime = 0;
+        let typeSpeed = 50; // ms per character
+
+        // --- Audio Synthesis Setup ---
+        let audioInitialized = false;
+        let typingSynth, fanHum, coilWhine;
+
+        function initializeAudio() {
+            // This function sets up all the audio components from Tone.js
+            
+            // Sound for each character appearing on screen
+            typingSynth = new Tone.MembraneSynth({
+                pitchDecay: 0.01,
+                octaves: 6,
+                envelope: {
+                    attack: 0.001,
+                    decay: 0.2,
+                    sustain: 0,
+                },
+            }).toDestination();
+            typingSynth.volume.value = -10;
+
+            // A low, deep humming sound for the fan/machinery
+            fanHum = new Tone.Noise("brown").toDestination();
+            const fanFilter = new Tone.AutoFilter({
+                frequency: 0.5,
+                baseFrequency: 60,
+                octaves: 2
+            }).toDestination();
+            fanHum.connect(fanFilter);
+            fanHum.volume.value = -35; // Start very quiet
+
+            // A high-pitched, unstable whine for the CRT monitor
+            coilWhine = new Tone.Noise("pink").toDestination();
+            const coilFilter = new Tone.Filter(9000, "bandpass").toDestination();
+            const coilLFO = new Tone.LFO(0.1, 8500, 9500).connect(coilFilter.frequency);
+            coilWhine.connect(coilFilter);
+            coilWhine.volume.value = -45; // Start very quiet
+            
+            // Start the audio components
+            fanFilter.start();
+            coilLFO.start();
+            fanHum.start();
+            coilWhine.start();
+            
+            audioInitialized = true;
+            statusText.textContent = "System Online | Status: NOMINAL | User: Guest | Audio: ACTIVE";
+        }
+
+
+        // --- Canvas Sizing ---
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            const size = container.clientWidth;
+            canvas.width = size;
+            canvas.height = size * (9 / 16);
+            if(letters.length > 0) {
+                startAnimation(sourceText, false); // Rerun animation without re-initializing audio
+            }
+        }
+
+        // --- Core Animation Logic ---
+        function animate(timestamp) {
+            ctx.fillStyle = 'rgba(8, 20, 8, 0.2)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const deltaTime = timestamp - lastTime;
+            if (deltaTime > typeSpeed && textIndex < sourceText.length) {
+                addLetter();
+                lastTime = timestamp;
+            }
+
+            drawScanlines();
+            
+            let needsRedraw = false;
+            ctx.font = `${canvas.width * 0.03}px 'VT323', monospace`;
+            letters.forEach(letter => {
+                updateAndDrawLetter(letter);
+                if (letter.alpha > 0) {
+                    needsRedraw = true;
+                }
+            });
+
+            letters = letters.filter(letter => letter.alpha > 0.01);
+
+            if (needsRedraw || textIndex < sourceText.length) {
+                animationFrameId = requestAnimationFrame(animate);
+            }
+        }
+        
+        function addLetter() {
+            const char = sourceText[textIndex];
+            if(char === ' ' || char === '\n') {
+                textIndex++;
+                if(textIndex < sourceText.length) addLetter();
+                return;
+            }
+
+            // Play the typing sound
+            if (audioInitialized) {
+                typingSynth.triggerAttack("C1");
+            }
+
+            const fontSize = canvas.width * 0.03;
+            const lines = sourceText.substring(0, textIndex).split('\n');
+            const currentLine = lines.length - 1;
+            const lastLineText = lines[currentLine];
+            
+            let x = ctx.measureText(lastLineText).width + (canvas.width * 0.02);
+            let y = (currentLine * fontSize * 1.5) + (fontSize * 1.5);
+            
+            if (x + ctx.measureText(char).width > canvas.width * 0.98) {
+                sourceText = sourceText.slice(0, textIndex) + '\n' + sourceText.slice(textIndex);
+                textIndex++;
+                addLetter();
+                return;
+            }
+
+            letters.push({
+                char: char, x: x, y: y, alpha: 1.0, brightness: 5.0, glow: 25,
+            });
+            textIndex++;
+        }
+
+        function updateAndDrawLetter(letter) {
+            if (letter.brightness > 1.0) letter.brightness -= 0.2;
+            if (letter.glow > 10) letter.glow -= 1;
+            letter.alpha -= 0.002;
+            letter.alpha = Math.max(0, letter.alpha);
+
+            const baseColor = `rgba(0, 255, 65, ${letter.alpha})`;
+            const brightColor = `rgba(200, 255, 220, ${Math.min(1, letter.alpha * 1.5)})`;
+
+            ctx.fillStyle = letter.brightness > 1.1 ? brightColor : baseColor;
+            ctx.shadowColor = `rgba(0, 255, 65, ${letter.alpha * 0.7})`;
+            ctx.shadowBlur = letter.glow;
+            
+            ctx.fillText(letter.char, letter.x, letter.y);
+        }
+
+        function drawScanlines() {
+            ctx.save();
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+            ctx.shadowBlur = 0;
+            for (let y = 0; y < canvas.height; y += 3) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+
+        // --- Event Handlers ---
+        function startAnimation(text, shouldInitAudio) {
+            // Because of browser autoplay policies, we must start the audio
+            // context after a user interaction (like a click).
+            if (shouldInitAudio && !audioInitialized && Tone.context.state !== 'running') {
+                Tone.start().then(initializeAudio);
+            }
+
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            
+            sourceText = text.length > 0 ? text : ' ';
+            letters = [];
+            textIndex = 0;
+            
+            ctx.fillStyle = '#081408';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            lastTime = performance.now();
+            animationFrameId = requestAnimationFrame(animate);
+        }
+
+        renderButton.addEventListener('click', () => {
+            startAnimation(textInput.value, true);
+        });
+
+        // --- Initialization ---
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        startAnimation(sourceText, false);
+    </script>
+
+</body>
+</html>

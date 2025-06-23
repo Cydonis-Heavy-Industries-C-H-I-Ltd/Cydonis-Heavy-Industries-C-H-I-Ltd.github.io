@@ -1,0 +1,96 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="600" fill="#f8f9fa" />
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">Estimated Compute Time vs. Model Completion</text>
+  <text x="400" y="70" font-family="Arial" font-size="16" text-anchor="middle">For Neurotransmitter Chirality Modeling</text>
+  
+  <!-- Axes -->
+  <line x1="100" y1="500" x2="700" y2="500" stroke="black" stroke-width="2" />
+  <line x1="100" y1="500" x2="100" y2="100" stroke="black" stroke-width="2" />
+  
+  <!-- X-axis Labels -->
+  <text x="400" y="550" font-family="Arial" font-size="18" text-anchor="middle">Model Completion (%)</text>
+  <text x="100" y="525" font-family="Arial" font-size="12" text-anchor="middle">0</text>
+  <text x="220" y="525" font-family="Arial" font-size="12" text-anchor="middle">25</text>
+  <text x="340" y="525" font-family="Arial" font-size="12" text-anchor="middle">50</text>
+  <text x="460" y="525" font-family="Arial" font-size="12" text-anchor="middle">75</text>
+  <text x="580" y="525" font-family="Arial" font-size="12" text-anchor="middle">90</text>
+  <text x="700" y="525" font-family="Arial" font-size="12" text-anchor="middle">100</text>
+  
+  <!-- Y-axis Labels -->
+  <text x="50" y="300" font-family="Arial" font-size="18" text-anchor="middle" transform="rotate(-90 50 300)">Compute Resources (Log Scale)</text>
+  <text x="95" y="500" font-family="Arial" font-size="10" text-anchor="end">1</text>
+  <text x="95" y="440" font-family="Arial" font-size="10" text-anchor="end">10</text>
+  <text x="95" y="380" font-family="Arial" font-size="10" text-anchor="end">100</text>
+  <text x="95" y="320" font-family="Arial" font-size="10" text-anchor="end">1K</text>
+  <text x="95" y="260" font-family="Arial" font-size="10" text-anchor="end">10K</text>
+  <text x="95" y="200" font-family="Arial" font-size="10" text-anchor="end">100K</text>
+  <text x="95" y="140" font-family="Arial" font-size="10" text-anchor="end">1M</text>
+  <text x="95" y="100" font-family="Arial" font-size="10" text-anchor="end">10M+</text>
+  
+  <!-- Grid Lines -->
+  <line x1="100" y1="440" x2="700" y2="440" stroke="#ddd" stroke-width="1" />
+  <line x1="100" y1="380" x2="700" y2="380" stroke="#ddd" stroke-width="1" />
+  <line x1="100" y1="320" x2="700" y2="320" stroke="#ddd" stroke-width="1" />
+  <line x1="100" y1="260" x2="700" y2="260" stroke="#ddd" stroke-width="1" />
+  <line x1="100" y1="200" x2="700" y2="200" stroke="#ddd" stroke-width="1" />
+  <line x1="100" y1="140" x2="700" y2="140" stroke="#ddd" stroke-width="1" />
+  
+  <line x1="220" y1="100" x2="220" y2="500" stroke="#ddd" stroke-width="1" />
+  <line x1="340" y1="100" x2="340" y2="500" stroke="#ddd" stroke-width="1" />
+  <line x1="460" y1="100" x2="460" y2="500" stroke="#ddd" stroke-width="1" />
+  <line x1="580" y1="100" x2="580" y2="500" stroke="#ddd" stroke-width="1" />
+  
+  <!-- Main exponential curve -->
+  <path d="M100,480 Q160,470 220,450 T340,380 T460,240 T580,140 T700,100" fill="none" stroke="#3366cc" stroke-width="3" />
+  
+  <!-- Milestones -->
+  <circle cx="100" cy="480" r="6" fill="#3366cc" />
+  <circle cx="220" cy="450" r="6" fill="#3366cc" />
+  <circle cx="340" cy="380" r="6" fill="#3366cc" />
+  <circle cx="460" cy="240" r="6" fill="#3366cc" />
+  <circle cx="580" cy="140" r="6" fill="#3366cc" />
+  <circle cx="700" cy="100" r="6" fill="#3366cc" />
+  
+  <!-- Model complexity stages -->
+  <line x1="100" y1="510" x2="100" y2="530" stroke="black" stroke-width="1" />
+  <line x1="220" y1="510" x2="220" y2="530" stroke="black" stroke-width="1" />
+  <line x1="340" y1="510" x2="340" y2="530" stroke="black" stroke-width="1" />
+  <line x1="460" y1="510" x2="460" y2="530" stroke="black" stroke-width="1" />
+  <line x1="580" y1="510" x2="580" y2="530" stroke="black" stroke-width="1" />
+  <line x1="700" y1="510" x2="700" y2="530" stroke="black" stroke-width="1" />
+  
+  <!-- Legend -->
+  <rect x="160" y="130" width="450" height="170" fill="white" fill-opacity="0.8" stroke="#cccccc" />
+  <text x="180" y="160" font-family="Arial" font-size="16" font-weight="bold">Model Complexity Stages</text>
+  
+  <circle cx="190" cy="190" r="5" fill="#3366cc" />
+  <text x="210" y="195" font-family="Arial" font-size="14">Basic molecular binding (25%): Standard workstation, weeks</text>
+  
+  <circle cx="190" cy="220" r="5" fill="#3366cc" />
+  <text x="210" y="225" font-family="Arial" font-size="14">Receptor interactions (50%): GPU cluster, months</text>
+  
+  <circle cx="190" cy="250" r="5" fill="#3366cc" />
+  <text x="210" y="255" font-family="Arial" font-size="14">Neural signaling (75%): HPC system, 1-2 years</text>
+  
+  <circle cx="190" cy="280" r="5" fill="#3366cc" />
+  <text x="210" y="285" font-family="Arial" font-size="14">Circuit integration (90%): Supercomputer, 3-5 years</text>
+  
+  <circle cx="190" cy="310" r="5" fill="#3366cc" />
+  <text x="210" y="315" font-family="Arial" font-size="14">Full behavioral modeling (100%): Quantum+classical hybrid, 10+ years</text>
+  
+  <!-- Annotations -->
+  <text x="300" y="430" font-family="Arial" font-size="14" fill="#666">Exponential increase in</text>
+  <text x="300" y="450" font-family="Arial" font-size="14" fill="#666">computational requirements</text>
+  
+  <path d="M280,440 L220,460" stroke="#666" stroke-width="1" marker-end="url(#arrow)" fill="none" />
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666" />
+    </marker>
+  </defs>
+</svg>

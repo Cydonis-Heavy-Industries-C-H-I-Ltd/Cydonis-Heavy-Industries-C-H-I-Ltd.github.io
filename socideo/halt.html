@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[C.H.I]: Global Socideo Profound Blocking/Halting Problem(s).</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .flowchart-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px; /* Max container width */
+            overflow: auto; /* Allows scrolling for larger flowcharts */
+        }
+        svg {
+            display: block;
+            margin: auto;
+        }
+        .flowchart-text {
+            font-size: 14px;
+            fill: #333;
+            text-anchor: middle; /* Centers text horizontally */
+            dominant-baseline: middle; /* Helps center single lines of text vertically */
+            /* pointer-events: none; */ /* Kept commented out as per user's version */
+        }
+        .flowchart-shape {
+            stroke: #4a5568; /* Tailwind gray-700 */
+            stroke-width: 2;
+            rx: 8px; /* Rounded corners for rectangles */
+            ry: 8px; /* Rounded corners for rectangles */
+        }
+        .flowchart-line {
+            stroke: #718096; /* Tailwind gray-500 */
+            stroke-width: 2;
+            fill: none; /* Important for polylines not to be filled */
+        }
+        .arrow-head {
+            fill: #718096; /* Tailwind gray-500 */
+        }
+
+        /* Specific shape styles */
+        .start-end {
+            fill: #e6fffa; /* Tailwind teal-100 */
+        }
+        .process {
+            fill: #ebf8ff; /* Tailwind blue-100 */
+        }
+        .decision {
+            fill: #fffaf0; /* Tailwind orange-100 */
+        }
+        .io {
+            fill: #f0fff4; /* Tailwind green-100 */
+        }
+        .alt-path-purple {
+             fill: #e9d8fd; /* Tailwind purple-100 */
+        }
+        .custom-yellow { /* For Tautological Constructs & Mimesis */
+            fill: #fefcbf; /* Tailwind yellow-100 like */
+        }
+        .custom-indigo { /* For Culture, Religion, Politics */
+            fill: #e0e7ff; /* Tailwind indigo-100 like */
+        }
+
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="flowchart-container">
+        <svg width="700" height="550" xmlns="http://www.w3.org/2000/svg">
+            <!--
+                SVG Flowchart
+                - Shapes are defined by <rect>, <ellipse>, <polygon> (for diamond) etc.
+                - Lines are defined by <line> or <polyline>.
+                - Arrowheads are defined by <marker> and applied to lines.
+                - Text is added using <text>. For multi-line text, <tspan> is used.
+            -->
+
+            <!-- Arrowhead Definition -->
+            <defs>
+                <marker
+                    id="arrow"
+                    markerWidth="10"
+                    markerHeight="7"
+                    refX="9"
+                    refY="3.5"
+                    orient="auto"
+                    class="arrow-head">
+                    <polygon points="0 0, 10 3.5, 0 7" />
+                </marker>
+            </defs>
+
+            <!-- Shapes -->
+            <!-- Start Node (Rectangle) - Changed from ellipse -->
+            <rect x="20" y="15" width="160" height="70" class="flowchart-shape start-end" />
+            <text x="100" y="50" class="flowchart-text">Start!</text>
+
+            <!-- Process 1 (Rectangle) -->
+            <rect x="30" y="120" width="140" height="60" class="flowchart-shape process" />
+            <text x="100" y="150" class="flowchart-text">World Status.</text>
+
+            <!-- Decision (Diamond) - Text wrapped -->
+            <polygon points="100,220 185,270 100,320 15,270" class="flowchart-shape decision" />
+            <text x="100" y="270" class="flowchart-text">
+                <tspan x="100" dy="-0.6em">Is There A</tspan>
+                <tspan x="100" dy="1.2em">Problem/Crisis?</tspan>
+            </text>
+
+            <!-- Process 2a (Rectangle - Yes branch) -->
+            <rect x="220" y="240" width="180" height="60" class="flowchart-shape process" />
+            <text x="310" y="270" class="flowchart-text">Process 2a (Yes).</text> <!-- Centered text for new width -->
+
+            <!-- Process 2b (Rectangle - No branch) - Text wrapped -->
+            <rect x="30" y="360" width="140" height="75" class="flowchart-shape process" /> <!-- Increased height for 3 lines -->
+            <text x="100" y="397.5" class="flowchart-text"> <!-- Adjusted y for new height and 3 lines -->
+                <tspan x="100" dy="-1.2em">Process 2b</tspan>
+                <tspan x="100" dy="1.2em">(Ignorance/</tspan>
+                <tspan x="100" dy="1.2em">Bickering/No)</tspan>
+            </text>
+
+            <!-- IO Shape (Parallelogram) - Text wrapped -->
+            <polygon points="220,360 360,360 340,435 200,435" class="flowchart-shape io" /> <!-- Increased width/height slightly for text -->
+             <text x="280" y="397.5" class="flowchart-text"> <!-- Adjusted x/y for new shape and 3 lines -->
+                <tspan x="280" dy="-1.2em">Input/Output.</tspan>
+                <tspan x="280" dy="1.2em">Money/Solution.</tspan>
+                <tspan x="280" dy="1.2em">Cancel/Solution.</tspan>
+            </text>
+
+            <!-- End Node (Rectangle) - Corrected text position -->
+            <rect x="450" y="50" width="180" height="60" class="flowchart-shape start-end" /> <!-- Moved End higher -->
+            <text x="540" y="80" class="flowchart-text">End.</text> <!-- Centered Text -->
+
+            <!-- Alternative Path (was previously also End Node) -->
+            <rect x="450" y="150" width="180" height="60" class="flowchart-shape alt-path-purple" />
+            <text x="540" y="180" class="flowchart-text">Alternative Path?</text>
+
+            <!-- Connections -->
+            <!-- Start to Process 1 -->
+            <line x1="100" y1="85" x2="100" y2="120" class="flowchart-line" marker-end="url(#arrow)" /> <!-- y1 adjusted from ellipse bottom to rect bottom -->
+            <!-- Process 1 to Decision -->
+            <line x1="100" y1="180" x2="100" y2="220" class="flowchart-line" marker-end="url(#arrow)" />
+            <!-- Decision to Process 2a (Yes) -->
+            <line x1="185" y1="270" x2="220" y2="270" class="flowchart-line" marker-end="url(#arrow)" />
+            <text x="202.5" y="260" class="flowchart-text" font-size="12px">Yes</text>
+            <!-- Decision to Process 2b (No) -->
+            <line x1="100" y1="320" x2="100" y2="360" class="flowchart-line" marker-end="url(#arrow)" />
+            <text x="85" y="340" class="flowchart-text" font-size="12px">No</text> <!-- Moved No label slightly left -->
+            <!-- Process 2a to IO -->
+            <line x1="310" y1="300" x2="310" y2="350" class="flowchart-line" marker-end="url(#arrow)" /> <!-- from center of P2a -->
+            <line x1="310" y1="350" x2="290" y2="360" class="flowchart-line" marker-end="url(#arrow)" /> <!-- Angled to IO top -->
+            <!-- Process 2b to IO -->
+            <polyline points="100,435 100,455 270,455 270,435" class="flowchart-line" marker-end="url(#arrow)"/> <!-- Adjusted polyline to IO bottom -->
+            
+            <!-- IO to End - Corrected to new End node position -->
+            <line x1="360" y1="397.5" x2="450" y2="80" class="flowchart-line" marker-end="url(#arrow)" /> <!-- IO right-middle to End left-middle -->
+
+            <!-- Process 1 to Alternative Path -->
+            <line x1="170" y1="150" x2="450" y2="180" class="flowchart-line" marker-end="url(#arrow)" /> <!-- P1 right-middle to AltPath left-middle -->
+            <text x="310" y="160" class="flowchart-text" font-size="12px">Branch</text>
+
+
+            <!-- Tautological Constructs -->
+            <rect x="450" y="230" width="180" height="60" class="flowchart-shape custom-yellow" />
+            <text x="540" y="260" class="flowchart-text">Tautological Constructs.</text>
+
+            <!-- Mimesis -->
+            <rect x="450" y="330" width="180" height="60" class="flowchart-shape custom-yellow" />
+            <text x="540" y="360" class="flowchart-text">Mimesis.</text>
+
+            <!-- Connection from Tautological Constructs to Mimesis -->
+            <line x1="540" y1="290" x2="540" y2="330" class="flowchart-line" marker-end="url(#arrow)" />
+
+            <!-- Sub-boxes for Mimesis -->
+            <!-- Culture -->
+            <rect x="360" y="430" width="100" height="50" class="flowchart-shape custom-indigo" />
+            <text x="410" y="455" class="flowchart-text">Culture.</text>
+            <!-- Religion -->
+            <rect x="480" y="430" width="100" height="50" class="flowchart-shape custom-indigo" />
+            <text x="530" y="455" class="flowchart-text">Religion.</text>
+            <!-- Politics -->
+            <rect x="600" y="430" width="100" height="50" class="flowchart-shape custom-indigo" />
+            <text x="650" y="455" class="flowchart-text">Politics.</text>
+
+            <!-- Connections from Mimesis to Sub-boxes -->
+            <!-- Mimesis (center-bottom: 540, 390) to Culture (center-top: 410, 430) -->
+            <polyline points="540,390 540,410 410,410 410,430" class="flowchart-line" marker-end="url(#arrow)"/>
+            <!-- Mimesis to Religion (center-top: 530, 430) -->
+            <line x1="540" y1="390" x2="530" y2="430" class="flowchart-line" marker-end="url(#arrow)" />
+            <!-- Mimesis to Politics (center-top: 650, 430) -->
+            <polyline points="540,390 540,410 650,410 650,430" class="flowchart-line" marker-end="url(#arrow)"/>
+
+        </svg>
+    </div>
+</body>
+</html>

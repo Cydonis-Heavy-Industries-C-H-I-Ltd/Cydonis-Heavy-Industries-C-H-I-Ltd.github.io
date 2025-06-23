@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cydonis Heavy Industries: Gravitational Whirlpool Sim. (v0.2a)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Cydonis" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="title" content="Cydonis Heavy Industries (C.H.I) Ltd" />
+<meta name="description" content=""Tackling life's toughest problems; with science!" />
+<script>
+/*
+          _       _        _          _                  _                _                    _             _        
+        /\ \     /\ \     /\_\       /\ \               /\ \             /\ \     _           /\ \          / /\      
+       /  \ \    \ \ \   / / /      /  \ \____         /  \ \           /  \ \   /\_\         \ \ \        / /  \     
+      / /\ \ \    \ \ \_/ / /      / /\ \_____\       / /\ \ \         / /\ \ \_/ / /         /\ \_\      / / /\ \__  
+     / / /\ \ \    \ \___/ /      / / /\/___  /      / / /\ \ \       / / /\ \___/ /         / /\/_/     / / /\ \___\ 
+    / / /  \ \_\    \ \ \_/      / / /   / / /      / / /  \ \_\     / / /  \/____/         / / /        \ \ \ \/___/ 
+   / / /    \/_/     \ \ \      / / /   / / /      / / /   / / /    / / /    / / /         / / /          \ \ \       
+  / / /               \ \ \    / / /   / / /      / / /   / / /    / / /    / / /         / / /       _    \ \ \      
+ / / /________         \ \ \   \ \ \__/ / /      / / /___/ / /    / / /    / / /      ___/ / /__     /_/\__/ / /      
+/ / /_________\         \ \_\   \ \___\/ /      / / /____\/ /    / / /    / / /      /\__\/_/___\    \ \/___/ /       
+\/____________/          \/_/    \/_____/       \/_________/     \/_/     \/_/       \/_________/     \_____\/        
+                                                                                                                      
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@BBB@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    @@@@@BBBBB@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,.  _@@@@@           "=@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                "+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    '4@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@B@@@@@@@@@@@@@@@@@@@@@@@@                       "B@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@"      9@@@@@@@@B.     'B@@@@@@@ga____.               %@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         9@@@@@@@.       .@@@@@@@@@@@@@@g__              %@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         @@@@@@@@.       .@@@@@@@@@@@@@@@@@@@_,            0@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@_    . j@@@@@@@@g_.    _@@@@@@@@@@@@@@@@@@@@@@g_.          '@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@_           @@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@           @@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@a          @@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'  _.   %@@@@@@@@@@@@@P'""""`@@@@@@@@g.        .@@@@@@@@@@@
+[@@@@@@@@@@@@@F      B@@@@@@F .+@@@@_.  B@@@@@@@@@@@|      @@@@@@@@@A.         @@@@@@@@@@
+[@@"   \@@@@@         @@@@@@  !@@@@@@;  .@@@T.---- Vg_.   j@'----..B@j         [@@@@@@@@@
+[@@.   ,@@@@@         &@@@@B   B@@@@P   .@@@||      @@|   @@|     [|@@,         @@@@@@@@@
+[@@@@@@@@@@@@@,      j@@@@@@,          .J@@@||      @@|   @@|     [|@@]         @@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@g_       _@@@@@||      --    --      [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ggggg@@@@@@@||     ___'   ___     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||      --.   --,     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P"     "%@@@@@||      @@|   @@|     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@N     "@@@@@@@F   ...    '@@@@||      @@|   @@|     [|@@@         @@@@@@@@@
+[@@"   \@@@@@"        @@@@@@  .g@@@@_.  .@@@1.===== P.    "@L.====='@@)         @@@@@@@@@
+[@@.    @@@@@         [@@@@B  !@@@@@@!  '@@@@@@@@@@@|      @@@@@@@@@@P         ,@@@@@@@@@
+[@@@ggg@@@@@@B       _@@@@@@   0@@@@f   !@@@@@@@@@@@ggggggg@@@@@@@@@@          @@@@@@@@@@
+[@@@@@@@@@@@@@@@~~~J@@@@@@@@@_         A@@@@@@@@@@@@@@@@@@@@@@@@@@@@"         j@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@g~~~~~@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@          _@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@N          _@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@W"         .+@@@@@@@@@@@@@
+[@@@@@@@@@@@@@W"'  "4@@@@@@@@@@P"   "4@@@@@@@@@@@@@@@@@@@@@@@P"          .g@@@@@@@@@@@@@@
+[@@@@@@@@@@@@?        @@@@@@@@'       '@@@@@@@@@@@@@@@@@@@@"            ,@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         [@@@@@@B.       .@@@@@@@@@@@@@@@@P"            ..g@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@B        @@@@@@@@_       J@@@@@@@@@@@=>'               ,g@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@~___~g@@@@@@@@@@g~___~@@@@@                        _@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    ._/@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                 __g@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P"""9@@@@@           ..__@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    @@@@@l__-___gg@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@g___g@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+*/
+</script>
+<!--
+#
+DARPA operates on the principle that generating big rewards requires taking big risks. But how does the Agency determine what risks are worth taking?
+
+George H. Heilmeier, a former DARPA director (1975-1977), crafted a set of questions known as the "Heilmeier Catechism" to help Agency officials think through,
+and evaluate proposed research programs:
+
+    What are you trying to do? Articulate your objectives using absolutely no jargon.
+    How is it done today, and what are the limits of current practice? [*]
+    What is new in your approach and why do you think it will be successful? [*]
+    Who cares? If you are successful, what difference will it make? [The continued existence of the human race 'homo-sapiens'...]
+    What are the risks? [High!]
+    How much will it cost? [Everything.]
+    How long will it take? [Unknowable?]
+    What are the mid-term and final “exams” to check for success? [Survival versus extinction for ~*8+ billion people...]
+#
+-->
+<!-- #high-energy #matter #physics #quantum-mechanics #space-time #research-development #industrial #science #mathematics #philosophy #meta-ethics #environment #humanitarianism #climate-crisis #activism #humankind #human-kind-ness" /> -->
+	<style>
+        body { margin: 0; overflow: hidden; background-color: #000; color: #fff; font-family: 'Inter', sans-serif; }
+        #container { width: 100vw; height: 100vh; display: block; }
+        #controls-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            z-index: 100;
+            max-width: 300px;
+        }
+        label { display: block; margin-bottom: 5px; font-size: 0.9em; }
+        input[type="range"] { width: 100%; margin-bottom: 10px;}
+        .info-text { font-size: 0.8em; color: #ccc; margin-top:10px;}
+        .toggle-switch { display: flex; align-items: center; margin-top: 15px; }
+        .toggle-switch label { margin-right: 10px; }
+        .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #4a5568; transition: .4s; border-radius: 24px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #00ffff; }
+        input:checked + .slider:before { transform: translateX(20px); }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="controls-panel" class="rounded-lg shadow-xl">
+        <h2 class="text-lg font-semibold mb-2">Controls</h2>
+        <div>
+            <label for="speedSlider">Whirlpool Speed:</label>
+            <input type="range" id="speedSlider" min="0" max="20" value="5" step="0.1" class="w-full">
+        </div>
+        <div class="toggle-switch">
+             <label for="sphereToggle">Sphere Mode:</label>
+             <label class="switch">
+                <input type="checkbox" id="sphereToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="info-text">
+            <p>- Mouse Wheel: Zoom</p>
+            <p>- Right-Click + Drag: Pan Camera</p>
+            <p>- Left-Click + Drag: Rotate Camera</p>
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        let scene, camera, renderer, gridMesh, controls;
+        let planeVertices, sphereVertices; // Store vertex data for both shapes
+        let whirlpoolSpeed = 0.5;
+        let time = 0;
+
+        // --- State variables for morphing ---
+        let isSphereMode = false;
+        let isMorphing = false;
+        let morphProgress = 0.0; // 0.0 = plane, 1.0 = sphere
+
+        // --- Grid parameters ---
+        const gridSize = 200;
+        const gridDivisions = 100;
+
+        function init() {
+            // --- Scene, Camera, Renderer, Lights (as before) ---
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000000);
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 80, 150);
+            camera.lookAt(0, 0, 0);
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('container').appendChild(renderer.domElement);
+            const ambientLight = new THREE.AmbientLight(0x404040, 2);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+            directionalLight.position.set(50, 100, 75);
+            scene.add(directionalLight);
+
+            // --- Geometry Creation for Morphing ---
+            // We create both a plane and a sphere. Their vertex counts must match.
+            const planeGeo = new THREE.PlaneGeometry(gridSize, gridSize, gridDivisions, gridDivisions);
+            planeGeo.rotateX(-Math.PI / 2); // Lay flat
+            const sphereGeo = new THREE.SphereGeometry(gridSize / 2, gridDivisions, gridDivisions);
+
+            // Store the raw vertex data from both geometries
+            planeVertices = Float32Array.from(planeGeo.attributes.position.array);
+            sphereVertices = Float32Array.from(sphereGeo.attributes.position.array);
+
+            // The main mesh will start with the plane geometry but its vertices will be updated every frame.
+            const material = new THREE.MeshStandardMaterial({
+                color: 0x00ffff,
+                wireframe: true,
+                roughness: 0.5,
+                metalness: 0.2
+            });
+            gridMesh = new THREE.Mesh(planeGeo, material); // Start with planeGeo structure
+            scene.add(gridMesh);
+
+
+            // --- Controls ---
+            setupControls();
+
+            // --- Event Listeners ---
+            window.addEventListener('resize', onWindowResize, false);
+            document.getElementById('sphereToggle').addEventListener('change', (event) => {
+                isSphereMode = event.target.checked;
+                isMorphing = true; // Trigger the morph animation
+            });
+
+
+            animate();
+        }
+
+        function setupControls() {
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.screenSpacePanning = false;
+            controls.minDistance = 10;
+            controls.maxDistance = 500;
+            controls.maxPolarAngle = Math.PI;
+            controls.mouseButtons = { LEFT: THREE.MOUSE.ROTATE, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.PAN };
+            
+            const speedSlider = document.getElementById('speedSlider');
+            speedSlider.addEventListener('input', (event) => {
+                whirlpoolSpeed = parseFloat(event.target.value) / 10;
+            });
+            whirlpoolSpeed = parseFloat(speedSlider.value) / 10;
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function updateGeometry() {
+            if (!gridMesh) return;
+
+            // --- Morphing Logic ---
+            // Animate the morphProgress value towards its target (0 or 1)
+            if (isMorphing) {
+                const morphSpeed = 0.02;
+                if (isSphereMode && morphProgress < 1.0) {
+                    morphProgress = Math.min(1.0, morphProgress + morphSpeed);
+                } else if (!isSphereMode && morphProgress > 0.0) {
+                    morphProgress = Math.max(0.0, morphProgress - morphSpeed);
+                } else {
+                    isMorphing = false; // Stop morphing when target is reached
+                }
+            }
+            
+            // --- Vertex Manipulation ---
+            const positions = gridMesh.geometry.attributes.position.array;
+            const vertexCount = positions.length / 3;
+            time += 0.01;
+
+            const pVec = new THREE.Vector3();
+            const sVec = new THREE.Vector3();
+            const morphedVec = new THREE.Vector3();
+
+            for (let i = 0; i < vertexCount; i++) {
+                // Get the original vertex from both plane and sphere
+                pVec.fromArray(planeVertices, i * 3);
+                sVec.fromArray(sphereVertices, i * 3);
+
+                // Interpolate between the plane and sphere position
+                morphedVec.lerpVectors(pVec, sVec, morphProgress);
+                
+                // --- Unified Whirlpool Calculation ---
+                // We base the effect on the current, morphed position of the vertex.
+                // This allows the effect to smoothly transition as the shape changes.
+                
+                // For distance, we use the X and Z coordinates, which works for the plane
+                // and creates a vortex around the Y-axis (poles) for the sphere.
+                const dx = morphedVec.x;
+                const dz = morphedVec.z;
+                const distance = Math.sqrt(dx * dx + dz * dz);
+
+                // Gravitational Well (dent)
+                const funnelStrength = 80;
+                const eyeRadius = 5;
+                let yDisplacement = -funnelStrength / (distance + eyeRadius);
+
+                // Swirl Effect
+                const swirlStrength = 0.1 * whirlpoolSpeed;
+                const angleOffset = swirlStrength * time - distance * 0.05;
+                
+                let finalX = morphedVec.x;
+                let finalZ = morphedVec.z;
+                let finalY = morphedVec.y;
+
+                if (distance > 0.1) {
+                    // Apply swirl to X and Z coordinates
+                    finalX = dx * Math.cos(angleOffset) - dz * Math.sin(angleOffset);
+                    finalZ = dx * Math.sin(angleOffset) + dz * Math.cos(angleOffset);
+                }
+
+                // Apply the "dent" based on the shape.
+                // For the plane, we modify Y. For the sphere, we pull it inwards.
+                const dentVec = new THREE.Vector3(finalX, finalY, finalZ).normalize().multiplyScalar(yDisplacement);
+                
+                // We blend the dent effect based on the morph progress
+                const planeDent = new THREE.Vector3(0, yDisplacement, 0); // Dent is purely vertical
+                const sphereDent = new THREE.Vector3(finalX, finalY, finalZ).normalize().multiplyScalar(yDisplacement * 0.5); // Dent is radial
+                const finalDent = new THREE.Vector3().lerpVectors(planeDent, sphereDent, morphProgress);
+                
+                // Apply final position
+                positions[i * 3]     = finalX + finalDent.x;
+                positions[i * 3 + 1] = finalY + finalDent.y;
+                positions[i * 3 + 2] = finalZ + finalDent.z;
+            }
+
+            gridMesh.geometry.attributes.position.needsUpdate = true;
+            gridMesh.geometry.computeVertexNormals();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            updateGeometry();
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        init();
+    </script>
+</body>
+</html>

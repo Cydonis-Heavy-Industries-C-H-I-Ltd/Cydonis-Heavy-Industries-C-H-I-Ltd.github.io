@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cydonis Heavy Industries (C.H.I) Ltd: Deep Brain Neural Network Gaussian Simulation. (v0.3a)(15.6.2025)</title>
+	<meta name="description" content=""Tackling life's toughest problems; with science!" />
+	<link rel="shortcut icon" href="chi-logo-only.png" />
+<script>
+/*
+          _       _        _          _                  _                _                    _             _        
+        /\ \     /\ \     /\_\       /\ \               /\ \             /\ \     _           /\ \          / /\      
+       /  \ \    \ \ \   / / /      /  \ \____         /  \ \           /  \ \   /\_\         \ \ \        / /  \     
+      / /\ \ \    \ \ \_/ / /      / /\ \_____\       / /\ \ \         / /\ \ \_/ / /         /\ \_\      / / /\ \__  
+     / / /\ \ \    \ \___/ /      / / /\/___  /      / / /\ \ \       / / /\ \___/ /         / /\/_/     / / /\ \___\ 
+    / / /  \ \_\    \ \ \_/      / / /   / / /      / / /  \ \_\     / / /  \/____/         / / /        \ \ \ \/___/ 
+   / / /    \/_/     \ \ \      / / /   / / /      / / /   / / /    / / /    / / /         / / /          \ \ \       
+  / / /               \ \ \    / / /   / / /      / / /   / / /    / / /    / / /         / / /       _    \ \ \      
+ / / /________         \ \ \   \ \ \__/ / /      / / /___/ / /    / / /    / / /      ___/ / /__     /_/\__/ / /      
+/ / /_________\         \ \_\   \ \___\/ /      / / /____\/ /    / / /    / / /      /\__\/_/___\    \ \/___/ /       
+\/____________/          \/_/    \/_____/       \/_________/     \/_/     \/_/       \/_________/     \_____\/        
+                                                                                                                      
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@BBB@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    @@@@@BBBBB@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,.  _@@@@@           "=@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                "+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    '4@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@B@@@@@@@@@@@@@@@@@@@@@@@@                       "B@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@"      9@@@@@@@@B.     'B@@@@@@@ga____.               %@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         9@@@@@@@.       .@@@@@@@@@@@@@@g__              %@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         @@@@@@@@.       .@@@@@@@@@@@@@@@@@@@_,            0@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@_    . j@@@@@@@@g_.    _@@@@@@@@@@@@@@@@@@@@@@g_.          '@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@_           @@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@           @@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@a          @@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'  _.   %@@@@@@@@@@@@@P'""""`@@@@@@@@g.        .@@@@@@@@@@@
+[@@@@@@@@@@@@@F      B@@@@@@F .+@@@@_.  B@@@@@@@@@@@|      @@@@@@@@@A.         @@@@@@@@@@
+[@@"   \@@@@@         @@@@@@  !@@@@@@;  .@@@T.---- Vg_.   j@'----..B@j         [@@@@@@@@@
+[@@.   ,@@@@@         &@@@@B   B@@@@P   .@@@||      @@|   @@|     [|@@,         @@@@@@@@@
+[@@@@@@@@@@@@@,      j@@@@@@,          .J@@@||      @@|   @@|     [|@@]         @@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@g_       _@@@@@||      --    --      [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ggggg@@@@@@@||     ___'   ___     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||      --.   --,     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P"     "%@@@@@||      @@|   @@|     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@N     "@@@@@@@F   ...    '@@@@||      @@|   @@|     [|@@@         @@@@@@@@@
+[@@"   \@@@@@"        @@@@@@  .g@@@@_.  .@@@1.===== P.    "@L.====='@@)         @@@@@@@@@
+[@@.    @@@@@         [@@@@B  !@@@@@@!  '@@@@@@@@@@@|      @@@@@@@@@@P         ,@@@@@@@@@
+[@@@ggg@@@@@@B       _@@@@@@   0@@@@f   !@@@@@@@@@@@ggggggg@@@@@@@@@@          @@@@@@@@@@
+[@@@@@@@@@@@@@@@~~~J@@@@@@@@@_         A@@@@@@@@@@@@@@@@@@@@@@@@@@@@"         j@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@g~~~~~@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@          _@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@N          _@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@W"         .+@@@@@@@@@@@@@
+[@@@@@@@@@@@@@W"'  "4@@@@@@@@@@P"   "4@@@@@@@@@@@@@@@@@@@@@@@P"          .g@@@@@@@@@@@@@@
+[@@@@@@@@@@@@?        @@@@@@@@'       '@@@@@@@@@@@@@@@@@@@@"            ,@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         [@@@@@@B.       .@@@@@@@@@@@@@@@@P"            ..g@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@B        @@@@@@@@_       J@@@@@@@@@@@=>'               ,g@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@~___~g@@@@@@@@@@g~___~@@@@@                        _@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    ._/@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                 __g@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P"""9@@@@@           ..__@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    @@@@@l__-___gg@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@g___g@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+*/
+</script>
+<script>
+/*
+* All rights reserved.
+
+ *
+
+ * Redistribution and use in source and binary forms, with or without
+
+ * modification, are permitted provided that the following conditions
+
+ * are met:
+
+ * 1. Redistributions of source code must retain the above copyright
+
+ *    notice, this list of conditions and the following disclaimer.
+
+ * 2. Redistributions in binary form must reproduce the above copyright
+
+ *    notice, this list of conditions and the following disclaimer in the
+
+ *    documentation and/or other materials provided with the distribution.
+
+ * 3. Neither the name of the copyright holder nor the names of contributors
+
+ *    may be used to endorse or promote products derived from this software
+
+ *    without specific prior written permission.
+
+ *
+
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTOR(S) ``AS IS'' AND
+
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTOR(S) BE LIABLE
+
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+
+ * SUCH DAMAGE.
+ */
+ </script>
+<!--
+#
+DARPA operates on the principle that generating big rewards requires taking big risks. But how does the Agency determine what risks are worth taking?
+
+George H. Heilmeier, a former DARPA director (1975-1977), crafted a set of questions known as the "Heilmeier Catechism" to help Agency officials think through,
+and evaluate proposed research programs:
+
+    What are you trying to do? Articulate your objectives using absolutely no jargon.
+    How is it done today, and what are the limits of current practice? [*]
+    What is new in your approach and why do you think it will be successful? [*]
+    Who cares? If you are successful, what difference will it make? [The continued existence of the human race 'homo-sapiens'...]
+    What are the risks? [High!]
+    How much will it cost? [Everything.]
+    How long will it take? [Unknowable?]
+    What are the mid-term and final “exams” to check for success? [Survival versus extinction for ~*8+ billion people...]
+#
+-->
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Basic styling for body and canvas */
+        body {
+            margin: 0;
+            overflow: hidden; /* Hide scrollbars */
+            font-family: "Inter", sans-serif; /* Use Inter font */
+        }
+        /* Canvas takes full display block space */
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        /* Custom styles for better icon visibility and spacing */
+        .icon-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .icon-feature i {
+            margin-right: 8px;
+            color: #6ee7b7; /* A contrasting teal color */
+            font-size: 1.1em;
+        }
+        .icon-feature svg {
+            margin-right: 8px;
+            fill: #6ee7b7; /* A contrasting teal color for SVG */
+            width: 1.1em;
+            height: 1.1em;
+        }
+
+        /* Styles for the information overlay */
+        .info-overlay {
+            transition: all 0.3s ease-in-out; /* Smooth transition for minimize/restore */
+        }
+
+        /* Styles for minimized state */
+        .info-overlay.minimized {
+            max-height: 60px; /* Adjust to show only the header and toggle button */
+            overflow: hidden; /* Hide overflowing content */
+            padding-bottom: 0.5rem; /* Reduce padding when minimized */
+        }
+
+        .info-overlay.minimized .content {
+            opacity: 0; /* Hide content */
+            pointer-events: none; /* Disable interactions with hidden content */
+            height: 0;
+            margin-top: 0;
+        }
+
+        .toggle-button {
+            background: none;
+            border: none;
+            color: #6ee7b7;
+            cursor: pointer;
+            font-size: 1.2em;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-button:hover {
+            color: #a7f3d0;
+            transform: scale(1.1);
+        }
+    </style>
+    <!-- Vertex Shader for the fractal background -->
+    <script id="vertexShader" type="x-shader/x-vertex">
+        void main() {
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+    </script>
+    <!-- Fragment Shader for the rippling purple fractal background -->
+    <script id="fragmentShader" type="x-shader/x-fragment">
+        uniform float iTime;
+        uniform vec2 iResolution;
+        uniform vec3 color1; // Dark purple
+        uniform vec3 color2; // Light purple/magenta
+
+        // Hash function for pseudo-randomness (vec2 to vec2).
+        // Ensures correct type operations and is a common, reliable hash function.
+        vec2 hash22(vec2 p) {
+            p = vec2(dot(p, vec2(127.1,311.7)), dot(p, vec2(269.5,183.3)));
+            return fract(sin(p)*43758.5453123);
+        }
+
+        // 2D Noise function.
+        float noise2d(vec2 p) {
+            vec2 ip = floor(p);
+            vec2 fp = fract(p);
+            fp = fp * fp * (3.0 - 2.0 * fp); // Smoother interpolation
+
+            float bl = dot(hash22(ip), fp);
+            float br = dot(hash22(ip + vec2(1.0, 0.0)), vec2(1.0 - fp.x, fp.y));
+            float tl = dot(hash22(ip + vec2(0.0, 1.0)), vec2(fp.x, 1.0 - fp.y));
+            float tr = dot(hash22(ip + vec2(1.0, 1.0)), vec2(1.0 - fp.x, 1.0 - fp.y));
+
+            return mix(mix(bl, br, fp.x), mix(tl, tr, fp.x), fp.y);
+        }
+
+        // Fractal Brownian Motion (FBM) for complex patterns.
+        float fbm(vec2 p) {
+            float total = 0.0;
+            float amplitude = 0.5;
+            float frequency = 1.0;
+            for (int i = 0; i < 4; i++) { // 4 octaves
+                total += noise2d(p * frequency) * amplitude;
+                frequency *= 2.0;
+                amplitude *= 0.5;
+            }
+            return total;
+        }
+
+        void main() {
+            // Get UV coordinates from gl_FragCoord (screen space)
+            vec2 uv = gl_FragCoord.xy / iResolution.xy;
+            uv.x *= iResolution.x / iResolution.y; // Correct for aspect ratio
+
+            // Animate the UV coordinates to create a rippling effect
+            vec2 p = uv * 5.0 + iTime * 0.05;
+            p.x += sin(uv.y * 10.0 + iTime * 0.5) * 0.1; // Horizontal ripple based on Y
+            p.y += cos(uv.x * 12.0 + iTime * 0.4) * 0.1; // Vertical ripple based on X
+
+            // Generate fractal value
+            float fractal = fbm(p);
+
+            // Interpolate between the two purple colors based on the fractal value
+            vec3 finalColor = mix(color1, color2, fractal);
+
+            gl_FragColor = vec4(finalColor, 1.0);
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen">
+    <!-- Main container for the simulation -->
+    <div class="relative w-full h-screen flex items-center justify-center">
+        <!-- Canvas for the Three.js scene -->
+        <canvas id="simulationCanvas" class="rounded-lg shadow-xl"></canvas>
+
+        <!-- Information overlay -->
+        <div id="infoOverlay" class="info-overlay absolute top-4 left-4 bg-gray-800 bg-opacity-75 p-4 rounded-lg shadow-lg max-w-xs">
+            <div class="flex justify-between items-center mb-2">
+                <h1 class="text-xl font-bold text-teal-300 flex items-center">
+				<!-- C.H.I Logo -->
+                    </br><div><img src="chi-logo-only.png" "alt="Cydonis Heavy Industries, (C.H.I), Ltd)" height="100" width="200" style="opacity: 0.6;"></br>
+					<i class="fas fa-brain mr-2"></i>Neural Network Simulation
+                </h1>
+                <button id="toggleInfoButton" class="toggle-button">
+                    <i class="fas fa-minus"></i> <!-- Initial icon: minus for minimize -->
+                </button>
+            </div>
+            <div class="content">
+                <p class="text-sm text-gray-300 leading-relaxed">
+                    Explore a 3D deep brain neural network with a soothing fractal background. Observe activation potentials spreading dynamically.
+                    <br><br>
+                    <strong>Interact:</strong>
+                    <ul class="mt-2 text-gray-400">
+                        <li class="icon-feature">
+                            <i class="fas fa-arrows-alt"></i>Drag mouse/finger to pan
+                        </li>
+                        <li class="icon-feature">
+                            <i class="fas fa-search-plus"></i>Scroll wheel/pinch to zoom
+                        </li>
+                        <li class="icon-feature">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.0.0-beta3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2021 Fonticons, Inc. --><path d="M544 0H32C14.33 0 0 14.33 0 32v448c0 17.67 14.33 32 32 32h512c17.67 0 32-14.33 32-32V32C576 14.33 561.67 0 544 0zM192 112c0-26.51 21.49-48 48-48h256c26.51 0 48 21.49 48 48v256c0 26.51-21.49 48-48 48H240c-26.51 0-48-21.49-48-48V112zM64 416H320V128H64V416z"/></svg>
+                            <iframe width="160" height="115" src="https://www.youtube.com/embed/d7uFcFKHbgE" frameborder="0" allowfullscreen></iframe>
+                        </li>
+                        <li class="icon-feature">
+                            <i class="fas fa-link"></i>Note Synaptic Connections & Firing.
+                        </li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Three.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- OrbitControls for camera interaction (mouse and touch) -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <script>
+        // Global variables for Three.js scene
+        let scene, camera, renderer, controls;
+        // Array to hold all neuron objects
+        let neurons = [];
+        // Geometry and material for neurons (reused for performance)
+        let neuronGeometry;
+        // Clock for time in shader
+        let clock = new THREE.Clock();
+        // Background mesh and its material
+        let backgroundMesh;
+
+        // Configuration for the neural network
+        const NUM_NEURONS = 1500; // Number of neurons in the network
+        const NETWORK_SIZE = 150; // Size of the 3D cube where neurons are placed
+        const NEURON_RADIUS = 0.5; // Radius of each neuron sphere
+        const CONNECTION_DISTANCE = 20; // Max distance for neurons to connect
+        const ACTIVATION_DECAY_RATE = 0.015; // How fast activation fades per frame
+        const FIRING_THRESHOLD = 0.005; // Chance for a neuron to spontaneously fire
+        const ACTIVATION_SPREAD_FACTOR = 0.7; // How much activation spreads to neighbors
+        const GAUSSIAN_SIGMA = 10; // Standard deviation for Gaussian spread effect
+
+        // Colors for neuron activation (interpolated)
+        const INACTIVE_COLOR = new THREE.Color(0x002244); // Dark blue/gray
+        const ACTIVE_COLOR = new THREE.Color(0xFF4500);   // Orange-red
+
+        /**
+         * Initializes the Three.js scene, camera, renderer, and controls.
+         */
+        function init() {
+            // Get the canvas element
+            const canvas = document.getElementById('simulationCanvas');
+
+            // Create a new Three.js scene
+            scene = new THREE.Scene();
+
+            // Create a perspective camera
+            // Parameters: FOV, Aspect Ratio, Near Clipping Plane, Far Clipping Plane
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 0, NETWORK_SIZE * 1.5); // Initial camera position
+
+            // Create a WebGL renderer and attach it to the canvas
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight); // Set renderer size to full window
+            renderer.setPixelRatio(window.devicePixelRatio); // Handle high-DPI displays
+
+            // Add OrbitControls for camera interaction
+            // This allows panning, zooming, and rotating the camera with mouse/touch
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true; // Enable smooth camera movement
+            controls.dampingFactor = 0.05; // Damping factor for smooth movement
+            controls.screenSpacePanning = false; // Prevent panning parallel to the screen
+            controls.maxDistance = NETWORK_SIZE * 3; // Max zoom out distance
+            controls.minDistance = 1; // Min zoom in distance
+
+            // Add ambient light to illuminate the scene uniformly
+            const ambientLight = new THREE.AmbientLight(0x404040, 5); // soft white light
+            scene.add(ambientLight);
+
+            // Add a directional light for better shading
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+            directionalLight.position.set(1, 1, 1).normalize();
+            scene.add(directionalLight);
+
+            // Create a simple sphere geometry for neurons (reused)
+            neuronGeometry = new THREE.SphereGeometry(NEURON_RADIUS, 12, 12);
+
+            // Create the rippling purple fractal background
+            createFractalBackground();
+
+            // Populate the scene with neurons
+            createNeurons();
+
+            // Handle window resizing to keep the simulation responsive
+            window.addEventListener('resize', onWindowResize, false);
+
+            // Add event listener for the toggle button
+            document.getElementById('toggleInfoButton').addEventListener('click', toggleInfoOverlay);
+        }
+
+        /**
+         * Toggles the visibility/size of the information overlay.
+         */
+        function toggleInfoOverlay() {
+            const infoOverlay = document.getElementById('infoOverlay');
+            const toggleButtonIcon = document.querySelector('#toggleInfoButton i');
+
+            infoOverlay.classList.toggle('minimized');
+
+            // Change the icon based on the minimized state
+            if (infoOverlay.classList.contains('minimized')) {
+                toggleButtonIcon.classList.remove('fa-minus');
+                toggleButtonIcon.classList.add('fa-plus');
+            } else {
+                toggleButtonIcon.classList.remove('fa-plus');
+                toggleButtonIcon.classList.add('fa-minus');
+            }
+        }
+
+        /**
+         * Creates the animated fractal background using a custom shader.
+         */
+        function createFractalBackground() {
+            // Get shader code from script tags
+            const vertexShader = document.getElementById('vertexShader').textContent;
+            const fragmentShader = document.getElementById('fragmentShader').textContent;
+
+            // Define uniforms for the shader (values that can change over time)
+            const uniforms = {
+                iTime: { value: 0 },
+                iResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+                color1: { value: new THREE.Color(0x300060) }, // Darker purple
+                color2: { value: new THREE.Color(0x8000FF) }  // Brighter purple/magenta
+            };
+
+            // Create a ShaderMaterial
+            const shaderMaterial = new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader,
+                side: THREE.DoubleSide // Render on both sides of the plane
+            });
+
+            // Create a large plane geometry that covers the entire view
+            const planeGeometry = new THREE.PlaneGeometry(2000, 2000); // Larger than max camera distance
+            backgroundMesh = new THREE.Mesh(planeGeometry, shaderMaterial);
+
+            // Position the background mesh far behind the main scene objects
+            backgroundMesh.position.z = -500;
+            scene.add(backgroundMesh);
+        }
+
+        /**
+         * Creates individual neurons and adds them to the scene.
+         * Neurons are placed randomly within a cube defined by NETWORK_SIZE.
+         */
+        function createNeurons() {
+            for (let i = 0; i < NUM_NEURONS; i++) {
+                // Create a random position for each neuron within the network size
+                const x = (Math.random() - 0.5) * NETWORK_SIZE;
+                const y = (Math.random() - 0.5) * NETWORK_SIZE;
+                const z = (Math.random() - 0.5) * NETWORK_SIZE;
+
+                // Create a basic material for the neuron (initially inactive color)
+                const material = new THREE.MeshBasicMaterial({ color: INACTIVE_COLOR });
+                // Create the neuron mesh
+                const neuron = new THREE.Mesh(neuronGeometry, material);
+                neuron.position.set(x, y, z);
+
+                // Add custom properties for simulation
+                neuron.activation = 0; // Current activation level (0 to 1)
+                neuron.neighbors = []; // Store references to neighboring neurons
+
+                neurons.push(neuron); // Add neuron to our array
+                scene.add(neuron);    // Add neuron to the Three.js scene
+            }
+
+            // Establish connections between neurons (based on proximity)
+            // This is a simplified "network" structure for visualisation purposes
+            for (let i = 0; i < NUM_NEURONS; i++) {
+                for (let j = i + 1; j < NUM_NEURONS; j++) {
+                    const neuronA = neurons[i];
+                    const neuronB = neurons[j];
+                    // Calculate distance between neurons
+                    const distance = neuronA.position.distanceTo(neuronB.position);
+
+                    // If neurons are close enough, consider them "connected"
+                    if (distance < CONNECTION_DISTANCE) {
+                        neuronA.neighbors.push(neuronB);
+                        neuronB.neighbors.push(neuronA);
+
+                        // Draw a line to visualize the connection
+                        const points = [];
+                        points.push(neuronA.position);
+                        points.push(neuronB.position);
+                        const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                        // Using a slightly brighter blue and increased opacity for better visibility
+                        const material = new THREE.LineBasicMaterial({ color: 0x006699, transparent: true, opacity: 0.2 });
+                        const line = new THREE.Line(geometry, material);
+                        scene.add(line);
+                    }
+                }
+            }
+        }
+
+        /**
+         * Updates the simulation state (neuron activations) in each frame.
+         */
+        function updateSimulation() {
+            neurons.forEach(neuron => {
+                // Decay activation over time
+                neuron.activation = Math.max(0, neuron.activation - ACTIVATION_DECAY_RATE);
+
+                // Spontaneously fire with a small probability
+                if (Math.random() < FIRING_THRESHOLD) {
+                    neuron.activation = 1; // Full activation
+                    // When a neuron fires, propagate activation to neighbors
+                    propagateActivation(neuron);
+                }
+
+                // Update neuron color based on activation level
+                // Interpolate between inactive and active colors
+                neuron.material.color.lerpColors(INACTIVE_COLOR, ACTIVE_COLOR, neuron.activation);
+            });
+        }
+
+        /**
+         * Propagates activation from a firing neuron to its neighbors using a Gaussian fall-off.
+         * @param {THREE.Mesh} firingNeuron - The neuron that just fired.
+         */
+        function propagateActivation(firingNeuron) {
+            firingNeuron.neighbors.forEach(neighbor => {
+                // Calculate distance to the neighbor
+                const distance = firingNeuron.position.distanceTo(neighbor.position);
+                // Calculate activation increase based on Gaussian distribution
+                // The closer the neighbor, the higher the activation increase
+                const activationIncrease = ACTIVATION_SPREAD_FACTOR * Math.exp(-(distance * distance) / (2 * GAUSSIAN_SIGMA * GAUSSIAN_SIGMA));
+                // Add activation, clamping it to 1
+                neighbor.activation = Math.min(1, neighbor.activation + activationIncrease);
+            });
+        }
+
+        /**
+         * The main animation loop.
+         * Continuously updates the simulation and renders the scene.
+         */
+        function animate() {
+            requestAnimationFrame(animate); // Request the next frame
+
+            controls.update(); // Update OrbitControls (for smooth camera movement)
+            updateSimulation(); // Update the neuron activation states
+
+            // Update shader time uniform for animation
+            if (backgroundMesh && backgroundMesh.material.uniforms) {
+                backgroundMesh.material.uniforms.iTime.value = clock.getElapsedTime();
+            }
+
+            renderer.render(scene, camera); // Render the scene with the current camera
+        }
+
+        /**
+         * Handles window resizing events to maintain responsiveness.
+         * Updates camera aspect ratio and renderer size.
+         */
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix(); // Update camera projection matrix after aspect change
+            renderer.setSize(window.innerWidth, window.innerHeight); // Resize renderer
+
+            // Update resolution uniform for the shader
+            if (backgroundMesh && backgroundMesh.material.uniforms) {
+                backgroundMesh.material.uniforms.iResolution.value.set(window.innerWidth, window.innerHeight);
+            }
+        }
+
+        // Start the simulation when the window loads
+        window.onload = function () {
+            init();    // Initialize Three.js scene
+            animate(); // Start the animation loop
+        };
+    </script>
+</body>
+</html>
