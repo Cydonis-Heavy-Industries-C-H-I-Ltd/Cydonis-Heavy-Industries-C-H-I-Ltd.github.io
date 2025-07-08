@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C.H.I: Comet C/2025 N1 (ATLAS) Trajectory Simulator (v0.25a)</title>
+    <!-- Redirect for future use: <meta http-equiv="refresh" content="0; url=https://linktr.ee/Cyd0n1a"> -->
+    <!-- Primary Meta Tags -->
+	<link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Cydonis" />
+<link rel="manifest" href="site.webmanifest" />
+<meta name="title" content="Cydonis Heavy Industries (C.H.I) Ltd" />
+<meta name="description" content=""Tackling life's toughest problems; with science!" />
+<script>
+/*
+          _       _        _          _                  _                _                    _             _        
+        /\ \     /\ \     /\_\       /\ \               /\ \             /\ \     _           /\ \          / /\      
+       /  \ \    \ \ \   / / /      /  \ \____         /  \ \           /  \ \   /\_\         \ \ \        / /  \     
+      / /\ \ \    \ \ \_/ / /      / /\ \_____\       / /\ \ \         / /\ \ \_/ / /         /\ \_\      / / /\ \__  
+     / / /\ \ \    \ \___/ /      / / /\/___  /      / / /\ \ \       / / /\ \___/ /         / /\/_/     / / /\ \___\ 
+    / / /  \ \_\    \ \ \_/      / / /   / / /      / / /  \ \_\     / / /  \/____/         / / /        \ \ \ \/___/ 
+   / / /    \/_/     \ \ \      / / /   / / /      / / /   / / /    / / /    / / /         / / /          \ \ \       
+  / / /               \ \ \    / / /   / / /      / / /   / / /    / / /    / / /         / / /       _    \ \ \      
+ / / /________         \ \ \   \ \ \__/ / /      / / /___/ / /    / / /    / / /      ___/ / /__     /_/\__/ / /      
+/ / /_________\         \ \_\   \ \___\/ /      / / /____\/ /    / / /    / / /      /\__\/_/___\    \ \/___/ /       
+\/____________/          \/_/    \/_____/       \/_________/     \/_/     \/_/       \/_________/     \_____\/        
+                                                                                                                      
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@BBB@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    @@@@@BBBBB@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,.  _@@@@@           "=@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                "+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    '4@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@B@@@@@@@@@@@@@@@@@@@@@@@@                       "B@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@"      9@@@@@@@@B.     'B@@@@@@@ga____.               %@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         9@@@@@@@.       .@@@@@@@@@@@@@@g__              %@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         @@@@@@@@.       .@@@@@@@@@@@@@@@@@@@_,            0@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@_    . j@@@@@@@@g_.    _@@@@@@@@@@@@@@@@@@@@@@g_.          '@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@_           @@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@           @@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@a          @@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'  _.   %@@@@@@@@@@@@@P'""""`@@@@@@@@g.        .@@@@@@@@@@@
+[@@@@@@@@@@@@@F      B@@@@@@F .+@@@@_.  B@@@@@@@@@@@|      @@@@@@@@@A.         @@@@@@@@@@
+[@@"   \@@@@@         @@@@@@  !@@@@@@;  .@@@T.---- Vg_.   j@'----..B@j         [@@@@@@@@@
+[@@.   ,@@@@@         &@@@@B   B@@@@P   .@@@||      @@|   @@|     [|@@,         @@@@@@@@@
+[@@@@@@@@@@@@@,      j@@@@@@,          .J@@@||      @@|   @@|     [|@@]         @@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@g_       _@@@@@||      --    --      [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ggggg@@@@@@@||     ___'   ___     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||      --.   --,     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P"     "%@@@@@||      @@|   @@|     [|@@@         [@@@@@@@@
+[@@@@@@@@@@@@@N     "@@@@@@@F   ...    '@@@@||      @@|   @@|     [|@@@         @@@@@@@@@
+[@@"   \@@@@@"        @@@@@@  .g@@@@_.  .@@@1.===== P.    "@L.====='@@)         @@@@@@@@@
+[@@.    @@@@@         [@@@@B  !@@@@@@!  '@@@@@@@@@@@|      @@@@@@@@@@P         ,@@@@@@@@@
+[@@@ggg@@@@@@B       _@@@@@@   0@@@@f   !@@@@@@@@@@@ggggggg@@@@@@@@@@          @@@@@@@@@@
+[@@@@@@@@@@@@@@@~~~J@@@@@@@@@_         A@@@@@@@@@@@@@@@@@@@@@@@@@@@@"         j@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@g~~~~~@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@          _@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@N          _@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@W"         .+@@@@@@@@@@@@@
+[@@@@@@@@@@@@@W"'  "4@@@@@@@@@@P"   "4@@@@@@@@@@@@@@@@@@@@@@@P"          .g@@@@@@@@@@@@@@
+[@@@@@@@@@@@@?        @@@@@@@@'       '@@@@@@@@@@@@@@@@@@@@"            ,@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@         [@@@@@@B.       .@@@@@@@@@@@@@@@@P"            ..g@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@B        @@@@@@@@_       J@@@@@@@@@@@=>'               ,g@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@~___~g@@@@@@@@@@g~___~@@@@@                        _@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    ._/@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                 __g@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P"""9@@@@@           ..__@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.    @@@@@l__-___gg@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@g___g@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+*/
+</script>
+<!--
+#
+DARPA operates on the principle that generating big rewards requires taking big risks. But how does the Agency determine what risks are worth taking?
+
+George H. Heilmeier, a former DARPA director (1975-1977), crafted a set of questions known as the "Heilmeier Catechism" to help Agency officials think through,
+and evaluate proposed research programs:
+
+    What are you trying to do? Articulate your objectives using absolutely no jargon.
+    How is it done today, and what are the limits of current practice? [*]
+    What is new in your approach and why do you think it will be successful? [*]
+    Who cares? If you are successful, what difference will it make? [The continued existence of the human race 'homo-sapiens'...]
+    What are the risks? [High!]
+    How much will it cost? [Everything.]
+    How long will it take? [Unknowable?]
+    What are the mid-term and final “exams” to check for success? [Survival versus extinction for ~*8+ billion people...]
+#
+-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #ui-panel {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            z-index: 1000;
+            max-width: 300px;
+        }
+        
+        #controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            z-index: 1000;
+        }
+        
+        .control-group {
+            margin-bottom: 10px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+        
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 5px;
+        }
+        
+        button:hover {
+            background: #0088ff;
+        }
+        
+        .info-text {
+            font-size: 12px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+        
+        .orbital-data {
+            font-size: 11px;
+            color: #ccc;
+        }
+        
+        .legend {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            z-index: 1000;
+            font-size: 12px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .legend-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(2px);
+        }
+        
+        .legend-item.active {
+            background: rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .info-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-container {
+            text-align: center;
+        }
+        
+        .logo-image {
+            max-width: 120px;
+            height: auto;
+            display: block;
+            opacity: 0.5;
+        }
+        
+        .qr-container {
+            text-align: center;
+        }
+        
+        .qr-image {
+            max-width: 100px;
+            height: auto;
+            display: block;
+            opacity: 0.5;
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .audio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .audio-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .minimize-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .minimize-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .audio-content {
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .audio-content.minimized {
+            display: none;
+        }
+        
+        .now-playing {
+            margin-bottom: 8px;
+        }
+        
+        .track-info {
+            font-size: 11px;
+            color: #ccc;
+            display: block;
+            text-align: center;
+        }
+        
+        .progress-container {
+            margin-bottom: 12px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ffff, #0088ff);
+            width: 0%;
+            transition: width 0.1s;
+        }
+        
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #aaa;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 6px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 10px;
+        }
+        
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        .control-btn.active {
+            background: rgba(0, 255, 255, 0.3);
+            border-color: #00ffff;
+        }
+        
+        .play-btn {
+            padding: 8px 10px;
+            font-size: 12px;
+        }
+        
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .volume-container i {
+            color: #ccc;
+            font-size: 10px;
+        }
+        
+        .volume-slider {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #00ffff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: #00ffff;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .time-buttons {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+        
+        .time-buttons button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 6px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 10px;
+            min-width: 32px;
+        }
+        
+        .time-buttons button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        .time-buttons button.active {
+            background: rgba(0, 255, 255, 0.3);
+            border-color: #00ffff;
+        }
+        
+        #dateSlider {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    
+    <div id="ui-panel">
+        <h3><i class="fas fa-meteor"></i> Comet C/2025 N1 (ATLAS)</h3>
+        <div class="info-text">
+            <strong>Discovery:</strong> July 1, 2025<br>
+            <strong>Perihelion:</strong> October 29, 2025<br>
+            <strong>Type:</strong> Hyperbolic (Interstellar)<br>
+            <strong>Diameter:</strong> ~4-5 km
+        </div>
+        <div class="orbital-data">
+            <strong>Orbital Elements:</strong><br>
+            Perihelion: 1.357 AU<br>
+            Eccentricity: 6.139<br>
+            Inclination: 175.11°<br>
+            v∞: 58 km/s
+        </div>
+    </div>
+    
+    <div id="controls">
+        <div class="control-group">
+            <label><i class="fas fa-play"></i> Animation</label>
+            <button id="playPause"><i class="fas fa-play"></i> Play</button>
+            <button id="reset"><i class="fas fa-redo"></i> Reset</button>
+        </div>
+        <div class="control-group">
+            <label><i class="fas fa-tachometer-alt"></i> Speed: <span id="speedValue">1.0x</span></label>
+            <input type="range" id="speedSlider" min="0.01" max="100" step="0.01" value="1">
+        </div>
+        <div class="control-group">
+            <label><i class="fas fa-clock"></i> Time Controls</label>
+            <div class="time-buttons">
+                <button id="pauseTime" title="Pause Time">
+                    <i class="fas fa-pause"></i>
+                </button>
+                <button id="normalTime" title="Normal Speed">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button id="fastTime" title="Fast Forward">
+                    <i class="fas fa-forward"></i>
+                </button>
+                <button id="superFastTime" title="Super Fast">
+                    <i class="fas fa-tachometer-alt"></i>
+                </button>
+                <button id="reverseTime" title="Reverse Time">
+                    <i class="fas fa-backward"></i>
+                </button>
+            </div>
+        </div>
+        <div class="control-group">
+            <label><i class="fas fa-calendar-alt"></i> Date: <span id="dateDisplay">July 8, 2025</span></label>
+            <input type="range" id="dateSlider" min="0" max="365" step="1" value="0">
+        </div>
+        <div class="control-group">
+            <label><i class="fas fa-eye"></i> Camera</label>
+            <button id="followComet">Follow Comet</button>
+            <button id="solarView">Solar View</button>
+        </div>
+        <div class="control-group">
+            <label><i class="fas fa-calendar"></i> Positions</label>
+            <button id="togglePositions">Real Positions</button>
+        </div>
+        <div class="control-group">
+            <label><i class="fas fa-eye"></i> View</label>
+            <button id="resetView">Reset View</button>
+        </div>
+    </div>
+    
+    <div class="legend">
+        <h4><i class="fas fa-info-circle"></i> Legend</h4>
+        <div class="legend-item" data-target="sun">
+            <div class="legend-color" style="background: #FDB813;"></div>
+            Sun
+        </div>
+        <div class="legend-item" data-target="mercury">
+            <div class="legend-color" style="background: #8C7853;"></div>
+            Mercury
+        </div>
+        <div class="legend-item" data-target="venus">
+            <div class="legend-color" style="background: #FFC649;"></div>
+            Venus
+        </div>
+        <div class="legend-item" data-target="earth">
+            <div class="legend-color" style="background: #6B93D6;"></div>
+            Earth
+        </div>
+        <div class="legend-item" data-target="mars">
+            <div class="legend-color" style="background: #C1440E;"></div>
+            Mars
+        </div>
+        <div class="legend-item" data-target="jupiter">
+            <div class="legend-color" style="background: #D8CA9D;"></div>
+            Jupiter
+        </div>
+        <div class="legend-item" data-target="saturn">
+            <div class="legend-color" style="background: #FAD5A5;"></div>
+            Saturn
+        </div>
+        <div class="legend-item" data-target="uranus">
+            <div class="legend-color" style="background: #4FD0E4;"></div>
+            Uranus
+        </div>
+        <div class="legend-item" data-target="neptune">
+            <div class="legend-color" style="background: #4B70DD;"></div>
+            Neptune
+        </div>
+        <div class="legend-item" data-target="pluto">
+            <div class="legend-color" style="background: #8B4513;"></div>
+            Pluto
+        </div>
+        <div class="legend-item" data-target="moon">
+            <div class="legend-color" style="background: #C0C0C0;"></div>
+            Moon
+        </div>
+        <div class="legend-item" data-target="comet">
+            <div class="legend-color" style="background: #00FFFF;"></div>
+            Comet C/2025 N1
+        </div>
+    </div>
+
+    <div class="info-box">
+        <div class="logo-container">
+            <img src="chi-logo-only.png" alt="C.H.I Logo" class="logo-image">
+        </div>
+        <div class="qr-container">
+            <img src="chi-qr-final.png" alt="QR Code" class="qr-image">
+        </div>
+        <div class="audio-player">
+            <div class="audio-header">
+                <span class="audio-title">Audio Player</span>
+                <button class="minimize-btn" id="minimizeBtn">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+            <div class="audio-content" id="audioContent">
+                <div class="now-playing">
+                    <span class="track-info" id="trackInfo">No track selected</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="time-display">
+                        <span id="currentTime">0:00</span>
+                        <span id="totalTime">0:00</span>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button class="control-btn" id="prevBtn">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button class="control-btn play-btn" id="playBtn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="control-btn" id="nextBtn">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    <button class="control-btn" id="loopBtn" title="Loop">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                    <button class="control-btn" id="shuffleBtn" title="Shuffle">
+                        <i class="fas fa-random"></i>
+                    </button>
+                </div>
+                <div class="volume-container">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000011);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Orbital parameters for comet C/2025 N1 (ATLAS)
+		// Comet goes wheeeee!!
+        const cometData = {
+            perihelion: 1.357, // AU
+            eccentricity: 6.139,
+            inclination: 175.11 * Math.PI / 180, // Convert to radians
+            longitudeOfAscendingNode: 322.15 * Math.PI / 180,
+            argumentOfPeriapsis: 128.00 * Math.PI / 180,
+            perihelionDate: new Date('2025-10-29T12:01:00Z'),
+            discoveryDate: new Date('2025-07-01T00:00:00Z')
+        };
+
+        // Planetary data (simplified)
+        const planetData = [
+            { name: 'Mercury', distance: 0.39, period: 88, color: 0x8C7853, size: 0.02 },
+            { name: 'Venus', distance: 0.72, period: 225, color: 0xFFC649, size: 0.03 },
+            { name: 'Earth', distance: 1.0, period: 365, color: 0x6B93D6, size: 0.03 },
+            { name: 'Mars', distance: 1.52, period: 687, color: 0xC1440E, size: 0.025 },
+            { name: 'Jupiter', distance: 5.2, period: 4333, color: 0xD8CA9D, size: 0.1 },
+            { name: 'Saturn', distance: 9.5, period: 10759, color: 0xFAD5A5, size: 0.08 },
+            { name: 'Uranus', distance: 19.2, period: 30687, color: 0x4FD0E4, size: 0.04 },
+            { name: 'Neptune', distance: 30.1, period: 60190, color: 0x4B70DD, size: 0.04 },
+            { name: 'Pluto', distance: 39.5, period: 90560, color: 0x8B4513, size: 0.015 }
+        ];
+
+        // Create celestial bodies. Let there be light!
+        
+        // Sun shader materials
+        const sunVertexShader = `
+            varying vec3 vNormal;
+            varying vec3 vPosition;
+            varying vec2 vUv;
+            
+            void main() {
+                vNormal = normalize(normalMatrix * normal);
+                vPosition = position;
+                vUv = uv;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `;
+        
+        const sunFragmentShader = `
+            uniform float time;
+            varying vec3 vNormal;
+            varying vec3 vPosition;
+            varying vec2 vUv;
+            
+            // Improved noise function
+            float noise(vec3 p) {
+                return fract(sin(dot(p, vec3(12.9898, 78.233, 45.164))) * 43758.5453);
+            }
+            
+            // Smooth noise function
+            float smoothNoise(vec3 p) {
+                vec3 i = floor(p);
+                vec3 f = fract(p);
+                f = f * f * (3.0 - 2.0 * f);
+                
+                float a = noise(i);
+                float b = noise(i + vec3(1.0, 0.0, 0.0));
+                float c = noise(i + vec3(0.0, 1.0, 0.0));
+                float d = noise(i + vec3(1.0, 1.0, 0.0));
+                float e = noise(i + vec3(0.0, 0.0, 1.0));
+                float f1 = noise(i + vec3(1.0, 0.0, 1.0));
+                float g = noise(i + vec3(0.0, 1.0, 1.0));
+                float h = noise(i + vec3(1.0, 1.0, 1.0));
+                
+                return mix(mix(mix(a, b, f.x), mix(c, d, f.x), f.y),
+                          mix(mix(e, f1, f.x), mix(g, h, f.x), f.y), f.z);
+            }
+            
+            // Fractal noise
+            float fractalNoise(vec3 p) {
+                float value = 0.0;
+                float amplitude = 0.5;
+                float frequency = 1.0;
+                
+                for(int i = 0; i < 4; i++) {
+                    value += amplitude * smoothNoise(p * frequency);
+                    amplitude *= 0.5;
+                    frequency *= 2.0;
+                }
+                
+                return value;
+            }
+            
+            void main() {
+                // Base sun colors (core to surface)
+                vec3 coreColor = vec3(1.0, 0.8, 0.4);    // Bright yellow core
+                vec3 surfaceColor = vec3(1.0, 0.6, 0.2); // Orange surface
+                vec3 edgeColor = vec3(1.0, 0.4, 0.1);    // Reddish edge
+                
+                // Calculate distance from center (0 = center, 1 = edge)
+                float distanceFromCenter = length(vPosition) / 0.1;
+                
+                // Create smooth surface texture using fractal noise
+                vec3 noiseCoord = vPosition * 8.0 + time * 0.5;
+                float surfaceNoise = fractalNoise(noiseCoord);
+                
+                // Add some larger scale variation
+                vec3 largeNoiseCoord = vPosition * 3.0 + time * 0.2;
+                float largeNoise = smoothNoise(largeNoiseCoord);
+                
+                // Combine noise layers
+                float totalNoise = (surfaceNoise * 0.7 + largeNoise * 0.3) * 0.3;
+                
+                // Create smooth radial gradient from core to edge
+                float radialGradient = 1.0 - distanceFromCenter;
+                radialGradient = pow(radialGradient, 0.8);
+                
+                // Add edge glow effect
+                float edgeGlow = 1.0 - dot(vNormal, vec3(0.0, 0.0, 1.0));
+                edgeGlow = pow(edgeGlow, 1.5);
+                
+                // Combine all effects with much higher brightness
+                float brightness = radialGradient + totalNoise + edgeGlow * 0.6;
+                brightness = clamp(brightness, 0.0, 3.0); // Increased max brightness
+                
+                // Interpolate colors based on position
+                vec3 finalColor = mix(coreColor, surfaceColor, distanceFromCenter);
+                finalColor = mix(finalColor, edgeColor, edgeGlow * 0.6);
+                
+                // Apply enhanced brightness
+                finalColor *= brightness * 2.0; // Doubled brightness multiplier
+                
+                // Add more intense color variation based on noise
+                finalColor += vec3(totalNoise * 0.3, totalNoise * 0.2, totalNoise * 0.1);
+                
+                // Add core brightness boost
+                float coreBoost = 1.0 - distanceFromCenter;
+                coreBoost = pow(coreBoost, 0.5);
+                finalColor += coreBoost * vec3(0.5, 0.3, 0.1);
+                
+                gl_FragColor = vec4(finalColor, 1.0);
+            }
+        `;
+        
+        // Create sun with shader material
+        const sunMaterial = new THREE.ShaderMaterial({
+            uniforms: {
+                time: { value: 0.0 }
+            },
+            vertexShader: sunVertexShader,
+            fragmentShader: sunFragmentShader
+        });
+        
+        const sun = new THREE.Mesh(
+            new THREE.SphereGeometry(0.1, 64, 64),
+            sunMaterial
+        );
+        scene.add(sun);
+        
+        // Create sun corona (outer glow) with shader
+        const coronaVertexShader = `
+            varying vec3 vNormal;
+            varying vec3 vPosition;
+            
+            void main() {
+                vNormal = normalize(normalMatrix * normal);
+                vPosition = position;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `;
+        
+        const coronaFragmentShader = `
+            uniform float time;
+            varying vec3 vNormal;
+            varying vec3 vPosition;
+            
+            void main() {
+                // Calculate distance from center
+                float distanceFromCenter = length(vPosition) / 0.15;
+                
+                // Create enhanced smooth falloff
+                float intensity = 1.0 - smoothstep(0.4, 1.0, distanceFromCenter);
+                intensity = pow(intensity, 1.5); // Less aggressive falloff
+                
+                // Add more variation
+                float variation = sin(distanceFromCenter * 15.0 + time * 0.3) * 0.2;
+                intensity += variation;
+                
+                // Enhanced color gradient from bright yellow to orange
+                vec3 coronaColor = mix(vec3(1.0, 0.9, 0.4), vec3(1.0, 0.5, 0.2), distanceFromCenter);
+                
+                // Add brightness boost
+                intensity *= 2.0; // Doubled intensity
+                
+                gl_FragColor = vec4(coronaColor, intensity * 0.6);
+            }
+        `;
+        
+        const coronaMaterial = new THREE.ShaderMaterial({
+            uniforms: {
+                time: { value: 0.0 }
+            },
+            vertexShader: coronaVertexShader,
+            fragmentShader: coronaFragmentShader,
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            side: THREE.BackSide
+        });
+        
+        const corona = new THREE.Mesh(
+            new THREE.SphereGeometry(0.15, 64, 64),
+            coronaMaterial
+        );
+        scene.add(corona);
+        
+        // Create sun particle system
+        const particleCount = 200;
+        const particleGeometry = new THREE.BufferGeometry();
+        const particlePositions = new Float32Array(particleCount * 3);
+        const particleSizes = new Float32Array(particleCount);
+        const particleColors = new Float32Array(particleCount * 3);
+        
+        for (let i = 0; i < particleCount; i++) {
+            // Random position around sun
+            const radius = 0.12 + Math.random() * 0.08;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.random() * Math.PI;
+            
+            particlePositions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+            particlePositions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+            particlePositions[i * 3 + 2] = radius * Math.cos(phi);
+            
+            // Random size
+            particleSizes[i] = Math.random() * 0.02 + 0.005;
+            
+            // Random color (yellow to orange)
+            const colorIntensity = 0.7 + Math.random() * 0.3;
+            particleColors[i * 3] = colorIntensity;
+            particleColors[i * 3 + 1] = colorIntensity * (0.4 + Math.random() * 0.3);
+            particleColors[i * 3 + 2] = colorIntensity * (0.1 + Math.random() * 0.2);
+        }
+        
+        particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+        particleGeometry.setAttribute('size', new THREE.BufferAttribute(particleSizes, 1));
+        particleGeometry.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
+        
+        const particleMaterial = new THREE.PointsMaterial({
+            size: 0.03, // Slightly larger particles
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8, // More opaque
+            blending: THREE.AdditiveBlending,
+            sizeAttenuation: true
+        });
+        
+        const sunParticles = new THREE.Points(particleGeometry, particleMaterial);
+        scene.add(sunParticles);
+        
+        // Add enhanced sun lighting
+        const sunLight = new THREE.PointLight(0xFF6600, 8, 15); // Increased intensity and range
+        sunLight.position.copy(sun.position);
+        scene.add(sunLight);
+        
+        // Add additional bright core light
+        const coreLight = new THREE.PointLight(0xFFFF80, 12, 8); // Bright yellow core
+        coreLight.position.copy(sun.position);
+        scene.add(coreLight);
+        
+        // Add ambient light for overall scene illumination
+        const ambientLight = new THREE.AmbientLight(0x222222, 0.5); // Increased ambient light
+        scene.add(ambientLight);
+
+        const planets = [];
+        planetData.forEach(planet => {
+            const planetMesh = new THREE.Mesh(
+                new THREE.SphereGeometry(planet.size, 16, 16),
+                new THREE.MeshBasicMaterial({ color: planet.color })
+            );
+            planetMesh.userData = planet;
+            scene.add(planetMesh);
+            planets.push(planetMesh);
+        });
+
+        // Create Moon. So that humans may wish upon it. ^_^v
+        const moon = new THREE.Mesh(
+            new THREE.SphereGeometry(0.008, 16, 16),
+            new THREE.MeshBasicMaterial({ color: 0xC0C0C0 })
+        );
+        scene.add(moon);
+
+        // Create comet
+        const comet = new THREE.Mesh(
+            new THREE.SphereGeometry(0.015, 16, 16),
+            new THREE.MeshBasicMaterial({ color: 0x00FFFF })
+        );
+        scene.add(comet);
+
+        // Create comet tail
+        const tailGeometry = new THREE.BufferGeometry();
+        const tailMaterial = new THREE.LineBasicMaterial({ color: 0x00FFFF, transparent: true, opacity: 0.6 });
+        const tailLine = new THREE.Line(tailGeometry, tailMaterial);
+        scene.add(tailLine);
+
+        // Create orbit paths
+        const orbitMaterial = new THREE.LineBasicMaterial({ color: 0x444444, transparent: true, opacity: 0.3 });
+        planets.forEach(planet => {
+            const orbitGeometry = new THREE.BufferGeometry();
+            const orbitPoints = [];
+            for (let i = 0; i <= 64; i++) {
+                const angle = (i / 64) * Math.PI * 2;
+                orbitPoints.push(
+                    planet.userData.distance * Math.cos(angle),
+                    0,
+                    planet.userData.distance * Math.sin(angle)
+                );
+            }
+            orbitGeometry.setAttribute('position', new THREE.Float32BufferAttribute(orbitPoints, 3));
+            const orbitLine = new THREE.Line(orbitGeometry, orbitMaterial);
+            scene.add(orbitLine);
+        });
+
+        // Create Moon's orbit path
+		// Scan for cheese.
+        const moonOrbitGeometry = new THREE.BufferGeometry();
+        const moonOrbitPoints = [];
+        const moonOrbitDistance = 0.04; // Scaled distance from Earth
+        for (let i = 0; i <= 32; i++) {
+            const angle = (i / 32) * Math.PI * 2;
+            moonOrbitPoints.push(
+                moonOrbitDistance * Math.cos(angle),
+                0,
+                moonOrbitDistance * Math.sin(angle)
+            );
+        }
+        moonOrbitGeometry.setAttribute('position', new THREE.Float32BufferAttribute(moonOrbitPoints, 3));
+        const moonOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x666666, transparent: true, opacity: 0.4 });
+        const moonOrbitLine = new THREE.Line(moonOrbitGeometry, moonOrbitMaterial);
+        scene.add(moonOrbitLine);
+
+        // Create comet orbit path
+        const cometOrbitGeometry = new THREE.BufferGeometry();
+        const cometOrbitPoints = [];
+        const cometOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x00FFFF, transparent: true, opacity: 0.5 });
+        
+        // Generate hyperbolic orbit points
+        for (let i = -100; i <= 100; i++) {
+            const trueAnomaly = i * 0.05; // Radians
+            const r = cometData.perihelion * (1 + cometData.eccentricity) / (1 + cometData.eccentricity * Math.cos(trueAnomaly));
+            
+            if (r > 0 && r < 50) { // Limit visualization range
+                const x = r * Math.cos(trueAnomaly);
+                const y = r * Math.sin(trueAnomaly);
+                
+                // Apply orbital inclination and orientation
+                const cosI = Math.cos(cometData.inclination);
+                const sinI = Math.sin(cometData.inclination);
+                const cosO = Math.cos(cometData.longitudeOfAscendingNode);
+                const sinO = Math.sin(cometData.longitudeOfAscendingNode);
+                const cosW = Math.cos(cometData.argumentOfPeriapsis);
+                const sinW = Math.sin(cometData.argumentOfPeriapsis);
+                
+                const xEcl = x * (cosO * cosW - sinO * sinW * cosI) - y * (cosO * sinW + sinO * cosW * cosI);
+                const yEcl = x * (sinO * cosW + cosO * sinW * cosI) - y * (sinO * sinW - cosO * cosW * cosI);
+                const zEcl = x * (sinW * sinI) + y * (cosW * sinI);
+                
+                cometOrbitPoints.push(xEcl, zEcl, yEcl);
+            }
+        }
+        
+        cometOrbitGeometry.setAttribute('position', new THREE.Float32BufferAttribute(cometOrbitPoints, 3));
+        const cometOrbitLine = new THREE.Line(cometOrbitGeometry, cometOrbitMaterial);
+        scene.add(cometOrbitLine);
+
+        // Camera setup
+        camera.position.set(0, 5, 10);
+        camera.lookAt(0, 0, 0);
+
+        // Mouse and touch controls
+        let isMouseDown = false;
+        let mouseX = 0, mouseY = 0;
+        let cameraTheta = 0, cameraPhi = Math.PI / 4;
+        let cameraRadius = 15;
+        let followingComet = false;
+
+        function updateCameraPosition() {
+            if (!followingComet) {
+                camera.position.x = cameraRadius * Math.sin(cameraTheta) * Math.cos(cameraPhi);
+                camera.position.y = cameraRadius * Math.sin(cameraPhi);
+                camera.position.z = cameraRadius * Math.cos(cameraTheta) * Math.cos(cameraPhi);
+                camera.lookAt(0, 0, 0);
+            } else {
+                camera.position.copy(comet.position);
+                camera.position.add(new THREE.Vector3(2, 1, 2));
+                camera.lookAt(comet.position);
+            }
+        }
+
+        // Mouse events
+        renderer.domElement.addEventListener('mousedown', (e) => {
+            if (e.button === 0) {
+                isMouseDown = true;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            }
+        });
+
+        renderer.domElement.addEventListener('mousemove', (e) => {
+            if (isMouseDown) {
+                const deltaX = e.clientX - mouseX;
+                const deltaY = e.clientY - mouseY;
+                
+                cameraTheta += deltaX * 0.01;
+                cameraPhi += deltaY * 0.01;
+                cameraPhi = Math.max(0.1, Math.min(Math.PI - 0.1, cameraPhi));
+                
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                followingComet = false;
+            }
+        });
+
+        renderer.domElement.addEventListener('mouseup', () => {
+            isMouseDown = false;
+        });
+
+        renderer.domElement.addEventListener('wheel', (e) => {
+            cameraRadius += e.deltaY * 0.01;
+            cameraRadius = Math.max(2, Math.min(50, cameraRadius));
+            followingComet = false;
+        });
+
+        // Touch events
+        let touchX = 0, touchY = 0;
+        renderer.domElement.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) {
+                touchX = e.touches[0].clientX;
+                touchY = e.touches[0].clientY;
+            }
+        });
+
+        renderer.domElement.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 1) {
+                const deltaX = e.touches[0].clientX - touchX;
+                const deltaY = e.touches[0].clientY - touchY;
+                
+                cameraTheta += deltaX * 0.01;
+                cameraPhi += deltaY * 0.01;
+                cameraPhi = Math.max(0.1, Math.min(Math.PI - 0.1, cameraPhi));
+                
+                touchX = e.touches[0].clientX;
+                touchY = e.touches[0].clientY;
+                followingComet = false;
+            }
+        });
+
+        // Real planetary positions for July 8, 2025 (heliocentric coordinates in AU)
+        const realPositions = {
+            'Mercury': { x: 0.31, z: 0.12, angle: 0.38 }, // ~15° Cancer
+            'Venus': { x: -0.45, z: 0.56, angle: 0.89 }, // ~2° Gemini  
+            'Earth': { x: -0.98, z: 0.18, angle: 1.83 }, // ~15° Cancer (opposite)
+            'Mars': { x: 0.72, z: -1.28, angle: 2.87 }, // ~11° Virgo
+            'Jupiter': { x: -4.89, z: 1.34, angle: 1.05 }, // ~6° Cancer
+            'Saturn': { x: 8.2, z: 4.1, angle: 0.45 }, // ~25° Pisces
+            'Uranus': { x: 18.8, z: 3.2, angle: 0.17 }, // ~10° Taurus
+            'Neptune': { x: -15.2, z: 24.8, angle: 2.13 }, // ~20° Pisces
+            'Pluto': { x: 28.5, z: 26.8, angle: 0.78 } // ~28° Capricorn
+        };
+
+        // Animation variables
+        let animationSpeed = 1;
+        let isPlaying = false;
+        let animationTime = 0;
+        const tailPositions = [];
+        let useRealPositions = true;
+        let timeDirection = 1; // 1 for forward, -1 for reverse
+        let baseDate = new Date('2025-07-08');
+        let currentDate = new Date(baseDate);
+
+        // UI Controls
+        document.getElementById('playPause').addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            const btn = document.getElementById('playPause');
+            btn.innerHTML = isPlaying ? '<i class="fas fa-pause"></i> Pause' : '<i class="fas fa-play"></i> Play';
+        });
+
+        document.getElementById('reset').addEventListener('click', () => {
+            animationTime = 0;
+            tailPositions.length = 0;
+            isPlaying = false;
+            document.getElementById('playPause').innerHTML = '<i class="fas fa-play"></i> Play';
+        });
+
+        document.getElementById('speedSlider').addEventListener('input', (e) => {
+            animationSpeed = parseFloat(e.target.value);
+            document.getElementById('speedValue').textContent = animationSpeed.toFixed(2) + 'x';
+            
+            // Update button states based on speed
+            if (animationSpeed === 0) {
+                updateTimeButtonStates('pause');
+            } else if (animationSpeed === 1) {
+                updateTimeButtonStates('normal');
+            } else if (animationSpeed === 10) {
+                updateTimeButtonStates('fast');
+            } else if (animationSpeed === 50) {
+                updateTimeButtonStates('superFast');
+            } else {
+                updateTimeButtonStates('none');
+            }
+        });
+
+        document.getElementById('followComet').addEventListener('click', () => {
+            followingComet = true;
+        });
+
+        document.getElementById('solarView').addEventListener('click', () => {
+            followingComet = false;
+            cameraTheta = 0;
+            cameraPhi = Math.PI / 4;
+            cameraRadius = 15;
+        });
+
+        document.getElementById('togglePositions').addEventListener('click', () => {
+            useRealPositions = !useRealPositions;
+            const btn = document.getElementById('togglePositions');
+            btn.textContent = useRealPositions ? 'Real Positions' : 'Orbital Animation';
+            
+            // Set initial positions when switching to real positions
+            if (useRealPositions) {
+                planets.forEach(planet => {
+                    if (realPositions[planet.userData.name]) {
+                        const pos = realPositions[planet.userData.name];
+                        planet.position.x = pos.x;
+                        planet.position.z = pos.z;
+                    }
+                });
+            }
+        });
+        
+        document.getElementById('resetView').addEventListener('click', () => {
+            cameraFocus.resetCamera();
+        });
+        
+        // Time control event listeners
+        document.getElementById('pauseTime').addEventListener('click', () => {
+            isPlaying = false;
+            updateTimeButtonStates('pause');
+        });
+        
+        document.getElementById('normalTime').addEventListener('click', () => {
+            isPlaying = true;
+            animationSpeed = 1;
+            timeDirection = 1;
+            document.getElementById('speedSlider').value = 1;
+            document.getElementById('speedValue').textContent = '1.0x';
+            updateTimeButtonStates('normal');
+        });
+        
+        document.getElementById('fastTime').addEventListener('click', () => {
+            isPlaying = true;
+            animationSpeed = 10;
+            timeDirection = 1;
+            document.getElementById('speedSlider').value = 10;
+            document.getElementById('speedValue').textContent = '10.0x';
+            updateTimeButtonStates('fast');
+        });
+        
+        document.getElementById('superFastTime').addEventListener('click', () => {
+            isPlaying = true;
+            animationSpeed = 50;
+            timeDirection = 1;
+            document.getElementById('speedSlider').value = 50;
+            document.getElementById('speedValue').textContent = '50.0x';
+            updateTimeButtonStates('superFast');
+        });
+        
+        document.getElementById('reverseTime').addEventListener('click', () => {
+            isPlaying = true;
+            timeDirection = -1;
+            updateTimeButtonStates('reverse');
+        });
+        
+        document.getElementById('dateSlider').addEventListener('input', (e) => {
+            const daysOffset = parseInt(e.target.value);
+            currentDate = new Date(baseDate);
+            currentDate.setDate(currentDate.getDate() + daysOffset);
+            updateDateDisplay();
+        });
+        
+        function updateTimeButtonStates(activeButton) {
+            const buttons = ['pauseTime', 'normalTime', 'fastTime', 'superFastTime', 'reverseTime'];
+            buttons.forEach(btnId => {
+                const btn = document.getElementById(btnId);
+                btn.classList.remove('active');
+            });
+            if (activeButton !== 'none') {
+                document.getElementById(activeButton + 'Time').classList.add('active');
+            }
+        }
+        
+        function updateDateDisplay() {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('dateDisplay').textContent = currentDate.toLocaleDateString('en-US', options);
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Update shader time uniforms
+            sunMaterial.uniforms.time.value += 0.016;
+            coronaMaterial.uniforms.time.value += 0.016;
+            
+            // Animate sun particles
+            const positions = sunParticles.geometry.attributes.position.array;
+            for (let i = 0; i < particleCount; i++) {
+                const x = positions[i * 3];
+                const y = positions[i * 3 + 1];
+                const z = positions[i * 3 + 2];
+                
+                // Add subtle movement
+                positions[i * 3] += (Math.random() - 0.5) * 0.001;
+                positions[i * 3 + 1] += (Math.random() - 0.5) * 0.001;
+                positions[i * 3 + 2] += (Math.random() - 0.5) * 0.001;
+                
+                // Keep particles within bounds
+                const distance = Math.sqrt(x * x + y * y + z * z);
+                if (distance > 0.2) {
+                    const scale = 0.2 / distance;
+                    positions[i * 3] *= scale;
+                    positions[i * 3 + 1] *= scale;
+                    positions[i * 3 + 2] *= scale;
+                }
+            }
+            sunParticles.geometry.attributes.position.needsUpdate = true;
+            
+            // Rotate corona slightly
+            corona.rotation.y += 0.002;
+            
+            if (isPlaying) {
+                animationTime += animationSpeed * 0.01 * timeDirection;
+                
+                // Update current date based on animation time
+                const daysPassed = Math.floor(animationTime * 10);
+                currentDate = new Date(baseDate);
+                currentDate.setDate(currentDate.getDate() + daysPassed);
+                updateDateDisplay();
+                
+                // Update planetary positions!
+                planets.forEach(planet => {
+                    if (useRealPositions && realPositions[planet.userData.name]) {
+                        // Use real positions for July 8, 2025
+                        const pos = realPositions[planet.userData.name];
+                        planet.position.x = pos.x;
+                        planet.position.z = pos.z;
+                    } else {
+                        // Use orbital animation
+                        const angle = (animationTime / planet.userData.period) * Math.PI * 2;
+                        planet.position.x = planet.userData.distance * Math.cos(angle);
+                        planet.position.z = planet.userData.distance * Math.sin(angle);
+                    }
+                });
+                
+                // Update Moon position relative to Earth
+                const earth = planets.find(p => p.userData.name === 'Earth');
+                if (earth) {
+                    const moonAngle = useRealPositions ? 2.1 : animationTime * 0.5; // Real moon phase for July 8
+                    const moonDistance = 0.04;
+                    moon.position.x = earth.position.x + moonDistance * Math.cos(moonAngle);
+                    moon.position.z = earth.position.z + moonDistance * Math.sin(moonAngle);
+                    
+                    // Update Moon's orbit path position
+                    moonOrbitLine.position.copy(earth.position);
+                }
+                
+                // Update comet position using hyperbolic orbit
+                const daysSinceDiscovery = animationTime * 10; // Scale for visualization
+                const meanAnomaly = daysSinceDiscovery * 0.01; // Simplified
+                
+                // Approximate hyperbolic orbit calculation
+                const trueAnomaly = meanAnomaly; // Simplified for visualization
+                const r = cometData.perihelion * (1 + cometData.eccentricity) / (1 + cometData.eccentricity * Math.cos(trueAnomaly));
+                
+                if (r > 0 && r < 50) {
+                    const x = r * Math.cos(trueAnomaly);
+                    const y = r * Math.sin(trueAnomaly);
+                    
+                    // Apply orbital transformations
+                    const cosI = Math.cos(cometData.inclination);
+                    const sinI = Math.sin(cometData.inclination);
+                    const cosO = Math.cos(cometData.longitudeOfAscendingNode);
+                    const sinO = Math.sin(cometData.longitudeOfAscendingNode);
+                    const cosW = Math.cos(cometData.argumentOfPeriapsis);
+                    const sinW = Math.sin(cometData.argumentOfPeriapsis);
+                    
+                    const xEcl = x * (cosO * cosW - sinO * sinW * cosI) - y * (cosO * sinW + sinO * cosW * cosI);
+                    const yEcl = x * (sinO * cosW + cosO * sinW * cosI) - y * (sinO * sinW - cosO * cosW * cosI);
+                    const zEcl = x * (sinW * sinI) + y * (cosW * sinI);
+                    
+                    comet.position.set(xEcl, zEcl, yEcl);
+                    
+                    // Update tail
+                    tailPositions.push(comet.position.clone());
+                    if (tailPositions.length > 50) {
+                        tailPositions.shift();
+                    }
+                    
+                    const tailPoints = [];
+                    tailPositions.forEach(pos => {
+                        tailPoints.push(pos.x, pos.y, pos.z);
+                    });
+                    
+                    tailGeometry.setAttribute('position', new THREE.Float32BufferAttribute(tailPoints, 3));
+                }
+            }
+            
+            updateCameraPosition();
+            renderer.render(scene, camera);
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Start animation!
+        animate();
+        
+        // Audio Player Functionality
+        const audioPlayer = {
+            audio: new Audio(),
+            playlist: [
+                { name: 'Rubicon', file: 'Rubicon.mp3' },
+                { name: 'Royksopp - Happy up here', file: 'Royksopp - Happy_up_here.mp3' },
+                { name: 'Royksopp - A Long Long Way', file: 'Royksopp - A_Long_Long_Way.mp3' },
+                { name: 'Tally Hall - Ruler of Everything', file: 'Tally Hall - Ruler of Everything.mp3' },
+                { name: 'They Might Be Giants - Particle Man', file: 'They Might Be Giants - Particle Man (Stylophone).mp3' },
+                { name: 'Tears For Fears - Head Over Heels', file: 'Tears For Fears - Head Over Heels (320 KBps).mp3' }
+            ],
+            currentTrack: 0,
+            isPlaying: false,
+            isLooping: false,
+            isShuffled: false,
+            originalPlaylist: [],
+            
+            init() {
+                this.originalPlaylist = [...this.playlist];
+                this.setupEventListeners();
+                this.loadTrack(0);
+            },
+            
+            setupEventListeners() {
+                // Minimize button
+                document.getElementById('minimizeBtn').addEventListener('click', () => {
+                    const content = document.getElementById('audioContent');
+                    content.classList.toggle('minimized');
+                    const btn = document.getElementById('minimizeBtn');
+                    btn.innerHTML = content.classList.contains('minimized') ? 
+                        '<i class="fas fa-plus"></i>' : '<i class="fas fa-minus"></i>';
+                });
+                
+                // Play/Pause button
+                document.getElementById('playBtn').addEventListener('click', () => {
+                    this.togglePlay();
+                });
+                
+                // Previous button
+                document.getElementById('prevBtn').addEventListener('click', () => {
+                    this.previousTrack();
+                });
+                
+                // Next button
+                document.getElementById('nextBtn').addEventListener('click', () => {
+                    this.nextTrack();
+                });
+                
+                // Loop button
+                document.getElementById('loopBtn').addEventListener('click', () => {
+                    this.toggleLoop();
+                });
+                
+                // Shuffle button
+                document.getElementById('shuffleBtn').addEventListener('click', () => {
+                    this.toggleShuffle();
+                });
+                
+                // Volume slider
+                document.getElementById('volumeSlider').addEventListener('input', (e) => {
+                    this.audio.volume = e.target.value / 100;
+                });
+                
+                // Progress bar click
+                document.querySelector('.progress-bar').addEventListener('click', (e) => {
+                    const rect = e.target.getBoundingClientRect();
+                    const percent = (e.clientX - rect.left) / rect.width;
+                    this.audio.currentTime = percent * this.audio.duration;
+                });
+                
+                // Audio events
+                this.audio.addEventListener('loadedmetadata', () => {
+                    this.updateTotalTime();
+                });
+                
+                this.audio.addEventListener('timeupdate', () => {
+                    this.updateProgress();
+                    this.updateCurrentTime();
+                });
+                
+                this.audio.addEventListener('ended', () => {
+                    if (this.isLooping) {
+                        this.audio.currentTime = 0;
+                        this.audio.play();
+                    } else {
+                        this.nextTrack();
+                    }
+                });
+            },
+            
+            loadTrack(index) {
+                this.currentTrack = index;
+                this.audio.src = this.playlist[index].file;
+                document.getElementById('trackInfo').textContent = this.playlist[index].name;
+                this.audio.load();
+            },
+            
+            togglePlay() {
+                if (this.isPlaying) {
+                    this.audio.pause();
+                    this.isPlaying = false;
+                    document.getElementById('playBtn').innerHTML = '<i class="fas fa-play"></i>';
+                } else {
+                    this.audio.play();
+                    this.isPlaying = true;
+                    document.getElementById('playBtn').innerHTML = '<i class="fas fa-pause"></i>';
+                }
+            },
+            
+            previousTrack() {
+                this.currentTrack = (this.currentTrack - 1 + this.playlist.length) % this.playlist.length;
+                this.loadTrack(this.currentTrack);
+                if (this.isPlaying) {
+                    this.audio.play();
+                }
+            },
+            
+            nextTrack() {
+                this.currentTrack = (this.currentTrack + 1) % this.playlist.length;
+                this.loadTrack(this.currentTrack);
+                if (this.isPlaying) {
+                    this.audio.play();
+                }
+            },
+            
+            toggleLoop() {
+                this.isLooping = !this.isLooping;
+                this.audio.loop = this.isLooping;
+                const btn = document.getElementById('loopBtn');
+                btn.classList.toggle('active', this.isLooping);
+            },
+            
+            toggleShuffle() {
+                this.isShuffled = !this.isShuffled;
+                const btn = document.getElementById('shuffleBtn');
+                btn.classList.toggle('active', this.isShuffled);
+                
+                if (this.isShuffled) {
+                    // Shuffle playlist
+                    this.playlist = [...this.originalPlaylist].sort(() => Math.random() - 0.5);
+                } else {
+                    // Restore original order
+                    this.playlist = [...this.originalPlaylist];
+                }
+                
+                // Find current track in new playlist
+                const currentTrackName = this.originalPlaylist[this.currentTrack].name;
+                this.currentTrack = this.playlist.findIndex(track => track.name === currentTrackName);
+                if (this.currentTrack === -1) this.currentTrack = 0;
+            },
+            
+            updateProgress() {
+                const progress = (this.audio.currentTime / this.audio.duration) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+            },
+            
+            updateCurrentTime() {
+                const current = Math.floor(this.audio.currentTime);
+                const minutes = Math.floor(current / 60);
+                const seconds = current % 60;
+                document.getElementById('currentTime').textContent = 
+                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            },
+            
+            updateTotalTime() {
+                const total = Math.floor(this.audio.duration);
+                const minutes = Math.floor(total / 60);
+                const seconds = total % 60;
+                document.getElementById('totalTime').textContent = 
+                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+        };
+        
+        // Initialize audio player
+        audioPlayer.init();
+        
+        // Camera focus functionality
+        const cameraFocus = {
+            currentTarget: null,
+            isTransitioning: false,
+            
+            init() {
+                this.setupLegendClickHandlers();
+            },
+            
+            setupLegendClickHandlers() {
+                document.querySelectorAll('.legend-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        const target = e.currentTarget.dataset.target;
+                        this.focusOnTarget(target);
+                        
+                        // Update active state
+                        document.querySelectorAll('.legend-item').forEach(li => li.classList.remove('active'));
+                        e.currentTarget.classList.add('active');
+                    });
+                });
+            },
+            
+            focusOnTarget(target) {
+                if (this.isTransitioning) return;
+                
+                this.isTransitioning = true;
+                followingComet = false; // Disable comet following
+                
+                let targetPosition = new THREE.Vector3();
+                let targetRadius = 5;
+                
+                switch(target) {
+                    case 'sun':
+                        targetPosition.set(0, 0, 0);
+                        targetRadius = 3;
+                        break;
+                    case 'mercury':
+                        targetPosition.copy(planets[0].position);
+                        targetRadius = 2;
+                        break;
+                    case 'venus':
+                        targetPosition.copy(planets[1].position);
+                        targetRadius = 2;
+                        break;
+                    case 'earth':
+                        targetPosition.copy(planets[2].position);
+                        targetRadius = 2;
+                        break;
+                    case 'mars':
+                        targetPosition.copy(planets[3].position);
+                        targetRadius = 2;
+                        break;
+                    case 'jupiter':
+                        targetPosition.copy(planets[4].position);
+                        targetRadius = 3;
+                        break;
+                    case 'saturn':
+                        targetPosition.copy(planets[5].position);
+                        targetRadius = 3;
+                        break;
+                    case 'uranus':
+                        targetPosition.copy(planets[6].position);
+                        targetRadius = 2.5;
+                        break;
+                    case 'neptune':
+                        targetPosition.copy(planets[7].position);
+                        targetRadius = 2.5;
+                        break;
+                    case 'pluto':
+                        targetPosition.copy(planets[8].position);
+                        targetRadius = 2;
+                        break;
+                    case 'moon':
+                        targetPosition.copy(moon.position);
+                        targetRadius = 1.5;
+                        break;
+                    case 'comet':
+                        targetPosition.copy(comet.position);
+                        targetRadius = 2;
+                        break;
+                }
+                
+                // Smooth camera transition
+                this.smoothCameraTransition(targetPosition, targetRadius);
+            },
+            // Smooooooooooooooooooooooth. Moist. Moist. Moist...... ;-P
+            smoothCameraTransition(targetPosition, targetRadius) {
+                const startPosition = camera.position.clone();
+                const startTime = Date.now();
+                const duration = 2000; // 2 seconds
+                
+                const animateTransition = () => {
+                    const elapsed = Date.now() - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    // Easing function for smooth motion
+                    const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+                    
+                    // Calculate new camera position
+                    const offset = new THREE.Vector3(targetRadius, targetRadius * 0.5, targetRadius);
+                    const newPosition = targetPosition.clone().add(offset);
+                    
+                    camera.position.lerpVectors(startPosition, newPosition, easeOutCubic);
+                    camera.lookAt(targetPosition);
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animateTransition);
+                    } else {
+                        this.isTransitioning = false;
+                        this.currentTarget = targetPosition;
+                    }
+                };
+                
+                animateTransition();
+            },
+            
+            resetCamera() {
+                this.focusOnTarget('sun');
+                document.querySelectorAll('.legend-item').forEach(li => li.classList.remove('active'));
+            }
+        };
+        
+        // Initialize camera focus
+        cameraFocus.init();
+        
+		// And Lo, Cydonis looked upon their works, oh mighty, and thought it good! ^_^v cydonis.co.uk/about
+    </script>
+</body>
+</html>
