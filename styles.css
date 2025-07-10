@@ -134,33 +134,94 @@ li {
 
 .dropdown {
   position: relative;
+  display: inline-block;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  background-color: #1a1a1a;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8);
+  z-index: 1000;
+  border: 1px solid #333;
+  border-radius: 4px;
+  top: 100%;
+  left: 0;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown-content.show {
   display: block;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 .dropdown-content a {
-  color: black;
+  color: #fff;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
   text-align: left;
+  transition: background-color 0.3s ease;
+  border-bottom: 1px solid #333;
 }
 
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:last-child {
+  border-bottom: none;
+}
 
-.dropdown-content.show {
-  display: block;
+.dropdown-content a:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Menu icon styling */
+.menu-icon button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.menu-icon button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Animation for dropdown */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile responsiveness */
+@media only screen and (max-width: 768px) {
+  .dropdown-content {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-width: auto;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .menu-icon {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1001;
+  }
 }
 
 /* End Dropdown Menu Code Block */
@@ -400,10 +461,6 @@ footer {
 .color-text-flow,
 .color-text-flow-hover:hover {
   /*
-   * Elements settings
-   */
-}
-/*
 .color-text-flow span,
 .color-text-flow-hover:hover span {
   -webkit-animation-name: color-text-flow-keys;

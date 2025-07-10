@@ -91,6 +91,8 @@ and evaluate proposed research programs:
     How long will it take? [Unknowable?]
     What are the mid-term and final “exams” to check for success? [Survival versus extinction for ~*8+ billion people...]
 #
+The web is held together by hopes, dreams, sticky tape and chewing gum. It is a nonsense! ^_^v This website is a work in progress, and as such, it might not work at all. The burger menu has so many bugs it's got it's own fucking lore at this point...
+Many dwarves have died fighting buggy dragons to try and to fix it! Role a 4*d20 for luck with the HTML5 DOM...
 -->
 	
 <!-- #high-energy #matter #physics #quantum-mechanics #space-time #research-development #industrial #science #mathematics #philosophy #meta-ethics #environment #humanitarianism #climate-crisis #activism #humankind #human-kind-ness" /> -->
@@ -122,11 +124,6 @@ and evaluate proposed research programs:
 	<!-- "&effect=neon|outline|emboss|shadow-multiple" -->
     <script src="https://kit.fontawesome.com/624f95c733.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="script.js"></script>
-	<script src="common-core.js"></script>
-	<script src="./pixi_js.js"</script>
-	<!-- Load jquery rippler plugin -->
-	<script src="ripple.js"></script>
 	<!-- Load reCaptcha v3 -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- Load Vimeo Video Player -->
@@ -171,15 +168,19 @@ and evaluate proposed research programs:
     </header>
     <!-- Main Menu. -->
 <div class="container">
-<div class="menu-icon" id="menuIcon"><a href="#" onclick="openDropdown()"><i class="fa-solid fa-bars"></i></i></a><!-- <i class="fa-solid fa-bars-staggered"> --></div>
+<div class="menu-icon" id="menuIcon">
+    <button onclick="openDropdown()" aria-label="Toggle navigation menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+</div>
         <nav class="dropdown" id="dropdown_menu">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
+            <ul class="dropdown-content">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="https://linktr.ee/Cyd0n1a">Linktree</a></li>
-                <li><a href="#">Services</a></li>
+                <li><a href="#services">Services</a></li>
                 <li><a href="https://docs.google.com/presentation/d/e/2PACX-1vRDPlz62EP7gkhV2Hpo2W9sv-uAgVvVsA6T1C9PAgJRrI_7q3bdGa1M93ksShS3pdwR44_yVgKSVEON/pub?start=false">For Investors</a></li>
-                <li><a href="#">Video(s)</a></li>
+                <li><a href="#videos">Video(s)</a></li>
             </ul>
         </nav>
         </div>
@@ -250,8 +251,8 @@ time_is_widget.init({Leeds_z716:{time_format:"12hours:minutes:secondsAMPM"}});
 <div style='float: right !important;'>
 <script>
  window.difyChatbotConfig = { 
-  token: 'pwjyUDnAqqQwsWRR'
- }
+   token: 'pwjyUDnAqqQwsWRR'
+ };
 </script>
 <script
  src="https://udify.app/embed.min.js"
@@ -261,6 +262,13 @@ time_is_widget.init({Leeds_z716:{time_format:"12hours:minutes:secondsAMPM"}});
 </div>
 <!-- End CHI-Bot Code -->
 	</footer>    
+	
+	<!-- Scripts loaded at end of body for better performance and DOM availability -->
+	<script src="script.js"></script>
+	<script src="common-core.js"></script>
+	<script src="./pixi_js.js"></script>
+	<!-- Load jquery rippler plugin -->
+	<script src="ripple.js"></script>
 </body>
 <!-- Ooooh! It's the end! You read to ze end! But your easter eggs are in another #castle, dear user... More puzzles & mysteries await the inquisitive... ^_^v -->
 <!-- The top left corner burger menu will work, someday... Bah! Without and within, time and again... May we merge eternal... ^_^v -->

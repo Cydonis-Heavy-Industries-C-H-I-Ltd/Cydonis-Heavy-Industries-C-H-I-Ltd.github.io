@@ -1,7 +1,7 @@
 /* (C) 2023/2024 Cydonis Heavy Industries (C.H.I), Ltd. */
 /* "Tackling life's toughest problems; with science!" */
 // CHI Website Core Codebase v0.02a.
-// Copyright (GPLv3) (Amanda Hariette Scott, ~40+ years old, December Onwards -->, 2023/2024.
+// Copyright (GPLv3) (Amanda Hariette Scott, ~41+ years old, December Onwards -->, 2023/2024/2025/2026.
 /*
           _       _        _          _                  _                _                    _             _        
         /\ \     /\ \     /\_\       /\ \               /\ \             /\ \     _           /\ \          / /\      
@@ -347,7 +347,6 @@ function toggleMenu() {
 }
 
 hamburger.addEventListener("click", toggleMenu);
-const menuItems = document.querySelectorAll(".menuItem");
 
 menuItems.forEach( 
   function(menuItem) { 
@@ -390,9 +389,7 @@ cycleBackgroundVideo();
 
 // Optional: Set an interval to cycle the videos automatically every 30 seconds:
 // setInterval(cycleBackgroundVideo, 60000);
-function openDropdown() {
-  document.querySelector('.dropdown-content').classList.toggle('show');
-}
+// Make openDropdown available globally for the onclick handler
 // document.onload = cycleBackgroundVideo();
 // document.onloadstart = cycleBackgroundVideo();
 // Menu Code block #2.
@@ -400,9 +397,9 @@ const sideNav = document.querySelector(".sideNav")
 const overlay = document.querySelector(".overlay")
 const ham = document.querySelector(".ham")
 const menuX = document.querySelector(".menuX")
-const menuItems = document.querySelectorAll(".menuLink")
+const menuLinks = document.querySelectorAll(".menuLink")
 
-menuItems.forEach(menuItem => {
+menuLinks.forEach(menuItem => {
   menuItem.addEventListener("click", toggleHamburger)
 })
 
@@ -579,16 +576,14 @@ function browserResize() {
         
     //    if (document.getElementById("adngin-try_it_leaderboard-0")) {
     //            adngin.queue.push(function(){  adngin.cmd.startAuction(["try_it_leaderboard"]); });
-              }
+    }
          
-    }
     if (window.screen.availWidth <= 768) {
-      restack(window.innerHeight > window.innerWidth);
+      // restack(window.innerHeight > window.innerWidth);
     }
-    fixDragBtn();
-    showFrameSize();  
+    // fixDragBtn();
+    // showFrameSize();  
   // End Dynamic Resizer.
-      
 }
 var fileID = "";
 
@@ -973,3 +968,72 @@ function animate( time ) {
 */
 // -------------------------------------------------------------------------
 /* EOF. EOL. MCP CORE PROTOCOLS CEASED. TRON WINS..? DUN DAH DUN!! 101010101010111111. */
+
+// Test function to ensure global scope works
+window.openDropdown = function() { 
+  alert('Dropdown test - function is working!'); 
+  console.log('openDropdown test function called');
+};
+
+// Define openDropdown function immediately and make it global
+function openDropdown() {
+  console.log('openDropdown called'); // Debug log
+  const dropdownContent = document.querySelector('.dropdown-content');
+  if (!dropdownContent) {
+    console.error('Dropdown content not found');
+    return;
+  }
+  
+  const isOpen = dropdownContent.classList.contains('show');
+  console.log('Dropdown is open:', isOpen); // Debug log
+  
+  // Toggle the dropdown
+  dropdownContent.classList.toggle('show');
+  
+  // Only add event listeners if the dropdown is now open
+  if (!isOpen) {
+    // Close dropdown when clicking outside (one-time listener)
+    const closeDropdown = function(event) {
+      const dropdown = document.querySelector('.dropdown');
+      const menuIcon = document.querySelector('.menu-icon');
+      
+      if (!dropdown.contains(event.target) && !menuIcon.contains(event.target)) {
+        dropdownContent.classList.remove('show');
+        document.removeEventListener('click', closeDropdown);
+        document.removeEventListener('keydown', closeOnEscape);
+      }
+    };
+    
+    // Close dropdown on Escape key (one-time listener)
+    const closeOnEscape = function(event) {
+      if (event.key === 'Escape') {
+        dropdownContent.classList.remove('show');
+        document.removeEventListener('click', closeDropdown);
+        document.removeEventListener('keydown', closeOnEscape);
+      }
+    };
+    
+    // Add listeners with a small delay to avoid immediate closure
+    setTimeout(() => {
+      document.addEventListener('click', closeDropdown);
+      document.addEventListener('keydown', closeOnEscape);
+    }, 100);
+  }
+}
+
+// Make openDropdown available globally immediately
+window.openDropdown = openDropdown;
+console.log('openDropdown function added to window object'); // Debug log
+
+// Ensure function is available when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM loaded, openDropdown available:', typeof window.openDropdown);
+  if (typeof window.openDropdown !== 'function') {
+    console.error('openDropdown is not a function!');
+  }
+});
+
+// Also check on window load
+window.addEventListener('load', function() {
+  console.log('Window loaded, openDropdown available:', typeof window.openDropdown);
+});
