@@ -190,6 +190,29 @@ li {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Video randomiser button styling */
+#video-randomiser {
+  background: linear-gradient(45deg, #4704E8, #8B5CF6);
+  border: 2px solid #4704E8;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(71, 4, 232, 0.3);
+}
+
+#video-randomiser:hover {
+  background: linear-gradient(45deg, #8B5CF6, #4704E8);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(71, 4, 232, 0.5);
+}
+
+#video-randomiser:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(71, 4, 232, 0.3);
+}
+
 /* Animation for dropdown */
 @keyframes fadeIn {
   from {

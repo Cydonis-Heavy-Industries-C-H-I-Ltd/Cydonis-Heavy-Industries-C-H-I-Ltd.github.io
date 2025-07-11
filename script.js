@@ -362,13 +362,22 @@ menuItems.forEach(
 document.cookie = "visited=hasVisited; expires=Wed, 25 Dec 2030 12:00:00 UTC; path=/";
 // Check for existing cookie.
 const hasVisitedCookie = document.cookie.includes("hasVisited");
+
+// Video Randomiser Functionality.
 function cycleBackgroundVideo() {
-  // Array of video file paths (replace with your actual paths):
+  // Array of video file paths for the randomiser:
   const videoPaths = [
-    "./sim-demo-4k-improved-scalar_model.mp4",
-    "./Time%20Vortex%20Experiment_1080p.mp4",
-    "./sim-demo-4k-improved-scalar_model.mp4",
-	"./red/1k_core_system.mp4",
+    "./blue/stack-of-tvs.mp4",                    // Current default
+    "./sim-demo-4k-improved-scalar_model.mp4",    // Wormhole simulation
+    "./blue/Lorn_Sega_Sunset_1080p.mp4",          // Lorn Protocol
+    "./Time Vortex Experiment_1080p.mp4",          // Vortex experiment
+    "./red/1k_core_system.mp4",                   // Core system
+    "./blue/fires_of_CHI_1080p.mp4",              // Fires of CHI
+    "./blue/facility-concept-anim.mp4",            // Facility concept
+    "./red/Ratatosk_System_Concept_Render.mp4",   // Ratatosk system
+    "./red/sim-run-alpha3_1080p.mp4",             // Sim run alpha
+    "./red/chi-the-ultimate.mp4",                  // CHI the ultimate
+    // Add more videos as needed
   ];
 
   // Get a random video path:
@@ -377,17 +386,67 @@ function cycleBackgroundVideo() {
 
   // Get the video element:
   const videoElement = document.getElementById("background-video");
-
-  // Set the new source, load, and play the video:
-  videoElement.src = randomVideoPath;
-  videoElement.load();
-  videoElement.play();
+  
+  if (videoElement) {
+    console.log("🎲 Rolling for video... Random index:", randomIndex);
+    console.log("🎬 Selected video:", randomVideoPath);
+    
+    // Create a new source element
+    const newSource = document.createElement('source');
+    newSource.src = randomVideoPath;
+    newSource.type = 'video/mp4';
+    
+    // Clear existing sources and add the new one
+    videoElement.innerHTML = '';
+    videoElement.appendChild(newSource);
+    
+    // Load and play the video
+    videoElement.load();
+    
+    // Add event listeners to track loading
+    videoElement.addEventListener('loadstart', () => console.log("📹 Video loading started"));
+    videoElement.addEventListener('canplay', () => console.log("✅ Video can play"));
+    videoElement.addEventListener('error', (e) => {
+      console.error("❌ Video failed to load:", randomVideoPath, e);
+      // Fallback to default video if random one fails
+      const fallbackSource = document.createElement('source');
+      fallbackSource.src = "./blue/stack-of-tvs.mp4";
+      fallbackSource.type = 'video/mp4';
+      videoElement.innerHTML = '';
+      videoElement.appendChild(fallbackSource);
+      videoElement.load();
+      console.log("🔄 Fallback to default video");
+    });
+    
+    videoElement.play().catch(function(error) {
+      console.log("⚠️ Video autoplay failed:", error);
+    });
+    
+    console.log("🎬 Video randomiser activated!");
+  } else {
+    console.warn("⚠️ Background video element not found!");
+  }
 }
 
-// Call the function initially to start the cycling:
-cycleBackgroundVideo();
+// Call the function when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("🚀 DOM loaded, calling video randomiser...");
+  cycleBackgroundVideo();
+});
 
-// Optional: Set an interval to cycle the videos automatically every 30 seconds:
+// Also try on window load as backup
+window.addEventListener('load', function() {
+  console.log("🌐 Window loaded, checking video randomiser...");
+  const videoElement = document.getElementById("background-video");
+  if (videoElement) {
+    console.log("✅ Video element found on window load");
+  } else {
+    console.warn("❌ Video element not found on window load");
+  }
+});
+
+// Optional: Set an interval to cycle the videos automatically every 60 seconds
+// Uncomment the line below to enable automatic cycling:
 // setInterval(cycleBackgroundVideo, 60000);
 // Make openDropdown available globally for the onclick handler
 // document.onload = cycleBackgroundVideo();

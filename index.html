@@ -144,16 +144,12 @@ Many dwarves have died fighting buggy dragons to try and to fix it! Role a 4*d20
 </iframe> -->
         </div>
         <div class="video-container">
-		<!-- Todo: Implement a randomiser? :) ^_^v -->
-		<!-- sim-demo-4k-improved-scalar_model.mp4 -->
-    <!-- <video id="wormhole" autoplay muted loop><source src="./sim-demo-4k-improved-scalar_model.mp4" type="video/mp4"/> -->
-	<video id="panopticon" autoplay muted loop><source src="./blue/stack-of-tvs.mp4" type="video/mp4"/>
-	<!-- <video id="Lorn_Protocol" autoplay muted loop><source src="./blue/Lorn_Sega_Sunset_1080p.mp4" type="video/mp4"/> -->
-	<!-- <video id="background-video" autoplay muted loop><source src="" type="video/mp4"/> -->
-	<!-- <video id="vortex-experiment" autoplay muted loop><source src="https://cydonis-heavy-industries-c-h-i-ltd.github.io/Time%20Vortex%20Experiment_1080p.mp4" type="video/mp4"/> -->
-	<!-- <video id="1k_core_system" autoplay muted loop><source src="https://cydonis-heavy-industries-c-h-i-ltd.github.io/red/1k_core_system.mp4" type="video/mp4"/> -->
-        <!-- Test video file/graceful fallback <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4"/> -->
-    </video>
+		<!-- Video Background Randomiser - Now Implemented! :) ^_^v -->
+		<video id="background-video" autoplay muted loop>
+			<source src="./blue/stack-of-tvs.mp4" type="video/mp4"/>
+			<!-- Fallback video -->
+			<source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4"/>
+		</video>
     <div class="caption">
       <h2><center><a href="https://linktr.ee/Cyd0n1a"><img class="glowing-logo-image" src="./CHI_Ltd_Transparent.png" alt="CHI Company Logo."></a></center><br></h2>
     </div>
@@ -164,7 +160,10 @@ Many dwarves have died fighting buggy dragons to try and to fix it! Role a 4*d20
         <div style="text-align: center;"><h1>Cydonis Heavy Industries (C.H.I) Ltd</h1>
         <p>Welcome!</p> <i class="fa-regular fa-heart"></i> <i class="fa-regular fa-hand-spock"></i></i></div><br>
         <p><a href="https://linktr.ee/Cyd0n1a"><i><b>"Tackling life's toughest problems; with science!"</b></i></a></p>
-        <p><i class="fas fa-cog fa-spin"></i> <a href="https://www.youtube.com/watch?v=0ttGgIQpAUc">Under Construction... ;-) ^_^v</a> <i class="fas fa-cog fa-spin"></i></p><button id="geo-demo" style='font-size:24px'>Under Construction... ;-) ^_^v <i class='fas fa-tools'></i></button>
+        <p><i class="fas fa-cog fa-spin"></i> <a href="https://www.youtube.com/watch?v=0ttGgIQpAUc">Under Construction... ;-) ^_^v</a> <i class="fas fa-cog fa-spin"></i></p>
+        <button id="geo-demo" style='font-size:24px'>Under Construction... ;-) ^_^v <i class='fas fa-tools'></i></button>
+        <button id="video-randomiser" style='font-size:16px; margin-left: 10px;' onclick="cycleBackgroundVideo()">🎬 Random Video <i class='fas fa-random'></i></button>
+        <button id="debug-video" style='font-size:12px; margin-left: 5px; background: #ff4444;' onclick="console.log('Current video src:', document.getElementById('background-video')?.src)">🐛 Debug</button>
     </header>
     <!-- Main Menu. -->
 <div class="container">
