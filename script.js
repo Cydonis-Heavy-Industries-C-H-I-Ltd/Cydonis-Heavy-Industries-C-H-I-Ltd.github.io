@@ -1,4 +1,4 @@
-/* (C) 2023/2024 Cydonis Heavy Industries (C.H.I), Ltd. */
+/* (C) 2023/2024/2025 Cydonis Heavy Industries (C.H.I), Ltd. */
 /* "Tackling life's toughest problems; with science!" */
 // CHI Website Core Codebase v0.02a.
 // Copyright (GPLv3) (Amanda Hariette Scott, ~41+ years old, December Onwards -->, 2023/2024/2025/2026.
@@ -1026,7 +1026,6 @@ function animate( time ) {
 }
 */
 // -------------------------------------------------------------------------
-/* EOF. EOL. MCP CORE PROTOCOLS CEASED. TRON WINS..? DUN DAH DUN!! 101010101010111111. */
 
 // Test function to ensure global scope works
 window.openDropdown = function() { 
@@ -1096,3 +1095,52 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('load', function() {
   console.log('Window loaded, openDropdown available:', typeof window.openDropdown);
 });
+// -------------------------------------------------------------------------
+/* 365 Steps March!
+
+(One-two, one-two! So, one-two, one-two!)
+Verse 1:
+Happiness doesn't walk to me
+So I'll walk to it.
+One day, one step,
+Three steps in three days.
+Three steps forward, two steps back,
+Life's a one-two punch!
+Chorus:
+Let's walk, sweating and crying.
+Beautiful flowers will surely bloom
+On the footprints you leave behind.
+Swing your arms, lift your legs,
+One-two, one-two! Keep walking without resting!
+(So, one-two, one-two! One-two, one-two!)
+Verse 2:
+The door to happiness is narrow,
+So you have to stoop to pass through.
+One hundred days, one hundred steps,
+One thousand days, one thousand steps.
+Some days things go well, some days they don't,
+Life's a one-two punch!
+Chorus:
+Let's walk, sweating and crying.
+Beautiful flowers will surely bloom
+On the footprints you leave behind.
+Swing your arms, lift your legs,
+One-two, one-two! Keep walking without resting!
+(So, one-two, one-two! One-two, one-two!)
+Verse 3:
+Even if happiness is right next to you,
+There are days you won't realize it.
+365 days a year,
+Even if you miss it by one step,
+Life's a one-two punch!
+Chorus:
+Let's walk, sweating and crying.
+Beautiful flowers will surely bloom
+On the footprints you leave behind.
+Swing your arms, lift your legs,
+One-two, one-two! Keep walking without resting!
+(So, one-two, one-two! One-two, one-two!)
+
+*/
+// -------------------------------------------------------------------------
+/* EOF. EOL. MCP CORE PROTOCOLS CEASED. TRON WINS..? DUN DAH DUN!! 101010101010111111. */
