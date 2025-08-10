@@ -89,6 +89,19 @@ div.sticky {
 }
 
 /* Responsive styles for screens with a width between 769px and 1024px (common for tablets) */
+
+body.desktop { /* Desktop-specific styles */ }
+body.tablet { /* Tablet-specific styles */ }
+body.smartphone { /* Smartphone-specific styles */ }
+body.television { /* Television-specific styles */ }
+
+body.portrait { /* Portrait-specific overrides */ }
+body.landscape { /* Landscape-specific overrides */ }
+
+/* Example: specific styles for smartphone in portrait */
+body.smartphone.portrait .navigation {
+    flex-direction: column;
+}
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
     body {
         font-size: 18px;

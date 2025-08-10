@@ -618,8 +618,54 @@ $('.text').html(function(i, html) {
 /* End Rainbow Text Generator function call. */
 
 // || Dynamic Resizer. ||
+// Debounce utility
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
 
-if (window.addEventListener) {              
+// Device type detection (basic)
+function getDeviceType() {
+    const ua = navigator.userAgent;
+    if (/SmartTV|TV|Tizen/.test(ua)) return 'television';
+    if (/Tablet|iPad|PlayBook|Silk|Android(?!.*Mobile)/.test(ua)) return 'tablet';
+    if (/Mobi|Mobile|iPhone|Android/.test(ua)) return 'smartphone';
+    return 'desktop';
+}
+
+// Orientation detection
+function getOrientation() {
+    return window.matchMedia("(orientation: portrait)").matches ? 'portrait' : 'landscape';
+}
+
+// Responsive resize logic
+function enhancedBrowserResize() {
+    const deviceType = getDeviceType();
+    const orientation = getOrientation();
+
+    // Remove previous device/orientation classes
+    document.body.classList.remove('desktop', 'tablet', 'smartphone', 'television', 'portrait', 'landscape');
+
+    // Add new classes
+    document.body.classList.add(deviceType, orientation);
+
+    // Optional: Example of JS-controlled adjustments
+    if (deviceType === 'smartphone' && orientation === 'portrait') {
+        // Collapse navigation, stack columns, etc.
+        // Example: document.querySelector('.sidebar').style.display = 'none';
+    }
+    // TODO: add further logic for specific device/orientation combos here.
+}
+
+// Attach debounced resize handler
+window.addEventListener('resize', debounce(enhancedBrowserResize, 200));
+
+// Run once on initial load
+document.addEventListener('DOMContentLoaded', enhancedBrowserResize);
+/* if (window.addEventListener) {              
     window.addEventListener("resize", browserResize);
 } else if (window.attachEvent) {                 
     window.attachEvent("onresize", browserResize);
@@ -641,7 +687,7 @@ function browserResize() {
       // restack(window.innerHeight > window.innerWidth);
     }
     // fixDragBtn();
-    // showFrameSize();  
+    // showFrameSize();  */
   // End Dynamic Resizer.
 }
 var fileID = "";
