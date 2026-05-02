@@ -354,6 +354,7 @@ const videoPaths = [
   "./red/Ratatosk_System_Concept_Render.mp4",
   "./red/sim-run-alpha3_1080p.mp4",
   "./red/chi-the-ultimate.mp4",
+  "./blue/solarpunk-2080-train-ride.mp4",
 ];
 
 function cycleBackgroundVideo() {
