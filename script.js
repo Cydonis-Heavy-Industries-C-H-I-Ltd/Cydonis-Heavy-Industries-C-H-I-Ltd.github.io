@@ -669,7 +669,53 @@ Shigoto no ato ni...
 w=Math.PI;s=Math.sin; ... } */
 // (Full Protocol M22 source preserved in experiments branch)
 // End Protocol M22.
+// #--------------------------------------------------------------#
+// Experimental:
+/*
+const LAMBDA = 1.5;
+const FLOOR = 0.3;
 
+const people = [
+  { id: "a", group: "x", utility: 0.5 },
+  { id: "b", group: "x", utility: 0.6 },
+  { id: "c", group: "x", utility: 0.7 },
+  { id: "d", group: "y", utility: 0.5 },
+  { id: "e", group: "y", utility: 0.6 },
+  { id: "f", group: "y", utility: 0.7 }
+];
+
+const siloed = [
+  { i: "a", j: "b", kappa: 0.9 }, { i: "b", j: "c", kappa: 0.9 },
+  { i: "a", j: "c", kappa: 0.9 }, { i: "d", j: "e", kappa: 0.9 },
+  { i: "e", j: "f", kappa: 0.9 }, { i: "d", j: "f", kappa: 0.9 }
+];
+// Death Stranding... :'-<
+const bridged = [
+  { i: "a", j: "b", kappa: 0.9 }, { i: "b", j: "c", kappa: 0.9 },
+  { i: "d", j: "e", kappa: 0.9 }, { i: "e", j: "f", kappa: 0.9 },
+  { i: "c", j: "d", kappa: 0.9 }, { i: "a", j: "f", kappa: 0.9 }
+];
+
+function W(people, ties, lambda = LAMBDA) {
+  const groupOf = id => people.find(p => p.id === id).group;
+  if (Math.min(...people.map(p => p.utility)) < FLOOR) return -Infinity;
+
+  const local = ties.reduce((s, t) => s + t.kappa, 0);
+  const bridging = ties
+    .filter(t => groupOf(t.i) !== groupOf(t.j))
+    .reduce((s, t) => s + t.kappa, 0);
+
+  return local + lambda * bridging;
+}
+// Output Stub:
+console.log(W(people, siloed));   // 5.4
+console.log(W(people, bridged));  // 8.1
+
+for (const l of [0, 0.25, 0.5, 1, 1.5]) {
+  console.log(l, W(people, siloed, l), W(people, bridged, l));
+}
+*/
+// #------------------------------------------------------------------------------------------------------#
 /*
 Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul;
 whenever I find myself involuntarily pausing before coffin warehouses,
@@ -680,7 +726,7 @@ principle to prevent me from deliberately stepping into the street,
 I account it high time to get to sea as soon as I can.
 - Herman Melville, Moby-Dick; or, The Whale (1851)
 */
-
+// #------------------------------------------------------------------------------------------------------#
 // Screensaver Easter Egg — TODO. ^_^v
 // (Particle ribbon screensaver source preserved in experiments branch)
 
