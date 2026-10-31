@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wildstar64 — Project Status</title>
+    <meta
+      name="description"
+      content="Wildstar64 is an authentic post-apocalyptic tactical tank action game for the Nintendo 64 and Analogue 3D."
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwUEQp2N7TQ1Q1w="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      :root {
+        --bg: #050b12;
+        --bg-2: #0b1721;
+        --panel: rgba(11, 22, 30, 0.74);
+        --panel-strong: rgba(11, 19, 26, 0.92);
+        --line: rgba(141, 196, 255, 0.22);
+        --line-bright: rgba(126, 227, 255, 0.7);
+        --text: #eaf4ff;
+        --muted: #a9c0d5;
+        --amber: #ffb347;
+        --cyan: #7be7ff;
+        --green: #8be9a8;
+        --red: #ff5c75;
+        --purple: #b78dff;
+        --shadow: rgba(0, 0, 0, 0.35);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(118, 158, 255, 0.12), transparent 32%),
+          linear-gradient(180deg, #03080d, #071218 55%, #04080d);
+        color: var(--text);
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+        background-size: 28px 28px;
+        pointer-events: none;
+        mask-image: radial-gradient(circle at center, black 45%, transparent 100%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(12px);
+        background: rgba(3, 8, 13, 0.64);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .topbar-inner,
+      .container {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .topbar-inner {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 0.82rem;
+      }
+
+      .brand-mark {
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--cyan), var(--purple));
+        box-shadow: 0 0 25px rgba(123, 231, 255, 0.55);
+        color: #031016;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .nav a {
+        opacity: 0.8;
+        transition: opacity 0.2s ease;
+      }
+
+      .nav a:hover {
+        opacity: 1;
+      }
+
+      .nav-button {
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line-bright);
+        background: rgba(123, 231, 255, 0.08);
+        color: var(--text);
+      }
+
+      .hero {
+        position: relative;
+        padding: 64px 0 26px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 36px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid rgba(123, 231, 255, 0.2);
+        background: rgba(123, 231, 255, 0.06);
+        color: var(--cyan);
+        border-radius: 999px;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 0.7rem;
+        padding: 10px 14px;
+      }
+
+      h1 {
+        margin: 18px 0 14px;
+        font-size: clamp(3.2rem, 6vw, 6rem);
+        line-height: 0.94;
+        letter-spacing: -0.06em;
+      }
+
+      .lead {
+        max-width: 60ch;
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 999px;
+        padding: 14px 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.72rem;
+        font-weight: 700;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+      }
+
+      .btn.primary {
+        background: linear-gradient(135deg, var(--amber), #ff7f50);
+        color: #16120f;
+        border-color: rgba(255, 179, 71, 0.9);
+      }
+
+      .btn.secondary {
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--text);
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(110px, 1fr));
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .stat {
+        padding: 18px 18px 16px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(12, 22, 31, 0.64);
+      }
+
+      .stat .value {
+        display: block;
+        font-size: clamp(1.6rem, 2vw, 2.2rem);
+        font-weight: 800;
+        letter-spacing: -0.05em;
+      }
+
+      .stat .label {
+        display: block;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.68rem;
+        margin-top: 10px;
+      }
+
+      .visual-wrap {
+        position: relative;
+        min-height: 520px;
+        display: grid;
+        place-items: center;
+      }
+
+      .visual-panel {
+        position: relative;
+        width: min(100%, 560px);
+        height: 480px;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: linear-gradient(180deg, rgba(13, 28, 38, 0.8), rgba(5, 10, 14, 0.92));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 30px 60px rgba(2, 7, 12, 0.7);
+        overflow: hidden;
+      }
+
+      #tankScene {
+        position: absolute;
+        inset: 0;
+      }
+
+      .visual-badges {
+        position: absolute;
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 12px;
+        border-radius: 999px;
+        background: rgba(5, 12, 17, 0.8);
+        border: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .badge strong {
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      section {
+        padding: 26px 0;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-size: clamp(1.7rem, 3vw, 2.6rem);
+        letter-spacing: -0.06em;
+      }
+
+      .section-head p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .status-grid,
+      .feature-grid,
+      .compat-grid,
+      .roadmap-grid,
+      .cta-grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .status-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 22px;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+      }
+
+      .card .icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        font-size: 1.2rem;
+        background: linear-gradient(135deg, rgba(123, 231, 255, 0.18), rgba(183, 141, 255, 0.1));
+        border: 1px solid rgba(123, 231, 255, 0.26);
+        color: var(--cyan);
+        margin-bottom: 14px;
+      }
+
+      .status-grid .card h3,
+      .feature-grid .card h3,
+      .compat-grid .card h3 {
+        margin: 0 0 10px;
+        font-size: 1.17rem;
+      }
+
+      .status-grid .card p,
+      .feature-grid .card p,
+      .compat-grid .card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .feature-grid .card {
+        min-height: 188px;
+      }
+
+      .feature-grid .card ul {
+        color: var(--muted);
+        margin: 0;
+        padding-left: 18px;
+        line-height: 1.8;
+      }
+
+      .roadmap-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .timeline {
+        position: relative;
+        padding-left: 18px;
+        border-left: 2px solid rgba(123, 231, 255, 0.22);
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 18px;
+        padding-left: 18px;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -24px;
+        top: 8px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--cyan), var(--purple));
+        box-shadow: 0 0 20px rgba(123, 231, 255, 0.55);
+      }
+
+      .timeline-item .tag {
+        display: inline-block;
+        margin-bottom: 8px;
+        color: var(--amber);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        font-weight: 700;
+      }
+
+      .timeline-item h4 {
+        margin: 0 0 6px;
+        font-size: 1.14rem;
+      }
+
+      .timeline-item p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .compat-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .table-wrap {
+        overflow: auto;
+        border-radius: 20px;
+        border: 1px solid var(--line);
+        background: rgba(10, 17, 23, 0.72);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 15px 16px;
+        text-align: left;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+
+      th {
+        background: rgba(123, 231, 255, 0.04);
+        color: var(--text);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+      }
+
+      td {
+        color: var(--muted);
+      }
+
+      .good {
+        color: var(--green);
+        font-weight: 700;
+      }
+
+      .cta-grid {
+        grid-template-columns: 1.2fr 0.8fr;
+        margin-top: 10px;
+      }
+
+      .cta-box {
+        display: grid;
+        gap: 18px;
+        padding: 26px;
+      }
+
+      .mini-list {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mini-list li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--muted);
+      }
+
+      .mini-list li i {
+        color: var(--green);
+      }
+
+      .footer {
+        border-top: 1px solid var(--line);
+        padding: 30px 0 54px;
+        color: var(--muted);
+      }
+
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      #bgCanvas {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        opacity: 1;
+      }
+
+      @media (max-width: 960px) {
+        .hero-grid,
+        .cta-grid,
+        .status-grid,
+        .feature-grid,
+        .compat-grid,
+        .roadmap-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar-inner {
+          flex-wrap: wrap;
+          justify-content: center;
+          padding: 12px 0;
+        }
+
+        .nav {
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+      }
+
+      @media (max-width: 540px) {
+        .stats {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          letter-spacing: -0.04em;
+        }
+
+        .cta-row {
+          flex-direction: column;
+        }
+
+        .btn {
+          justify-content: center;
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="bgCanvas"></canvas>
+
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand" aria-label="Wildstar64 brand logo">
+          <span class="brand-mark"><i class="fa-solid fa-bolt"></i></span>
+          <span>Wildstar64</span>
+        </div>
+
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#status">Status</a>
+          <a href="#features">Features</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="#compatibility">Compatibility</a>
+          <a class="nav-button" href="#join">Join the Resistance</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow"><i class="fa-solid fa-shield-halved"></i> Tactical tank action</div>
+            <h1>Wildstar64</h1>
+            <p class="lead">
+              The oligarchs broke the world. Now it’s time to ride the lightning on real silicon.
+              Take control of a stolen Bio-Neural Siege Engine and fight through a ruined future
+              in a gritty, tactical, post-apocalyptic action experience built for the Nintendo 64.
+            </p>
+
+            <div class="cta-row">
+              <a href="#status" class="btn primary"><i class="fa-solid fa-bolt"></i> View status</a>
+              <button class="btn secondary" id="engineToggle" type="button">
+                <i class="fa-solid fa-gamepad"></i> Ignite engine
+              </button>
+            </div>
+
+            <div class="stats" aria-label="Project stats">
+              <div class="stat">
+                <span class="value">12</span>
+                <span class="label">Acts planned</span>
+              </div>
+              <div class="stat">
+                <span class="value">Act 1</span>
+                <span class="label">Live and playable</span>
+              </div>
+              <div class="stat">
+                <span class="value">£5</span>
+                <span class="label">Digital release</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="visual-wrap">
+            <div class="visual-panel" aria-label="Animated 3D tank preview">
+              <div id="tankScene"></div>
+              <div class="visual-badges">
+                <div class="badge"><i class="fa-solid fa-microchip"></i> <strong>Real</strong> hardware</div>
+                <div class="badge"><i class="fa-solid fa-bomb"></i> <strong>Rogue</strong> combat</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="status">
+        <div class="section-head">
+          <h2>Project status</h2>
+          <p>Act 1 is live. Acts 2–12 are underway.</p>
+        </div>
+
+        <div class="status-grid">
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-download"></i></div>
+            <h3>Release format</h3>
+            <p>Digital download in standard .z64 ROM format for original N64 hardware and flash cartridges.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-check"></i></div>
+            <h3>Act 1 status</h3>
+            <p>100% complete, compiled, and ready to flash. The opening chapter is fully playable.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-wrench"></i></div>
+            <h3>In development</h3>
+            <p>Acts 2–12 are under active development, with optimization and coding continuing on hardware.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-shield-heart"></i></div>
+            <h3>Funding model</h3>
+            <p>Your purchase directly supports ongoing work, optimization, and future content expansion.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="features">
+        <div class="section-head">
+          <h2>Hardware features</h2>
+          <p>Built for authenticity, performance, and a brutal retro feel.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-microchip"></i></div>
+            <h3>Original hardware</h3>
+            <ul>
+              <li>Compatible with original Nintendo 64 consoles</li>
+              <li>Works with flash carts such as EverDrive-64</li>
+              <li>Designed around Expansion Pak constraints</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-display"></i></div>
+            <h3>Analogue 3D</h3>
+            <ul>
+              <li>Native 4K compatibility and retro-accurate presentation</li>
+              <li>Optimized for modern displays without losing the CRT vibe</li>
+              <li>High-contrast, sharp visual tuning</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-helmet-safety"></i></div>
+            <h3>Combat design</h3>
+            <ul>
+              <li>Heavy tank combat with tactical positioning</li>
+              <li>Shield management and accurate weapon timing</li>
+              <li>Retro-inspired brutality and relentless pressure</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="roadmap">
+        <div class="section-head">
+          <h2>12-act roadmap</h2>
+          <p>The fight against the oligarchs is only just beginning.</p>
+        </div>
+
+        <div class="roadmap-grid">
+          <article class="card">
+            <div class="timeline">
+              <div class="timeline-item">
+                <span class="tag">Now</span>
+                <h4>Act 1: Out of the Scrap Heap</h4>
+                <p>Available now. Introduces Rox, Vance, and the raw power of the Wildstar in the opening chapters.</p>
+              </div>
+
+              <div class="timeline-item">
+                <span class="tag">Next</span>
+                <h4>Act 2</h4>
+                <p>Assembly, map-mapping, and live sector expansion are in active development.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="timeline">
+              <div class="timeline-item">
+                <span class="tag">Mid</span>
+                <h4>Acts 3–6</h4>
+                <p>World expansion, enemy evolution, and larger tactical encounters across the wasteland.</p>
+              </div>
+
+              <div class="timeline-item">
+                <span class="tag">Late</span>
+                <h4>Acts 7–12</h4>
+                <p>Final story arcs, larger scale battles, and the climactic push against the oligarch power structure.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="timeline">
+              <div class="timeline-item">
+                <span class="tag">Core</span>
+                <h4>Production focus</h4>
+                <p>Optimization of engine routines, procedural content generation, and real console stability under load.</p>
+              </div>
+
+              <div class="timeline-item">
+                <span class="tag">Support</span>
+                <h4>Community funding</h4>
+                <p>Supporters directly help expand the project and keep hardware performance in the loop.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="compatibility">
+        <div class="section-head">
+          <h2>Compatibility &amp; hardware requirements</h2>
+          <p>Built for the console and tuned for modern play.</p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Environment</th>
+                <th>Compatibility</th>
+                <th>Setup notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Original N64</td>
+                <td class="good">Fully supported</td>
+                <td>Requires a flash cartridge (e.g. EverDrive) and the 8MB Expansion Pak.</td>
+              </tr>
+              <tr>
+                <td>Analogue 3D</td>
+                <td class="good">Fully supported</td>
+                <td>Works flawlessly with Expansion Pak mode enabled in system settings.</td>
+              </tr>
+              <tr>
+                <td>PC / Mac / emulator</td>
+                <td class="good">Supported</td>
+                <td>Run the .z64 ROM and ensure emulator memory is set to 8MB (Expansion Pak).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="join">
+        <div class="section-head">
+          <h2>Join the Scrap Town resistance</h2>
+          <p>Your support helps keep the lightning charging.</p>
+        </div>
+
+        <div class="cta-grid">
+          <article class="card cta-box">
+            <div>
+              <div class="eyebrow" style="display: inline-flex;">
+                <i class="fa-solid fa-user-astronaut"></i> Crew callout
+              </div>
+            </div>
+
+            <p class="lead" style="margin: 0; max-width: 54ch;">
+              As a solo developer wrangling real console hardware limitations across a massive 12-act vision,
+              every bit of support helps push the Wildstar forward. Report issues, follow progress, and keep the project alive.
+            </p>
+
+            <div class="cta-row" style="margin-top: 0;">
+              <a href="#" class="btn primary" aria-label="Follow on the project page">
+                <i class="fa-solid fa-heart"></i> Follow the project
+              </a>
+              <a href="#" class="btn secondary" aria-label="View discussion board">
+                <i class="fa-solid fa-comments"></i> Discussion board
+              </a>
+            </div>
+          </article>
+
+          <article class="card cta-box">
+            <h3 style="margin: 0;">What to track</h3>
+            <ul class="mini-list">
+              <li><i class="fa-solid fa-circle-check"></i> Hardware-specific bugs</li>
+              <li><i class="fa-solid fa-circle-check"></i> Framerate dips</li>
+              <li><i class="fa-solid fa-circle-check"></i> Controller issues</li>
+              <li><i class="fa-solid fa-circle-check"></i> Performance notes on real N64</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <span>Wildstar64 © 2026 Cydonis Heavy Industries</span>
+        <span>Built for real hardware, raw atmosphere, and relentless action.</span>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        const bgCanvas = document.getElementById('bgCanvas');
+        const ctx = bgCanvas.getContext('2d');
+        const stars = [];
+
+        function seedStars() {
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          bgCanvas.width = Math.floor(window.innerWidth * dpr);
+          bgCanvas.height = Math.floor(window.innerHeight * dpr);
+          bgCanvas.style.width = window.innerWidth + 'px';
+          bgCanvas.style.height = window.innerHeight + 'px';
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+          stars.length = 0;
+          const starCount = Math.min(220, Math.max(110, Math.floor((window.innerWidth * window.innerHeight) / 10)));
+          for (let i = 0; i < starCount; i++) {
+            stars.push({
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
+              r: Math.random() * 2.2 + 0.4,
+              a: Math.random() * 0.7 + 0.2,
+              speed: Math.random() * 0.35 + 0.12
+            });
+          }
+        }
+
+        function drawBackground() {
+          ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+          const gradient = ctx.createRadialGradient(
+            window.innerWidth * 0.45,
+            window.innerHeight * 0.2,
+            0,
+            window.innerWidth * 0.45,
+            window.innerHeight * 0.2,
+            Math.max(window.innerWidth, window.innerHeight) * 0.8
+          );
+          gradient.addColorStop(0, 'rgba(106, 152, 255, 0.18)');
+          gradient.addColorStop(0.5, 'rgba(35, 55, 73, 0.08)');
+          gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+          for (const star of stars) {
+            star.y += star.speed;
+            if (star.y > window.innerHeight) {
+              star.y = -10;
+              star.x = Math.random() * window.innerWidth;
+            }
+
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(255,255,255,${star.a})`;
+            ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          ctx.strokeStyle = 'rgba(123,231,255,0.06)';
+          ctx.lineWidth = 1;
+          for (let x = 0; x < window.innerWidth; x += 40) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, window.innerHeight);
+            ctx.stroke();
+          }
+        }
+
+        function animateBackground() {
+          drawBackground();
+          requestAnimationFrame(animateBackground);
+        }
+
+        window.addEventListener('resize', seedStars);
+        seedStars();
+        animateBackground();
+
+        const tankSceneElement = document.getElementById('tankScene');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x060d17, 0.075);
+
+        const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 1000);
+        camera.position.set(0, 1.8, 11.5);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.setClearColor(0x000000, 0);
+        tankSceneElement.appendChild(renderer.domElement);
+
+        const group = new THREE.Group();
+        scene.add(group);
+
+        const ambient = new THREE.AmbientLight(0x9ec9ff, 1.7);
+        scene.add(ambient);
+
+        const keyLight = new THREE.DirectionalLight(0x7be7ff, 1.5);
+        keyLight.position.set(6, 7, 8);
+        scene.add(keyLight);
+
+        const rimLight = new THREE.DirectionalLight(0xffb347, 1.25);
+        rimLight.position.set(-6, 4, -8);
+        scene.add(rimLight);
+
+        const bodyMat = new THREE.MeshStandardMaterial({
+          color: 0x2f3d4d,
+          metalness: 0.72,
+          roughness: 0.38,
+          emissive: 0x0d1620,
+        });
+
+        const accentMat = new THREE.MeshStandardMaterial({
+          color: 0x7be7ff,
+          metalness: 0.82,
+          roughness: 0.22,
+          emissive: 0x0d2d38,
+        });
+
+        const amberMat = new THREE.MeshStandardMaterial({
+          color: 0xffb347,
+          metalness: 0.6,
+          roughness: 0.36,
+          emissive: 0x351b07,
+        });
+
+        const chassis = new THREE.Mesh(new THREE.BoxGeometry(4.2, 1.2, 2.7), bodyMat);
+        chassis.position.y = 0.6;
+        group.add(chassis);
+
+        const turret = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.8, 1.8), bodyMat);
+        turret.position.set(0.8, 1.55, 0);
+        group.add(turret);
+
+        const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.18, 3.3, 12), accentMat);
+        barrel.rotation.z = Math.PI / 2;
+        barrel.position.set(2.9, 1.62, 0);
+        group.add(barrel);
+
+        const gunGlow = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.5, 12), amberMat);
+        gunGlow.rotation.z = Math.PI / 2;
+        gunGlow.position.set(4.3, 1.62, 0);
+        group.add(gunGlow);
+
+        const trackMaterial = new THREE.MeshStandardMaterial({ color: 0x111a22, metalness: 0.5, roughness: 0.9 });
+        const leftTrack = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.9, 3.1), trackMaterial);
+        const rightTrack = leftTrack.clone();
+        leftTrack.position.set(-1.9, -0.15, 0);
+        rightTrack.position.set(1.9, -0.15, 0);
+        group.add(leftTrack, rightTrack);
+
+        const wheelGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.28, 16);
+        const wheelMat = new THREE.MeshStandardMaterial({ color: 0x525d68, metalness: 0.8, roughness: 0.45 });
+
+        for (let i = 0; i < 8; i++) {
+          const wheelL = new THREE.Mesh(wheelGeo, wheelMat);
+          wheelL.rotation.z = Math.PI / 2;
+          wheelL.position.set(-1.9 + (i % 2 === 0 ? 0 : 0), -0.05, -1.1 + (i * 0.35));
+          group.add(wheelL);
+
+          const wheelR = wheelL.clone();
+          wheelR.position.x = 1.9;
+          group.add(wheelR);
+        }
+
+        const floor = new THREE.Mesh(
+          new THREE.CircleGeometry(16, 64),
+          new THREE.MeshBasicMaterial({ color: 0x0b1a22, transparent: true, opacity: 0.9 })
+        );
+        floor.rotation.x = -Math.PI / 2;
+        floor.position.y = -1.2;
+        scene.add(floor);
+
+        function resizeTankScene() {
+          const { clientWidth, clientHeight } = tankSceneElement;
+          const width = Math.max(clientWidth, 280);
+          const height = Math.max(clientHeight, 240);
+          renderer.setSize(width, height, false);
+          camera.aspect = width / height;
+          camera.updateProjectionMatrix();
+        }
+
+        window.addEventListener('resize', resizeTankScene);
+        resizeTankScene();
+
+        let t = 0;
+        function renderTank() {
+          t += 0.016;
+          group.rotation.y = Math.sin(t * 0.7) * 0.7 + 0.6;
+          group.rotation.x = 0.15;
+          group.position.y = Math.sin(t * 1.8) * 0.12;
+          camera.position.x = Math.sin(t * 0.9) * 1.4;
+          renderer.render(scene, camera);
+          requestAnimationFrame(renderTank);
+        }
+        renderTank();
+
+        const engineToggle = document.getElementById('engineToggle');
+        let audioCtx = null;
+        let engineGain = null;
+        let engineOsc = null;
+        let lfo = null;
+        let isAudioOn = false;
+
+        function toggleEngineAudio() {
+          if (!audioCtx) {
+            const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContextCtor) return;
+            audioCtx = new AudioContextCtor();
+
+            const master = audioCtx.createGain();
+            master.gain.value = 0.04;
+            master.connect(audioCtx.destination);
+
+            engineGain = audioCtx.createGain();
+            engineGain.gain.value = 0.0001;
+            engineGain.connect(master);
+
+            engineOsc = audioCtx.createOscillator();
+            engineOsc.type = 'sawtooth';
+            engineOsc.frequency.value = 44;
+            engineOsc.connect(engineGain);
+            engineOsc.start();
+
+            lfo = audioCtx.createOscillator();
+            const lfoGain = audioCtx.createGain();
+            lfo.type = 'sine';
+            lfo.frequency.value = 0.2;
+            lfoGain.gain.value = 16;
+            lfo.connect(lfoGain);
+            lfoGain.connect(engineOsc.frequency);
+            lfo.start();
+          }
+
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+
+          isAudioOn = !isAudioOn;
+          engineGain.gain.linearRampToValueAtTime(isAudioOn ? 0.15 : 0.0001, audioCtx.currentTime + 0.6);
+          engineToggle.innerHTML = isAudioOn
+            ? '<i class="fa-solid fa-volume-high"></i> Engine online'
+            : '<i class="fa-solid fa-gamepad"></i> Ignite engine';
+        }
+
+        engineToggle.addEventListener('click', toggleEngineAudio);
+
+        function generateFavicon() {
+          const canvas = document.createElement('canvas');
+          canvas.width = 64;
+          canvas.height = 64;
+          const g = canvas.getContext('2d');
+
+          const gradient = g.createLinearGradient(0, 0, 64, 64);
+          gradient.addColorStop(0, '#0d1720');
+          gradient.addColorStop(1, '#1f2a40');
+          g.fillStyle = gradient;
+          g.fillRect(0, 0, 64, 64);
+
+          g.beginPath();
+          g.moveTo(32, 6);
+          g.lineTo(55, 18);
+          g.lineTo(55, 46);
+          g.lineTo(32, 58);
+          g.lineTo(9, 46);
+          g.lineTo(9, 18);
+          g.closePath();
+          g.fillStyle = '#0f1d27';
+          g.fill();
+          g.strokeStyle = '#7be7ff';
+          g.lineWidth = 2;
+          g.stroke();
+
+          g.fillStyle = '#ffb347';
+          g.beginPath();
+          g.moveTo(28, 18);
+          g.lineTo(41, 18);
+          g.lineTo(34, 35);
+          g.lineTo(44, 35);
+          g.lineTo(22, 52);
+          g.lineTo(28, 38);
+          g.lineTo(18, 38);
+          g.closePath();
+          g.fill();
+
+          g.fillStyle = '#d8f0ff';
+          g.font = 'bold 11px sans-serif';
+          g.textAlign = 'center';
+          g.fillText('W', 32, 30);
+
+          const url = canvas.toDataURL('image/png');
+          const link = document.querySelector('link[rel="icon"]') || document.createElement('link');
+          link.rel = 'icon';
+          link.type = 'image/png';
+          link.href = url;
+          document.head.appendChild(link);
+        }
+
+        generateFavicon();
+      })();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+  </body>
+</html>
